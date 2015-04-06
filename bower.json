@@ -1,0 +1,32 @@
+{
+  "name": "aikido-irimi",
+  "version": "0.0.1",
+  "homepage": "https://github.com/patoi/aikido-irimi",
+  "authors": [
+    "István Pató <istvan.pato@gmail.com>"
+  ],
+  "description": "Aikido Nyári Tábor - 2015",
+  "main": "index.html",
+  "keywords": [
+    "aikido",
+    "2015",
+    "magyarország",
+    "tata",
+    "tábor"
+  ],
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "angular": "~1.3",
+    "materialize": "~0.96.0"
+  },
+  "devDependencies": {
+    "materialize": "~0.96.0"
+  }
+}

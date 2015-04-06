@@ -1,0 +1,32 @@
+{
+  "name": "aikido-irimi",
+  "version": "0.0.1",
+  "description": "Aikido 2015 Tata edzőtábor",
+  "main": "index.js",
+  "dependencies": {
+    "connect": "^3.3.5",
+    "livereload": "^0.3.7"
+  },
+  "devDependencies": {
+    "serve-static": "^1.9.2"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/patoi/aikido-irimi.git"
+  },
+  "keywords": [
+    "tata",
+    "aikido",
+    "2015",
+    "edzőtábor"
+  ],
+  "author": "Pató István",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/patoi/aikido-irimi/issues"
+  },
+  "homepage": "https://github.com/patoi/aikido-irimi"
+}
