@@ -50,17 +50,14 @@ app.route('/api/regisztraciok')
     // FIXME: egyediseg ellenőrzések, összefüggés ellenőrzések és validálás
     // FIXME: transzformációk, pl: Capitalize
     // FIXME: regisztrációs szám generálása
-    dbReg.insert(req.body);
-    // visszakeresés az ID miatt
-    dbReg.find({
-      'nev': req.body.nev
-    }, function(err, docs) {
-      var result = docs[docs.length - 1];
-      winston.info('regisztracio out', result);
-      res.json(result);
+    dbReg.insert(req.body, function(err, newDoc) {
+      winston.info('regisztracio out', newDoc);
+      res.json(newDoc);
     });
+
   })
   .get(function(req, res) {
+    // admin: minden reg letöltése
     if (req.query.key === config.adminKey) {
       dbReg.find({}, function(err, docs) {
         smtpTransport.sendMail(mailOptions, function(error, response) {
