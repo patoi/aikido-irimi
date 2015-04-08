@@ -18,7 +18,7 @@ app.constant(
   }
 );
 
-app.controller('RegisztracioCtrl',
+app.controller('RegisztracioCtrl', ['RegisztracioService', 'msg',
   function(RegisztracioService, msg) {
     var reg = this;
     reg.mkdeTag = '1';
@@ -31,10 +31,12 @@ app.controller('RegisztracioCtrl',
       reg.hiba = undefined;
       try {
         RegisztracioService.validate(reg);
+        RegisztracioService.create(reg);
+
       } catch (e) {
         console.log(e.message);
         reg.hiba = msg['hu'][e.message];
       }
     }
   }
-);
+]);
