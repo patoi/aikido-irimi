@@ -1,37 +1,37 @@
 <?xml version="1.0"?>
 <testsuites>
-  <testsuite name="PhantomJS 1.9.8 (Linux)" package="test" timestamp="2015-04-08T15:24:04" id="0" hostname="patoi-y510p">
+  <testsuite name="PhantomJS 1.9.8 (Linux)" package="test" timestamp="2015-04-08T16:36:21" id="0" hostname="patoi-y510p">
     <properties>
       <property name="browser.fullName" value="Mozilla/5.0 (Unknown; Linux x86_64) AppleWebKit/534.34 (KHTML, like Gecko) PhantomJS/1.9.8 Safari/534.34"/>
     </properties>
   </testsuite>
-  <testsuite name="PhantomJS 1.9.8 (Linux)" package="test" timestamp="2015-04-08T15:24:04" id="0" hostname="patoi-y510p" tests="23" errors="0" failures="0" time="0.029">
+  <testsuite name="PhantomJS 1.9.8 (Linux)" package="test" timestamp="2015-04-08T16:36:22" id="0" hostname="patoi-y510p" tests="23" errors="0" failures="0" time="0.062">
     <properties>
       <property name="browser.fullName" value="Mozilla/5.0 (Unknown; Linux x86_64) AppleWebKit/534.34 (KHTML, like Gecko) PhantomJS/1.9.8 Safari/534.34"/>
     </properties>
-    <testcase name="kötelező mezők ellenőrzés hiba, nincs név: v.required" time="0.008" classname="test PhantomJS 1.9.8 (Linux).Regisztráció validálás"/>
-    <testcase name="kötelező mezők ellenőrzés hiba, nincs email: v.required" time="0.001" classname="test PhantomJS 1.9.8 (Linux).Regisztráció validálás"/>
+    <testcase name="kötelező mezők ellenőrzés hiba, nincs név: v.required" time="0.006" classname="test PhantomJS 1.9.8 (Linux).Regisztráció validálás"/>
+    <testcase name="kötelező mezők ellenőrzés hiba, nincs email: v.required" time="0.004" classname="test PhantomJS 1.9.8 (Linux).Regisztráció validálás"/>
     <testcase name="kötelező mezők ellenőrzés hiba, nincs dojo: v.required" time="0.001" classname="test PhantomJS 1.9.8 (Linux).Regisztráció validálás"/>
-    <testcase name="kötelező mezők ellenőrzés hiba, nincs edzésjegy: v.required" time="0.001" classname="test PhantomJS 1.9.8 (Linux).Regisztráció validálás"/>
-    <testcase name="kötelező mezők ellenőrzés hiba, nincs elfogadom: v.required" time="0.001" classname="test PhantomJS 1.9.8 (Linux).Regisztráció validálás"/>
+    <testcase name="kötelező mezők ellenőrzés hiba, nincs edzésjegy: v.required" time="0.004" classname="test PhantomJS 1.9.8 (Linux).Regisztráció validálás"/>
+    <testcase name="kötelező mezők ellenőrzés hiba, nincs elfogadom: v.required" time="0.002" classname="test PhantomJS 1.9.8 (Linux).Regisztráció validálás"/>
     <testcase name="kötelező mezők ellenőrzés hiba, nincs elfogadom és név: v.required" time="0.001" classname="test PhantomJS 1.9.8 (Linux).Regisztráció validálás"/>
-    <testcase name="kötelező mezők ellenőrzés hiba, név üres: v.required" time="0" classname="test PhantomJS 1.9.8 (Linux).Regisztráció validálás"/>
-    <testcase name="név hosszú ellenőrzés hiba: v.nev.hiba" time="0" classname="test PhantomJS 1.9.8 (Linux).Regisztráció validálás"/>
+    <testcase name="kötelező mezők ellenőrzés hiba, név üres: v.required" time="0.001" classname="test PhantomJS 1.9.8 (Linux).Regisztráció validálás"/>
+    <testcase name="név hosszú ellenőrzés hiba: v.nev.hiba" time="0.001" classname="test PhantomJS 1.9.8 (Linux).Regisztráció validálás"/>
     <testcase name="név rövid ellenőrzés hiba: v.nev.hiba" time="0.001" classname="test PhantomJS 1.9.8 (Linux).Regisztráció validálás"/>
     <testcase name="név hossz ellenőrzés sikeres" time="0.001" classname="test PhantomJS 1.9.8 (Linux).Regisztráció validálás"/>
-    <testcase name="név típus ellenőrzés hiba" time="0.003" classname="test PhantomJS 1.9.8 (Linux).Regisztráció validálás"/>
+    <testcase name="név típus ellenőrzés hiba" time="0.002" classname="test PhantomJS 1.9.8 (Linux).Regisztráció validálás"/>
     <testcase name="email típus ellenőrzés hiba" time="0.002" classname="test PhantomJS 1.9.8 (Linux).Regisztráció validálás"/>
-    <testcase name="email típus ellenőrzés sikeres" time="0" classname="test PhantomJS 1.9.8 (Linux).Regisztráció validálás"/>
-    <testcase name="dojo típus ellenőrzés hiba" time="0.001" classname="test PhantomJS 1.9.8 (Linux).Regisztráció validálás"/>
+    <testcase name="email típus ellenőrzés sikeres" time="0.002" classname="test PhantomJS 1.9.8 (Linux).Regisztráció validálás"/>
+    <testcase name="dojo típus ellenőrzés hiba" time="0.002" classname="test PhantomJS 1.9.8 (Linux).Regisztráció validálás"/>
     <testcase name="pénznem típus ellenőrzés hiba" time="0.001" classname="test PhantomJS 1.9.8 (Linux).Regisztráció validálás"/>
     <testcase name="pénznem típus ellenőrzés sikeres" time="0.001" classname="test PhantomJS 1.9.8 (Linux).Regisztráció validálás"/>
-    <testcase name="edzésjegy típus ellenőrzés hiba" time="0.001" classname="test PhantomJS 1.9.8 (Linux).Regisztráció validálás"/>
-    <testcase name="edzésjegy típus ellenőrzés sikeres" time="0" classname="test PhantomJS 1.9.8 (Linux).Regisztráció validálás"/>
+    <testcase name="edzésjegy típus ellenőrzés hiba" time="0.002" classname="test PhantomJS 1.9.8 (Linux).Regisztráció validálás"/>
+    <testcase name="edzésjegy típus ellenőrzés sikeres" time="0.002" classname="test PhantomJS 1.9.8 (Linux).Regisztráció validálás"/>
     <testcase name="szállás típus ellenőrzés hiba" time="0.001" classname="test PhantomJS 1.9.8 (Linux).Regisztráció validálás"/>
-    <testcase name="szállás típus ellenőrzés sikeres" time="0.002" classname="test PhantomJS 1.9.8 (Linux).Regisztráció validálás"/>
-    <testcase name="szállás típus ellenőrzés sikeres, mert opcionális" time="0.001" classname="test PhantomJS 1.9.8 (Linux).Regisztráció validálás"/>
-    <testcase name="elfogadom ellenőrzés hiba, mert false az értéke" time="0.001" classname="test PhantomJS 1.9.8 (Linux).Regisztráció validálás"/>
-    <testcase name="elfogadom ellenőrzése: mindig true-nak kell lennie" time="0" classname="test PhantomJS 1.9.8 (Linux).Regisztráció validálás"/>
+    <testcase name="szállás típus ellenőrzés sikeres" time="0.015" classname="test PhantomJS 1.9.8 (Linux).Regisztráció validálás"/>
+    <testcase name="szállás típus ellenőrzés sikeres, mert opcionális" time="0.007" classname="test PhantomJS 1.9.8 (Linux).Regisztráció validálás"/>
+    <testcase name="elfogadom ellenőrzés hiba, mert false az értéke" time="0.002" classname="test PhantomJS 1.9.8 (Linux).Regisztráció validálás"/>
+    <testcase name="elfogadom ellenőrzése: mindig true-nak kell lennie" time="0.001" classname="test PhantomJS 1.9.8 (Linux).Regisztráció validálás"/>
     <system-out><![CDATA[
 ]]></system-out>
     <system-err/>

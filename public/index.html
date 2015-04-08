@@ -118,11 +118,12 @@
     </div>
 
     <div class="row">
-      <form ng-submit="reg.regisztracio()" class="offset-m2 col s12 m8">
+      <form ng-submit="reg.regisztracio()" class="offset-m2 col s12 m8" name="regForm" autocomplete="off" role="form" novalidate>
         <h5 class="blue-text text-darken-2">Regisztráció</h5>
         <div class="row">
           <div class="input-field col s12">
-            <input ng-model="reg.nev" id="nev" type="text" class="validate">
+            <input ng-model="reg.nev" ng-required="true" ng-pattern="/^([a-zöüóőúéáűíä \-\.]){6,100}$/" name="nev" type="text" class="form-control" class="validate" ng-class="{invalid: regForm.nev.$invalid}">
+            <span ng-show="regForm.nev.$invalid && regForm.nev.$dirty">Minimum 6, maximum 100 karakter</span>
             <label for="nev">Név / Name
               <span class="red-text"> *</span>
             </label>
@@ -130,7 +131,8 @@
         </div>
         <div class="row">
           <div class="input-field col s12">
-            <input ng-model="reg.email" id="email" type="email" class="validate">
+            <input ng-model="reg.email" ng-required="true" name="email" type="email" class="validate" ng-class="{invalid: regForm.email.$invalid}" ng-pattern='/^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/'>
+            <span ng-show="regForm.email.$invalid && regForm.email.$dirty">Nem érvényes a megadott email cím</span>
             <label for="email">Email
               <span class="red-text"> *</span>
             </label>
@@ -138,7 +140,8 @@
         </div>
         <div class="row">
           <div class="input-field col s12">
-            <input ng-model="reg.dojo" id="dojo" type="text" class="validate">
+            <input ng-model="reg.dojo" ng-required="true" ng-pattern="/^([a-zöüóőúéáűíä\ \-\.]){6,100}/" name="dojo" type="text" class="validate" ng-class="{invalid: regForm.dojo.$invalid}">
+            <span ng-show="regForm.dojo.$invalid && regForm.dojo.$dirty">Minimum 6, maximum 100 karakter</span>
             <label for="dojo">Dojo
               <span class="red-text"> *</span>
             </label>
@@ -146,7 +149,8 @@
         </div>
         <div class="row">
           <div class="input-field col s12">
-            <input ng-model="reg.tel" id="tel" type="text" class="validate">
+            <input ng-model="reg.tel" ng-required="true" ng-pattern="/^([0-9 \-\+]){7,16}$/" name="tel" type="text" class="validate" ng-class="{invalid: regForm.tel.$invalid}">
+            <span ng-show="regForm.tel.$invalid && regForm.tel.$dirty">Csak számot, szóközt, kötőjelet és + jel adható meg 7-16 hosszon</span>
             <label for="tel">Telefon / Telephone
               <span class="red-text"> *</span>
             </label>
@@ -197,7 +201,7 @@
             </p>
           </div>
           <div class="input-field col m9 s12">
-            <select ng-model="reg.edzesjegy" class="browser-default validate" name="edzesjegy" id="edzesjegy">
+            <select ng-model="reg.edzesjegy" ng-required="true" class="browser-default validate" name="edzesjegy" id="edzesjegy">
               <option value="" disabled selected>Válassz jegyet!</option>
               <option value="teljes">Teljes tábor / Whole Camp</option>
               <option value="1napi">1 napi jegy / daily ticket</option>
@@ -257,6 +261,8 @@
           </label>
         </div>
         <div class="row">
+
+          <div class="red-text">{{reg.hiba}}</div>
           <button class="btn waves-effect waves-light" type="submit" name="action">Regisztrálok
             <i class="mdi-content-send right"></i>
           </button>

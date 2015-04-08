@@ -225,7 +225,7 @@ describe('Regisztráció validálás', function() {
     try {
       expect(service.validate(data)).toThrow();
     } catch (e) {
-      expect(e.message).toBe('v.elfogadom.hiba');
+      expect(e.message).toBe('v.required');
     }
   });
 

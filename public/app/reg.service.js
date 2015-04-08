@@ -9,18 +9,15 @@ app.factory('RegisztracioService', [
 
     };
 
-
-
     var validate = function(reg) {
       var required =
         _.trim(reg.nev) &&
         _.trim(reg.email) &&
         _.trim(reg.dojo) &&
         _.trim(reg.tel) &&
-        _.trim(reg.mkdeTag) &&
         _.trim(reg.penznem) &&
         _.trim(reg.edzesjegy) &&
-        _.trim(reg.elfogadom);
+        reg.elfogadom;
 
       if (!required) {
         throw new Error('v.required');
