@@ -225,14 +225,14 @@
           </div>
           <div class="input-field col m9 s12">
             <select ng-model="reg.szallas" class="browser-default validate" name="szallas" id="szallas">
-              <option value="" disabled selected>Válassz szállást!</option>
+              <option value="" selected>Válassz szállást!</option>
               <option value="1agyas">Egyágyas elhelyezés, augusztus 6 - 8 (3 éj)</option>
               <option value="2agyas">Kétágyas elhelyezés, augusztus 6 - 8 (3 éj)</option>
             </select>
           </div>
         </div>
 
-        <div class="row">
+        <div class="row" ng-show="reg.szallas">
           <div class="input-field col m3 s12">
             <p class="blue-text">Étkezés</p>
           </div>
@@ -255,7 +255,7 @@
             A fent leírtakat elolvastam és tudomásul vettem, az összeget átutalom. A regisztráció csak a befizetett összeg beérkezését követően válik érvényessé! The registration became valid, after the transferred amount is arrived to our account!
           </p>
 
-          <input ng-model="reg.elfogadom" type="checkbox" class="filled-in" id="elfogadom" />
+          <input ng-model="reg.elfogadom" ng-required="true" type="checkbox" class="filled-in" id="elfogadom" />
           <label for="elfogadom">Elfogadom / Agree
             <span class="red-text"> *</span>
           </label>

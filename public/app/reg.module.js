@@ -30,6 +30,9 @@ app.controller('RegisztracioCtrl', ['RegisztracioService', 'msg',
       console.log('Regisztracio: ', reg);
       reg.hiba = undefined;
       try {
+        if (!reg.szallas && reg.etkezes) {
+          delete reg.etkezes;
+        }
         RegisztracioService.validate(reg);
         RegisztracioService.create(reg);
 
