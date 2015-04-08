@@ -6,7 +6,7 @@ app.factory('RegisztracioService', [
   function($http, $window) {
 
     var create = function(reg) {
-      $http.post('/api/regisztracio', reg)
+      $http.post('/api/regisztraciok', reg)
       .success(function(data, status, headers, config) {
         console.log(data, status);
       }).
