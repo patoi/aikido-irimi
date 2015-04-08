@@ -9,67 +9,48 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
 </head>
 
-<body ng-app="YourApp">
-
-  <div ng-controller="YourController">
-
-  </div>
+<body ng-app="Reg">
 
   <script src="./js/angular.js"></script>
-  <script>
-    // Include app dependency on ngMaterial
+  <script src="./app/reg.js"></script>
+  <script src="./app/reg.service.js"></script>
 
-    angular.module('YourApp', ['ngMaterial'])
-      .controller("YourController", YourController);
-  </script>
-
-  <div class="container">
+  <div class="container" ng-controller="RegisztracioCtrl as reg">
 
     <div class="row">
-      <div class="offset-s2 col s8">
-        <img class="responsive-img" src="./img/aikido.jpg">
+      <div class="offset-s2 col s8 s8">
+        <div class="card">
+          <div class="card-image">
+            <img class="responsive-img" src="./img/aikido.jpg">
+          </div>
+          <div class="card-content center-align">
+            <h6>Aikido 2015 tatai edzőtábor regisztráció</h6>
+            <h2>2015. augusztus 6-9.</h2>
+            <h3>Kobayashi Hiroaki (7.dan) shihan</h3>
+            <h6>Tatai Olimpiai Központ: 2890 Tata, Baji u. 21.</h6>
+            <p style="padding-top: 2em">
+              <ul style="font-weight: 300;">
+                <li><b>Szervező:</b> Renseikan Aikido Egyesület - Magyarországi Kobayashi Dojók Egyesületének tagja</li>
+                <li>
+                  <span class="red-text">TODO</span><b> 15 éves évforduló.</b>
+              </ul>
+            </p>
+          </div>
+          <div class="card-action center-align">
+            <a href="#">Részletes információk a weboldalon <span class="red-text">TODO</span></a>
+          </div>
+        </div>
       </div>
-      <h4 class="offset-s2 col s8 blue-text text-darken-2 center-align">Aikido 2015 edzőtábor regisztráció</h4>
-      <div class="offset-s2 col s8 divider"></div>
+    </div>
 
-      <div class="offset-s2 col s8 section">
-        <h5 class="blue-text text-darken-2">Rendezvény</h5>
-        <p>
-          <ul style="font-weight: 300;">
-            <li><b>Szervező:</b> Renseikan Aikido Egyesület - Magyarországi Kobayashi Dojók Egyesületének tagja
-            </li>
-            <li><b>A tábor helyszíne:</b> Tatai Olimpiai Központ (2890 Tata, Baji u. 21.)
-            </li>
-            <li><b>A tábor időpontja:</b> 2015. augusztus 6-9.
-            </li>
-            <li><b>A tábort vezeti:</b> Kobayashi Hiroaki (7.dan) shihan
-            </li>
-            <li><b>Részletek / Details:</b>
-              <span class="red-text">TODO</span> weboldal cím
-            </li>
-            <li>
-              <span class="red-text">TODO</span><b> 15 éves évforduló.</b>
-          </ul>
-        </p>
-      </div>
-
+    <div class="row">
       <div class="offset-s2 col s8 section">
         <h5 class="blue-text text-darken-2">Útmutató</h5>
-        <div>
-          <span class="red-text">*</span> kötelezően kitöltendő
-        </div>
         <p style="font-weight: 300;">
           Az következőképpen regisztrálhatsz a nyári AIKIDO edzőtáborra:
           <ol style="font-weight: 300;">
             <li>Tekintsd át az árakat!</li>
-            <li>Add meg az adataidat!
-              <span class="red-text">*</span>
-            </li>
-            <li>Rendeld meg a jegyed!
-              <span class="red-text">*</span>
-            </li>
-            <li>Foglalj szállást!</li>
-            <li>Add meg, hogy akarsz-e bankettre jönni!</li>
+            <li>Regisztrálj!</li>
             <li>Add meg, hogy milyen pólót szeretnél rendelni!</li>
             <li>Olvasd el az átutaláshoz szükséges adatokat és fejezd be a regisztrációt!</li>
             <li>Ellenőrizd, majd utald át az összeget.</li>
@@ -79,7 +60,9 @@
           <span class="red-text">Fontos </span>Regisztrációd csak a beérkezett összeg után válik érvényessé. A befizetésedről néhány napon belül kapsz egy visszaigazoló emailt. Ha nem kapsz ilyet, akkor vedd fel a kapcsolatot a megadott email címen!
         </div>
       </div>
+    </div>
 
+    <div class="row">
       <div class="offset-s2 col s8 section">
         <h5 class="blue-text text-darken-2">Tekintsd át az árakat!</h5>
         <p class="red-text">Kedvezményes részvételi díj:
@@ -88,6 +71,7 @@
         <p>Program terv - edzés naptár és vizsga időpontok:
           <span class="red-text">TODO</span>
         </p>
+        <h6 class="blue-text text-darken-2">Jegyárak</h6>
         <p style="font-weight: 300;">
           Nem MKDE tagoknak:
           <ul style="font-weight: 300;">
@@ -104,47 +88,187 @@
             <li>Edzésjegy/Training ticket: 3.500 HUF or 18 EUR</li>
           </ul>
         </p>
+        <h6 class="blue-text text-darken-2">Szállás és étkezési költség</h6>
+        <p style="font-weight: 300;">
+          <div style="font-weight: 300;">Lehetőség van a Tatai edzőtáborban megszállni. A szállások korlátozott számban állnak rendelkezésre, azokat a beérkezés sorrendjében tudjuk biztosítani.</div>
+          <ul style="font-weight: 300;">
+            <li>Egyágyas elhelyezés: 5.300 Ft / fő / éj</li>
+            <li>Kétágyas elhelyezés: 3.500 Ft / fő / éj</li>
+          </ul>
+          <div style="text-align: justify">
+            <span class="red-text">Fontos </span>
+            Kétágyas szoba foglalása esetén meg lehet adni azt, hogy kivel szeretnél egy szobában lenni, - ez nem minősül a 2. személynek foglalásnak, azt külön regisztráción lehet végrehajtani!
+          </div>
+          <div style="font-weight: 300; padding-top: 1em">A szállással együtt étkezés is igényelhető az alábbi árakon.</div>
+          <ul style="font-weight: 300;">
+            <li>Reggeli: 1.900 Ft / fő / nap</li>
+            <li>Ebéd: 3.000 Ft / fő / nap</li>
+            <li>Vacsora: 2.600 Ft / fő / nap</li>
+          </ul>
+          <p style="font-weight: 300; padding-top: 1em"><b>Szállásadó közleménye:</b> További létesítmény használatokkal kapcsolatosan a teljes árlistánk megtalálják az
+            <a href="http://www.mnsk.hu" target="_blank">olimpiai központok</a> oldalon. Számlázásunk alapja a tényleges igénybevétel. Aki bármelyik más létesítménybe bemegy, azt igénybe veszi (uszoda, futópálya, stb), annak ki kell fizetnie a pálya óradíját.
+            <br><b>Tájékoztatjuk, hogy az Edzőtáborba ételt behozni tilos!</b>
+            <br>Szállás: <a href="http://mnsk.hu/letesitmeny/tatai-olimpiai-kozpont/" target="_blank">Tatai Olimpiai Központ</a>
+            <br><a href="http://mnsk.hu/wp-content/uploads/tata.pdf" target="_blank">Árlista letöltés</a>
+          </p>
+        </p>
       </div>
+    </div>
 
-      <form class="offset-s2 col s8">
-        <h5 class="blue-text text-darken-2">Add meg az adataidat!</h5>
+    <div class="row">
+      <form ng-submit="reg.regisztracio()" class="offset-s2 col s8">
+        <h5 class="blue-text text-darken-2">Regisztráció</h5>
         <div class="row">
           <div class="input-field col s12">
-            <input id="name" type="text" class="validate">
-            <label for="name">Név / Name</label>
+            <input ng-model="reg.nev" id="nev" type="text" class="validate">
+            <label for="nev">Név / Name
+              <span class="red-text"> *</span>
+            </label>
+            {{reg.nev}}
           </div>
         </div>
         <div class="row">
           <div class="input-field col s12">
             <input id="email" type="email" class="validate">
-            <label for="email">Email</label>
+            <label for="email">Email
+              <span class="red-text"> *</span>
+            </label>
           </div>
         </div>
         <div class="row">
           <div class="input-field col s12">
             <input id="dojo" type="text" class="validate">
-            <label for="dojo">Dojo</label>
+            <label for="dojo">Dojo
+              <span class="red-text"> *</span>
+            </label>
           </div>
         </div>
         <div class="row">
           <div class="input-field col s12">
             <input id="tel" type="text" class="validate">
-            <label for="tel">Telefon / Telephone</label>
+            <label for="tel">Telefon / Telephone
+              <span class="red-text"> *</span>
+            </label>
           </div>
         </div>
-        <h5 class="blue-text text-darken-2">Rendeld meg a jegyed!</h5>
-        <p>
-          <input name="mkde-group" type="radio" id="mkde_tag" />
-          <label for="mkde_tag">MKDE tag</label>
-        </p>
-        <p>
-          <input name="mkde-group" type="radio" id="nem_mkde_tag" />
-          <label for="nem_mkde_tag">Nem MKDE tag</label>
-        </p>
-        <p>
-          <input type="checkbox" class="filled-in" id="dojo_vezeto" />
-          <label for="dojo_vezeto">Dojo vezető vagyok</label>
-        </p>
+
+        <div class="row">
+          <div class="input-field col s2">
+            <p class="blue-text">MKDE tag
+              <span class="red-text"> *</span>
+            </p>
+          </div>
+          <div class="input-field col s2">
+            <input name="mkde-group" type="radio" id="mkde_tag" />
+            <label for="mkde_tag">Igen</label>
+          </div>
+          <div class="input-field col s2">
+            <input name="mkde-group" type="radio" id="nem_mkde_tag" />
+            <label for="nem_mkde_tag">Nem</label>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="input-field col s2">
+            <p class="blue-text">Pénznem
+              <span class="red-text"> *</span>
+            </p>
+          </div>
+          <div class="input-field col s2">
+            <input name="penznem-group" type="radio" id="huf" />
+            <label for="huf">Forint</label>
+          </div>
+          <div class="input-field col s2">
+            <input name="penznem-group" type="radio" id="euro" />
+            <label for="euro">Euro</label>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="offset-s2 input-field col s4">
+            <input type="checkbox" class="filled-in" id="dojo_vezeto" />
+            <label for="dojo_vezeto">Dojo vezető vagyok</label>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="offset-s2 input-field col s4">
+            <input type="checkbox" class="filled-in" id="bankett" />
+            <label for="bankett">Bankett jegyet foglalok</label>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="input-field col s2">
+            <p class="blue-text">Edzés jegy
+              <span class="red-text"> *</span>
+            </p>
+          </div>
+          <div class="input-field col s10">
+            <select class="browser-default validate" name="jegyfajta" id="jegyfajta" required="true">
+              <option value="" disabled selected>Válassz jegyet!</option>
+              <option value="teljes">Teljes tábor / Whole Camp</option>
+              <option value="1napi">1 napi jegy / daily ticket</option>
+              <option value="2napi">2 napi jegy / daily ticket</option>
+              <option value="3napi">3 napi jegy / daily ticket</option>
+              <option value="4napi">4 napi jegy / daily ticket</option>
+              <option value="1edzes">1 edzés jegy / training ticket</option>
+              <option value="2edzes">2 edzés jegy / training ticket</option>
+              <option value="3edzes">3 edzés jegy / training ticket</option>
+              <option value="4edzes">4 edzés jegy / training ticket</option>
+              <option value="5edzes">5 edzés jegy / training ticket</option>
+              <option value="6edzes">6 edzés jegy / training ticket</option>
+              <option value="7edzes">7 edzés jegy / training ticket</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="input-field col s2">
+            <p class="blue-text">Szállás</p>
+          </div>
+          <div class="input-field col s10">
+            <select class="browser-default validate" name="szallasfajta" id="szallasfajta" required="true">
+              <option value="" disabled selected>Válassz szállást!</option>
+              <option value="1agyas">Egyágyas elhelyezés, augusztus 6 - 8 (3 éj)</option>
+              <option value="2agyas">Kétágyas elhelyezés, augusztus 6 - 8 (3 éj)</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="input-field col s2">
+            <p class="blue-text">Étkezés</p>
+          </div>
+          <div class="input-field col s2">
+            <input type="checkbox" class="filled-in" id="reggeli" />
+            <label for="reggeli">reggeli</label>
+          </div>
+          <div class="input-field col s2">
+            <input type="checkbox" class="filled-in" id="ebed" />
+            <label for="ebed">ebéd</label>
+          </div>
+          <div class="input-field col s2">
+            <input type="checkbox" class="filled-in" id="vacsora" />
+            <label for="vacsora">vacsora</label>
+          </div>
+        </div>
+
+        <div class="row">
+          <p>
+            A fent leírtakat elolvastam és tudomásul vettem, az összeget átutalom. A regisztráció csak a befizetett összeg beérkezését követően válik érvényessé! The registration became valid, after the transferred amount is arrived to our account!
+          </p>
+
+          <input type="checkbox" class="filled-in" id="elfogadom" />
+          <label for="elfogadom">Elfogadom / Agree
+            <span class="red-text"> *</span>
+          </label>
+        </div>
+        <div class="row">
+          <button class="btn waves-effect waves-light" type="submit" name="action">Regisztrálok
+            <i class="mdi-content-send right"></i>
+          </button>
+        </div>
       </form>
 
 
