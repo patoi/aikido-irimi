@@ -124,12 +124,11 @@
             <label for="nev">Név / Name
               <span class="red-text"> *</span>
             </label>
-            {{reg.nev}}
           </div>
         </div>
         <div class="row">
           <div class="input-field col s12">
-            <input id="email" type="email" class="validate">
+            <input ng-model="reg.email" id="email" type="email" class="validate">
             <label for="email">Email
               <span class="red-text"> *</span>
             </label>
@@ -137,7 +136,7 @@
         </div>
         <div class="row">
           <div class="input-field col s12">
-            <input id="dojo" type="text" class="validate">
+            <input ng-model="reg.dojo" id="dojo" type="text" class="validate">
             <label for="dojo">Dojo
               <span class="red-text"> *</span>
             </label>
@@ -145,7 +144,7 @@
         </div>
         <div class="row">
           <div class="input-field col s12">
-            <input id="tel" type="text" class="validate">
+            <input ng-model="reg.tel" id="tel" type="text" class="validate">
             <label for="tel">Telefon / Telephone
               <span class="red-text"> *</span>
             </label>
@@ -158,12 +157,12 @@
               <span class="red-text"> *</span>
             </p>
           </div>
-          <div class="input-field col m2 s4">
-            <input name="mkde-group" type="radio" id="mkde_tag" />
+          <div class="input-field col m3 s4">
+            <input ng-model="reg.mkdeTag" value="1" name="mkde-group" type="radio" id="mkde_tag"/>
             <label for="mkde_tag">Igen</label>
           </div>
-          <div class="input-field col m2 s4">
-            <input name="mkde-group" type="radio" id="nem_mkde_tag" />
+          <div class="input-field col m3 s4">
+            <input ng-model="reg.mkdeTag" value="0" name="mkde-group" type="radio" id="nem_mkde_tag" />
             <label for="nem_mkde_tag">Nem</label>
           </div>
         </div>
@@ -174,26 +173,26 @@
               <span class="red-text"> *</span>
             </p>
           </div>
-          <div class="input-field col m2 s4">
-            <input name="penznem-group" type="radio" id="huf" />
+          <div class="input-field col m3 s4">
+            <input ng-model="reg.penznem" value="huf" name="penznem-group" type="radio" id="huf" />
             <label for="huf">Forint</label>
           </div>
-          <div class="input-field col m2 s4">
-            <input name="penznem-group" type="radio" id="euro" />
+          <div class="input-field col m3 s4">
+            <input ng-model="reg.penznem" value="euro" name="penznem-group" type="radio" id="euro" />
             <label for="euro">Euro</label>
           </div>
         </div>
 
         <div class="row">
           <div class="offset-m3 input-field col m9">
-            <input type="checkbox" class="filled-in" id="dojo_vezeto" />
+            <input ng-model="reg.dojovezeto" type="checkbox" class="filled-in" id="dojo_vezeto" />
             <label for="dojo_vezeto">Dojo vezető vagyok</label>
           </div>
         </div>
 
         <div class="row">
           <div class="offset-m3 input-field col m9">
-            <input type="checkbox" class="filled-in" id="bankett" />
+            <input ng-model="reg.bankett" type="checkbox" class="filled-in" id="bankett" />
             <label for="bankett">Bankett jegyet foglalok</label>
           </div>
         </div>
@@ -205,7 +204,7 @@
             </p>
           </div>
           <div class="input-field col m9 s12">
-            <select class="browser-default validate" name="jegyfajta" id="jegyfajta" required="true">
+            <select ng-model="reg.edzesjegy" class="browser-default validate" name="edzesjegy" id="edzesjegy">
               <option value="" disabled selected>Válassz jegyet!</option>
               <option value="teljes">Teljes tábor / Whole Camp</option>
               <option value="1napi">1 napi jegy / daily ticket</option>
@@ -228,7 +227,7 @@
             <p class="blue-text">Szállás</p>
           </div>
           <div class="input-field col m9 s12">
-            <select class="browser-default validate" name="szallasfajta" id="szallasfajta" required="true">
+            <select ng-model="reg.szallas" class="browser-default validate" name="szallas" id="szallas">
               <option value="" disabled selected>Válassz szállást!</option>
               <option value="1agyas">Egyágyas elhelyezés, augusztus 6 - 8 (3 éj)</option>
               <option value="2agyas">Kétágyas elhelyezés, augusztus 6 - 8 (3 éj)</option>
@@ -240,16 +239,16 @@
           <div class="input-field col m3 s12">
             <p class="blue-text">Étkezés</p>
           </div>
-          <div class="input-field col m2 s12">
-            <input type="checkbox" class="filled-in" id="reggeli" />
+          <div class="input-field col m3 s12">
+            <input ng-model="reg.etkezes.reggeli" type="checkbox" class="filled-in" id="reggeli" />
             <label for="reggeli">reggeli</label>
           </div>
-          <div class="input-field col m2 s12">
-            <input type="checkbox" class="filled-in" id="ebed" />
+          <div class="input-field col m3 s12">
+            <input ng-model="reg.etkezes.ebed" type="checkbox" class="filled-in" id="ebed" />
             <label for="ebed">ebéd</label>
           </div>
-          <div class="input-field col m2 s12">
-            <input type="checkbox" class="filled-in" id="vacsora" />
+          <div class="input-field col m3 s12">
+            <input ng-model="reg.etkezes.vacsora" type="checkbox" class="filled-in" id="vacsora" />
             <label for="vacsora">vacsora</label>
           </div>
         </div>
@@ -259,7 +258,7 @@
             A fent leírtakat elolvastam és tudomásul vettem, az összeget átutalom. A regisztráció csak a befizetett összeg beérkezését követően válik érvényessé! The registration became valid, after the transferred amount is arrived to our account!
           </p>
 
-          <input type="checkbox" class="filled-in" id="elfogadom" />
+          <input ng-model="reg.elfogadom" type="checkbox" class="filled-in" id="elfogadom" />
           <label for="elfogadom">Elfogadom / Agree
             <span class="red-text"> *</span>
           </label>
