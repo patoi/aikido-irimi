@@ -11,14 +11,16 @@
 
 <body ng-app="Reg">
 
-  <script src="./js/angular.js"></script>
-  <script src="./app/reg.js"></script>
+  <script src="./js/angular.min.js"></script>
+  <script src="./js/is.min.js"></script>
+  <script src="./js/lodash.min.js"></script>
+  <script src="./app/reg.module.js"></script>
   <script src="./app/reg.service.js"></script>
 
   <div class="container" ng-controller="RegisztracioCtrl as reg">
 
     <div class="row">
-      <div class="offset-m2 col s12 m8">
+      <div class="col s12 m12">
         <div class="card">
           <div class="card-image">
             <img class="responsive-img" src="./img/aikido.jpg">
@@ -44,7 +46,7 @@
     </div>
 
     <div class="row">
-      <div class="offset-m2 col s12 m8 section">
+      <div class="col s12 m12 section">
         <h5 class="blue-text text-darken-2">Útmutató</h5>
         <p style="font-weight: 300;">
           Az következőképpen regisztrálhatsz a nyári AIKIDO edzőtáborra:
@@ -63,7 +65,7 @@
     </div>
 
     <div class="row">
-      <div class="offset-m2 col s12 m8 section">
+      <div class="col s12 m12 section">
         <h5 class="blue-text text-darken-2">Tekintsd át az árakat!</h5>
         <p class="red-text">Kedvezményes részvételi díj:
           <span class="red-text">TODO</span>
@@ -153,22 +155,6 @@
 
         <div class="row">
           <div class="input-field col m3 s4">
-            <p class="blue-text">MKDE tag
-              <span class="red-text"> *</span>
-            </p>
-          </div>
-          <div class="input-field col m3 s4">
-            <input ng-model="reg.mkdeTag" value="1" name="mkde-group" type="radio" id="mkde_tag"/>
-            <label for="mkde_tag">Igen</label>
-          </div>
-          <div class="input-field col m3 s4">
-            <input ng-model="reg.mkdeTag" value="0" name="mkde-group" type="radio" id="nem_mkde_tag" />
-            <label for="nem_mkde_tag">Nem</label>
-          </div>
-        </div>
-
-        <div class="row">
-          <div class="input-field col m3 s4">
             <p class="blue-text">Pénznem
               <span class="red-text"> *</span>
             </p>
@@ -180,6 +166,13 @@
           <div class="input-field col m3 s4">
             <input ng-model="reg.penznem" value="euro" name="penznem-group" type="radio" id="euro" />
             <label for="euro">Euro</label>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="offset-m3 input-field col m9">
+            <input ng-model="reg.mkdeTag" type="checkbox" class="filled-in" id="mkdeTag" />
+            <label for="mkdeTag">MKDE tag vagyok</label>
           </div>
         </div>
 
