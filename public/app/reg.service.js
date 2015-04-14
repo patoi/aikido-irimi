@@ -16,6 +16,7 @@ app.factory('RegisztracioService', [
     };
 
     var validate = function(reg) {
+      return true;
       var required =
         _.trim(reg.nev) &&
         _.trim(reg.email) &&

@@ -1,6 +1,6 @@
 bower_components
 node_modules
 tests/out/
-config_eles.js
+config*.js
 **/*.log
 **/*.db
