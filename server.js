@@ -75,13 +75,13 @@ app.route('/api/regisztraciok')
                 to: reg.email,
                 bcc: config.email.bcc,
                 subject: config.email.subject,
-                text: JSON.stringify(reg)
+                text: regService.toText(newDoc)
               };
               smtpTransport.sendMail(mailOptions, function(error, response) {
                 if (error) {
                   winston.error(error);
                 } else {
-                  winston.info('registration email sent: ', response.message);
+                  winston.info('registration email sent: ', newDoc.email);
                 }
               });
               res.json(newDoc);
@@ -93,6 +93,7 @@ app.route('/api/regisztraciok')
           }
         });
     } catch (e) {
+      winston.error(e.message);
       res.json({
         'errorCode': e.message
       });

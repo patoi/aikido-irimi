@@ -72,5 +72,28 @@ var transform = function(reg) {
   return regNew;
 };
 
+// registration email
+var toText = function(reg) {
+  var txt = '';
+  txt += 'Aikido 2015 regisztráció\n'
+  txt += _.padRight('\nReg. kód: ', 20) + reg._id;
+  txt += _.padRight('\nNév: ', 20) + reg.nev;
+  txt += _.padRight('\nEmail: ', 20) + reg.email;
+  txt += _.padRight('\nDojo: ', 20) + reg.dojo;
+  txt += _.padRight('\nTelefon: ', 20) + reg.tel;
+  txt += _.padRight('\nPénznem: ', 20) + reg.penznem;
+  txt += _.padRight('\nMKDE tag: ', 20) + (reg.mkdeTag ? 'Igen' : 'Nem');
+  txt += _.padRight('\nDojo vezető: ', 20) + (reg.dojovezeto ? 'Igen' : 'Nem');
+  txt += _.padRight('\nBankett jegy: ', 20) + (reg.bankett ? 'Igen' : 'Nem');
+  txt += _.padRight('\nEdzés jegy: ', 20) + reg.edzesjegy; // FIXME: resolution codes
+  txt += _.padRight('\nSzállás: ', 20) + reg.szallas;
+  txt += _.padRight('\nÉtkezés: ', 20) + (reg.etkezes.reggeli ? 'Reggeli' : '-------')
+  txt += (reg.etkezes.ebed ? ' Ebéd' : ' ----');
+  txt += (reg.etkezes.vacsora ? ' Vacsora' : '-------');
+  txt += '\nElfogadom a rendezvényre és a regisztrációra vonatkozó feltételeket.';
+  return txt;
+};
+
 exports.validate = validate;
 exports.transform = transform;
+exports.toText = toText;
