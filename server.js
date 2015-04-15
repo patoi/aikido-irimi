@@ -47,7 +47,7 @@ app.use(morgan('combined', {
 }));
 
 // registration
-app.route('/api/regisztraciok')
+app.route('/api/registrations')
   .post(function(req, res) {
     winston.info('registration in', req.body);
     // transform registration data
@@ -57,11 +57,7 @@ app.route('/api/regisztraciok')
       regService.validate(reg);
       // validate unique registration
       dbReg.find({
-          $or: [{
-            'nev': reg.nev
-          }, {
-            'email': reg.email
-          }]
+          'email': reg.email
         },
         function(err, docs) {
           if (docs.length === 0) {
@@ -108,7 +104,7 @@ app.route('/api/regisztraciok')
       dbReg.find({}, function(err, docs) {
         var mailOptions = {
           from: config.email.from,
-          to: config.email.cc,
+          to: config.email.bcc,
           subject: 'All registration',
           text: JSON.stringify(docs)
         };
@@ -117,7 +113,7 @@ app.route('/api/regisztraciok')
             winston.error(error);
             res.end('registration download smtp error');
           } else {
-            console.log('registration download email sent: ' + response.message);
+            console.log('registration download email sent: ', docs);
             res.send(docs);
           }
         });
