@@ -59,22 +59,24 @@ var MAPS = {
   'euro': 'Euro'
 };
 
-var getPrice = function(reg) {
+var getPrice = function(reg, deadlineDiscount) {
   var sum = 0;
   if (reg.penznem !== 'huf' && reg.penznem !== 'euro') {
     throw new Error('v.unknown.currency');
   }
-  sum += PRICES[reg.penznem]['workout'][reg.edzesjegy] * ((100 + DISCOUNTS['deadline'] + DISCOUNTS['mkde'] + DISCOUNTS['dojoleader']) / 100);
+  var sumDiscounts = reg.mkdeTag ? DISCOUNTS['mkde'] : 0;
+  sumDiscounts += reg.dojovezeto ? DISCOUNTS['dojoleader'] : 0;
+  sumDiscounts += deadlineDiscount ? DISCOUNTS['deadline'] : 0;
+  sum += PRICES[reg.penznem]['workout'][reg.edzesjegy] * ((100 + sumDiscounts) / 100);
+  sum += reg.bankett ? PRICES[reg.penznem]['banquet'] : 0;
   if (reg.szallas) {
     sum += PRICES[reg.penznem]['accommodation'][reg.szallas];
   }
-  sum += reg.bankett ? PRICES[reg.penznem]['banquet'] : 0;
   if (reg.etkezes) {
     sum += reg.etkezes.reggeli ? PRICES[reg.penznem]['meal']['breakfast'] : 0;
     sum += reg.etkezes.ebed ? PRICES[reg.penznem]['meal']['lunch'] : 0;
     sum += reg.etkezes.vacsora ? PRICES[reg.penznem]['meal']['dinner'] : 0;
   }
-  console.log(sum);
   return sum;
 };
 
@@ -176,3 +178,4 @@ exports.validate = validate;
 exports.transform = transform;
 exports.toText = toText;
 exports.getPrice = getPrice;
+exports.PRICES = PRICES;

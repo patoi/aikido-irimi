@@ -51,7 +51,7 @@ app.route('/api/price')
   .post(function(req, res) {
     winston.info('price in', req.body);
     var reg = regService.transform(req.body);
-    var price = regService.getPrice(reg);
+    var price = regService.getPrice(reg, config.deadlineDiscount);
     winston.info('price out', price);
     res.json({
       'price': price
@@ -76,7 +76,7 @@ app.route('/api/registrations')
             // registration is unique
 
             // calculating price
-           reg.price = regService.getPrice(reg);
+           reg.price = regService.getPrice(reg, config.deadlineDiscount);
 
             dbReg.insert(reg, function(err, newDoc) {
               if (err) {
