@@ -2,6 +2,8 @@ bower_components
 node_modules
 coverage
 tests/out/
-config*.js
+config.dev.js
+config.prod.js
+config.test*.js
 **/*.log
 **/*.db
