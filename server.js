@@ -46,6 +46,18 @@ app.use(morgan('combined', {
   stream: eventLogStream
 }));
 
+// create price
+app.route('/api/price')
+  .post(function(req, res) {
+    winston.info('price in', req.body);
+    var reg = regService.transform(req.body);
+    var price = regService.getPrice(reg);
+    winston.info('price out', price);
+    res.json({
+      'price': price
+    });
+  });
+
 // registration
 app.route('/api/registrations')
   .post(function(req, res) {
@@ -62,25 +74,33 @@ app.route('/api/registrations')
         function(err, docs) {
           if (docs.length === 0) {
             // registration is unique
+
+            // calculating price
+           reg.price = regService.getPrice(reg);
+
             dbReg.insert(reg, function(err, newDoc) {
-              // registration code is _id
-              winston.info('registration out', newDoc);
-              // email admin and user
-              var mailOptions = {
-                from: config.email.from,
-                to: reg.email,
-                bcc: config.email.bcc,
-                subject: config.email.subject,
-                text: regService.toText(newDoc)
-              };
-              smtpTransport.sendMail(mailOptions, function(error, response) {
-                if (error) {
-                  winston.error(error);
-                } else {
-                  winston.info('registration email sent: ', newDoc.email);
-                }
-              });
-              res.json(newDoc);
+              if (err) {
+                res.json({'errorCode': 'e.reg.insert'});
+              } else {
+                // registration code is _id
+                winston.info('registration out', newDoc);
+                // email admin and user
+                var mailOptions = {
+                  from: config.email.from,
+                  to: reg.email,
+                  bcc: config.email.bcc,
+                  subject: config.email.subject,
+                  text: regService.toText(newDoc)
+                };
+                smtpTransport.sendMail(mailOptions, function(error, response) {
+                  if (error) {
+                    winston.error(error);
+                  } else {
+                    winston.info('registration email sent: ', newDoc.email);
+                  }
+                });
+                res.json(newDoc);
+              }
             });
           } else {
             res.json({

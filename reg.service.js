@@ -4,6 +4,80 @@
 var _ = require('lodash');
 var is = require('is_js');
 
+var DISCOUNTS = {
+  deadline: -20,
+  mkde: -10,
+  dojoleader: -20
+};
+
+// FIXME: euro
+var PRICES = {
+  'huf': {
+    'workout': {
+      'teljes': 20000,
+      '1napi': 6000,
+      '2napi': 12000,
+      '3napi': 18000,
+      '4napi': 24000,
+      '1edzes': 4000,
+      '2edzes': 8000,
+      '3edzes': 12000,
+      '4edzes': 16000,
+      '5edzes': 20000,
+      '6edzes': 24000,
+      '7edzes': 28000
+    },
+    'accommodation': {
+      '1agyas': 24000,
+      '2agyas': 18000
+    },
+    'banquet': 8000,
+    'meal': {
+      'breakfast': 2000 * 3,
+      'lunch': 3000 * 3,
+      'dinner': 2000 * 3
+    }
+  }
+};
+
+var MAPS = {
+  'teljes': 'Teljes edzőtábor jegy',
+  '1napi': '1 napos edzésjegy',
+  '2napi': '2 napos edzésjegy',
+  '3napi': '3 napos edzésjegy',
+  '4napi': '4 napos edzésjegy',
+  '1edzes': '1 edzésjegy',
+  '2edzes': '2 edzésjegy',
+  '3edzes': '3 edzésjegy',
+  '4edzes': '4 edzésjegy',
+  '5edzes': '5 edzésjegy',
+  '6edzes': '6 edzésjegy',
+  '7edzes': '7 edzésjegy',
+  '1agyas': '1 ágyas szoba',
+  '2agyas': '2 ágyas szoba',
+  'huf': 'Forint',
+  'euro': 'Euro'
+};
+
+var getPrice = function(reg) {
+  var sum = 0;
+  if (reg.penznem !== 'huf' && reg.penznem !== 'euro') {
+    throw new Error('v.unknown.currency');
+  }
+  sum += PRICES[reg.penznem]['workout'][reg.edzesjegy] * ((100 + DISCOUNTS['deadline'] + DISCOUNTS['mkde'] + DISCOUNTS['dojoleader']) / 100);
+  if (reg.szallas) {
+    sum += PRICES[reg.penznem]['accommodation'][reg.szallas];
+  }
+  sum += reg.bankett ? PRICES[reg.penznem]['banquet'] : 0;
+  if (reg.etkezes) {
+    sum += reg.etkezes.reggeli ? PRICES[reg.penznem]['meal']['breakfast'] : 0;
+    sum += reg.etkezes.ebed ? PRICES[reg.penznem]['meal']['lunch'] : 0;
+    sum += reg.etkezes.vacsora ? PRICES[reg.penznem]['meal']['dinner'] : 0;
+  }
+  console.log(sum);
+  return sum;
+};
+
 // validate registration data
 var validate = function(reg) {
   var required =
@@ -68,7 +142,7 @@ var transform = function(reg) {
   var regNew = _.clone(reg);
   regNew.nev = reg.nev ? reg.nev.toUpperCase() : reg.nev;
   regNew.email = reg.email ? reg.email.toLowerCase() : reg.email;
-  regNew.dojo = reg.dojo.toUpperCase();
+  regNew.dojo = reg.dojo ? reg.dojo.toUpperCase() : reg.dojo;
   return regNew;
 };
 
@@ -81,19 +155,24 @@ var toText = function(reg) {
   txt += _.padRight('\nEmail: ', 20) + reg.email;
   txt += _.padRight('\nDojo: ', 20) + reg.dojo;
   txt += _.padRight('\nTelefon: ', 20) + reg.tel;
-  txt += _.padRight('\nPénznem: ', 20) + reg.penznem;
+  txt += _.padRight('\nPénznem: ', 20) + MAPS[reg.penznem];
   txt += _.padRight('\nMKDE tag: ', 20) + (reg.mkdeTag ? 'Igen' : 'Nem');
   txt += _.padRight('\nDojo vezető: ', 20) + (reg.dojovezeto ? 'Igen' : 'Nem');
   txt += _.padRight('\nBankett jegy: ', 20) + (reg.bankett ? 'Igen' : 'Nem');
-  txt += _.padRight('\nEdzés jegy: ', 20) + reg.edzesjegy; // FIXME: resolution codes
-  txt += _.padRight('\nSzállás: ', 20) + reg.szallas;
-  txt += _.padRight('\nÉtkezés: ', 20) + (reg.etkezes.reggeli ? 'Reggeli' : '-------')
-  txt += (reg.etkezes.ebed ? ' Ebéd' : ' ----');
-  txt += (reg.etkezes.vacsora ? ' Vacsora' : '-------');
-  txt += '\nElfogadom a rendezvényre és a regisztrációra vonatkozó feltételeket.';
+  txt += _.padRight('\nEdzés jegy: ', 20) + MAPS[reg.edzesjegy];
+
+  if (reg.etkezes) {
+    txt += _.padRight('\nSzállás: ', 20) + MAPS[reg.szallas];
+    txt += _.padRight('\nÉtkezés: ', 20) + (reg.etkezes.reggeli ? 'Reggeli' : '-------')
+    txt += (reg.etkezes.ebed ? ' Ebéd' : ' ----');
+    txt += (reg.etkezes.vacsora ? ' Vacsora' : '-------');
+  }
+  txt += _.padRight('\n\nUtalandó összeg: ', 20) + reg.price + " " + MAPS[reg.penznem];
+  txt += '\n\nElfogadom a rendezvényre és a regisztrációra vonatkozó feltételeket.';
   return txt;
 };
 
 exports.validate = validate;
 exports.transform = transform;
 exports.toText = toText;
+exports.getPrice = getPrice;

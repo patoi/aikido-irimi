@@ -18,8 +18,8 @@ app.constant(
   }
 );
 
-app.controller('RegisztracioCtrl', ['RegisztracioService', 'msg',
-  function(RegisztracioService, msg) {
+app.controller('RegisztracioCtrl', ['$http', '$scope', 'RegisztracioService', 'msg',
+  function($http, $scope, RegisztracioService, msg) {
     var reg = this;
     reg.mkdeTag = '1';
     reg.penznem = 'huf';
