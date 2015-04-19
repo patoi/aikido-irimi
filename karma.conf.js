@@ -18,7 +18,7 @@ module.exports = function(config) {
             //'public/js/materialize.js',
             'public/app/**/*.module.js',
             'public/app/**/*.service.js',
-            'bower_components/angular-mocks/angular-mocks.js',
+            'node_components/angular-mocks/angular-mocks.js',
             'tests/unit/*.test.js',
         ],
         // list of files / patterns to exclude

@@ -29,7 +29,6 @@
     "is_js": "~0.7.3"
   },
   "devDependencies": {
-    "materialize": "~0.96.0",
     "angular-mocks": "~1.3.15"
   }
 }
