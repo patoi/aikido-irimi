@@ -1,9 +1,19 @@
 language: node_js
 node_js:
   - "0.10"
-env:
-  - NODE_ENV="dev"
+
+before_install:
+  - "npm config set spin false"
+  - "npm install -g npm@^2"
+  - "npm --version"
+
+install:
+  - "npm install"
+
 cache:
   directories:
     - node_modules
     - bower_components
+
+env:
+  - NODE_ENV="dev"
