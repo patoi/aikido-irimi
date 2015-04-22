@@ -23,15 +23,6 @@ var dbReg = new Datastore({
   autoload: true
 });
 
-// smtp config
-var smtpTransport = nodemailer.createTransport({
-  service: 'Gmail',
-  auth: {
-    user: config.email.from,
-    pass: config.email.psw
-  }
-});
-
 // event log file init
 var eventLogStream = fs.createWriteStream(__dirname + '/event.log', {
   flags: 'a'
