@@ -151,6 +151,7 @@ app.route('/api/registrations')
           } else {
             winston.info('Email sent from all reg. data!');
           }
+          res.sendStatus(200);
         });
       });
     } else {
