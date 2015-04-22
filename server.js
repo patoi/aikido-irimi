@@ -100,7 +100,7 @@ app.route('/api/registrations')
                     BccAddresses: [config.email.bcc]
                   },
                   Message: {
-                    Subject: Source {
+                    Subject: {
                       Data: config.email.subject
                     },
                     Body: {
@@ -145,7 +145,7 @@ app.route('/api/registrations')
             ToAddresses: [config.email.bcc]
           },
           Message: {
-            Subject: Source {
+            Subject: {
               Data: 'Minden regisztráció'
             },
             Body: {
