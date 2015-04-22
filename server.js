@@ -12,7 +12,7 @@ var Datastore = require('nedb');
 var regService = require('./reg.service.js');
 
 // init SMTP
-aws.config.loadFromPath('config.aws.json');
+aws.config.loadFromPath('./config.aws.json');
 var ses = new aws.SES({
   apiVersion: '2010-12-01'
 });
