@@ -4,6 +4,7 @@ coverage
 tests/out/
 config.dev.js
 config.prod.js
-config.test*.js
+config.staging.js
+aws*.md
 **/*.log
 **/*.db
