@@ -4,6 +4,7 @@
   "description": "Aikido 2015 Tata edzőtábor",
   "main": "index.js",
   "dependencies": {
+    "aws-sdk": "^2.1.24",
     "body-parser": "^1.12.2",
     "connect": "^3.3.5",
     "express": "^4.12.3",
@@ -12,7 +13,6 @@
     "lodash": "^3.6.0",
     "morgan": "^1.5.2",
     "nedb": "^1.1.2",
-    "nodemailer": "^1.3.2",
     "winston": "^1.0.0"
   },
   "devDependencies": {
@@ -32,8 +32,8 @@
     "test": "./_mocha && ./karma start --single-run",
     "test-client": "./karma start --single-run",
     "coverage": "./node_modules/istanbul/lib/cli.js cover ./_mocha -- -R spec",
-    "run-dev": "NODE_ENV=dev nodemon server.js",
-    "run-staging": "NODE_ENV=staging forever start -c nodemon server.js"
+    "start-dev": "NODE_ENV=dev nodemon server.js",
+    "start-staging": "NODE_ENV=staging forever start -c nodemon server.js"
   },
   "repository": {
     "type": "git",

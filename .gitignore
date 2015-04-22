@@ -5,6 +5,7 @@ tests/out/
 config.dev.js
 config.prod.js
 config.staging.js
+config.aws.json
 aws*.md
 **/*.log
 **/*.db

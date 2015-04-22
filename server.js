@@ -1,5 +1,6 @@
 'use strict';
 
+var aws = require('aws-sdk');
 var express = require('express');
 var config = require('./config.' + process.env.NODE_ENV);
 var app = express();
@@ -7,9 +8,14 @@ var fs = require('fs')
 var morgan = require('morgan');
 var bodyParser = require('body-parser');
 var winston = require('winston');
-var nodemailer = require('nodemailer');
 var Datastore = require('nedb');
 var regService = require('./reg.service.js');
+
+// init SMTP
+aws.config.loadFromPath('config.aws.json');
+var ses = new aws.SES({
+  apiVersion: '2010-12-01'
+});
 
 // init database
 var dbReg = new Datastore({
@@ -76,27 +82,38 @@ app.route('/api/registrations')
             // registration is unique
 
             // calculating price
-           reg.price = regService.getPrice(reg, config.deadlineDiscount);
+            reg.price = regService.getPrice(reg, config.deadlineDiscount);
 
             dbReg.insert(reg, function(err, newDoc) {
               if (err) {
-                res.json({'errorCode': 'e.reg.insert'});
+                res.json({
+                  'errorCode': 'e.reg.insert'
+                });
               } else {
                 // registration code is _id
                 winston.info('registration out', newDoc);
                 // email admin and user
-                var mailOptions = {
-                  from: config.email.from,
-                  to: reg.email,
-                  bcc: config.email.bcc,
-                  subject: config.email.subject,
-                  text: regService.toText(newDoc)
-                };
-                smtpTransport.sendMail(mailOptions, function(error, response) {
-                  if (error) {
-                    winston.error(error);
+                ses.sendEmail({
+                  Source: config.email.from,
+                  Destination: {
+                    ToAddresses: [reg.email],
+                    BccAddresses: [config.email.bcc]
+                  },
+                  Message: {
+                    Subject: Source {
+                      Data: config.email.subject
+                    },
+                    Body: {
+                      Text: {
+                        Data: regService.toText(newDoc)
+                      }
+                    }
+                  }
+                }, function(err, data) {
+                  if (err) {
+                    winston.error('SMTP error: reg. send error.');
                   } else {
-                    winston.info('registration email sent: ', newDoc.email);
+                    winston.info('Email sent to from reg.: ' + reg.email + ", " + reg._id);
                   }
                 });
                 res.json(newDoc);
@@ -122,19 +139,26 @@ app.route('/api/registrations')
     winston.info('registration download', req.query.key);
     if (req.query.key === config.adminKey) {
       dbReg.find({}, function(err, docs) {
-        var mailOptions = {
-          from: config.email.from,
-          to: config.email.bcc,
-          subject: 'All registration',
-          text: JSON.stringify(docs)
-        };
-        smtpTransport.sendMail(mailOptions, function(error, response) {
-          if (error) {
-            winston.error(error);
-            res.end('registration download smtp error');
+        ses.sendEmail({
+          Source: config.email.from,
+          Destination: {
+            ToAddresses: [config.email.bcc]
+          },
+          Message: {
+            Subject: Source {
+              Data: 'Minden regisztráció'
+            },
+            Body: {
+              Text: {
+                Data: JSON.stringify(docs)
+              }
+            }
+          }
+        }, function(err, data) {
+          if (err) {
+            winston.error('SMTP error: all reg. data send error.');
           } else {
-            console.log('registration download email sent: ', docs);
-            res.send(docs);
+            winston.info('Email sent to from all reg. data!');
           }
         });
       });
