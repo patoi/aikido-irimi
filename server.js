@@ -127,7 +127,7 @@ app.route('/api/registrations')
   })
   .get(function(req, res) {
     // get all registration data
-    winston.info('registration download', req.query.key);
+    winston.info('registration download, user: ', req.query.key);
     if (req.query.key === config.adminKey) {
       dbReg.find({}, function(err, docs) {
         ses.sendEmail({
@@ -149,7 +149,7 @@ app.route('/api/registrations')
           if (err) {
             winston.error('SMTP: all reg. data send: ' + err.message);
           } else {
-            winston.info('Email sent to from all reg. data!');
+            winston.info('Email sent from all reg. data!');
           }
         });
       });
