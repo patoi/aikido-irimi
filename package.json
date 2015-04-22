@@ -33,7 +33,8 @@
     "test-client": "./karma start --single-run",
     "coverage": "./node_modules/istanbul/lib/cli.js cover ./_mocha -- -R spec",
     "start-dev": "NODE_ENV=dev nodemon server.js",
-    "start-staging": "NODE_ENV=staging forever start -c nodemon server.js"
+    "start-staging": "NODE_ENV=staging forever start -c nodemon server.js",
+    "start-prod": "NODE_ENV=prod forever start -c nodemon server.js"
   },
   "repository": {
     "type": "git",

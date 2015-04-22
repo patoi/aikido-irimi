@@ -159,6 +159,6 @@ app.route('/api/registrations')
     }
   });
 
-app.listen(3000, function() {
-  winston.info('Listen on port 3000 NODE_ENV: ' + process.env.NODE_ENV);
+app.listen(config.port, function() {
+  winston.info('Listen on port ' + config.port + ' NODE_ENV: ' + process.env.NODE_ENV);
 });
