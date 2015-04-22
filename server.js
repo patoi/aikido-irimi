@@ -102,7 +102,7 @@ app.route('/api/registrations')
                   }
                 }, function(err, data) {
                   if (err) {
-                    winston.error('SMTP error: reg. send error.');
+                    winston.error('SMTP: reg. send: ' + err.message);
                   } else {
                     winston.info('Email sent to from reg.: ' + reg.email + ", " + reg._id);
                   }
@@ -147,7 +147,7 @@ app.route('/api/registrations')
           }
         }, function(err, data) {
           if (err) {
-            winston.error('SMTP error: all reg. data send error.');
+            winston.error('SMTP: all reg. data send: ' + err.message);
           } else {
             winston.info('Email sent to from all reg. data!');
           }
