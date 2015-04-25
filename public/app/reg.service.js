@@ -6,13 +6,7 @@ app.factory('RegisztracioService', [
   function($http, $window) {
 
     var create = function(reg) {
-      $http.post('/api/registrations', reg)
-      .success(function(data, status, headers, config) {
-        console.log(data, status);
-      }).
-      error(function(data, status, headers, config) {
-        console.log(data, status);
-      });
+      return $http.post('/api/registrations', reg);
     };
 
     var validate = function(reg) {

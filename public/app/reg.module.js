@@ -19,22 +19,30 @@ app.constant(
 );
 
 app.controller('RegisztracioCtrl', ['$http', '$scope', 'RegisztracioService', 'msg',
-  function($http, $scope, RegisztracioService, msg) {
+  function($animate$http, $scope, RegisztracioService, msg) {
+
+    $scope.showReg = true;
+
     var reg = this;
     reg.mkdeTag = '1';
     reg.penznem = 'huf';
 
-    console.log('RegisztracioCtrl');
-
     reg.regisztracio = function() {
-      console.log('Regisztracio: ', reg);
       reg.hiba = undefined;
       try {
         if (!reg.szallas && reg.etkezes) {
           delete reg.etkezes;
         }
         RegisztracioService.validate(reg);
-        RegisztracioService.create(reg);
+        RegisztracioService.create(reg)
+          .success(function(data, status, headers, config) {
+            console.log(data, status);
+            $scope.showReg = false;
+          })
+          .error(function(data, status, headers, config) {
+            console.log(data, status);
+            reg.hiba = 'Hiba történt a regisztráció mentésekor, próbáld meg újra!'
+          });
 
       } catch (e) {
         console.log(e.message);
