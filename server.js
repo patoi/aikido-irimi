@@ -129,7 +129,7 @@ app.route('/api/registrations')
     // get all registration data
     winston.info('registration download, user: ', req.query.key);
     if (req.query.key === config.adminKey) {
-      dbReg.find({}, function(err, docs) {
+      dbReg.find({}).sort({ time: 1 }).exec(function(err, docs) {
         ses.sendEmail({
           Source: config.email.from,
           Destination: {
@@ -141,7 +141,7 @@ app.route('/api/registrations')
             },
             Body: {
               Text: {
-                Data: JSON.stringify(docs)
+                Data: regService.getAllRegAsCSV(docs)
               }
             }
           }

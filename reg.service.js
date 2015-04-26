@@ -191,8 +191,21 @@ var toHtml = function(reg) {
   return txt;
 };
 
+// all registration as CSV
+var getAllRegAsCSV = function(regList) {
+  var txt = 'Sorszám, kód, idő, név, email, dojo, tel., mkde tag, dojo vez., bankett, jegy, ár, pénznem\n';
+  var addReg = function(reg) {
+    return (i + 1) + ',' + reg._id + ',' + reg.time + ',' + reg.nev + ',' + reg.email + ',' + reg.dojo + ',' + reg.tel + ',' + (reg.mkdeTag ? 'I' : 'N') + ',' + (reg.dojovezeto ? 'I' : 'N') + ',' + (reg.bankett ? 'I' : 'N') + ',' + reg.edzesjegy + ',' + reg.price + ',' + reg.penznem;
+  };
+  for(var i = 0; regList.length > i; i++) {
+    txt += addReg(regList[i]) + '\n';
+  }
+  return txt;
+};
+
 exports.validate = validate;
 exports.transform = transform;
 exports.toHtml = toHtml;
 exports.getPrice = getPrice;
+exports.getAllRegAsCSV = getAllRegAsCSV;
 exports.PRICES = PRICES;
