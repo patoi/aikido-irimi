@@ -12,11 +12,16 @@ module.exports = function(config) {
         // list of files / patterns to load in the browser
         files: [
             'public/js/jquery.min.js',
-            'public/js/angular.min.js',
             'public/js/lodash.min.js',
             'public/js/is.min.js',
+            'public/js/angular.min.js',
+            'public/js/angular-cookies.min.js',
+            'public/js/angular-translate-storage-cookie.min.js',
+            'public/js/angular-translate-storage-local.min.js',
+            'public/js/angular-translate.min.js',
             //'public/js/materialize.js',
             'public/app/**/*.module.js',
+            'public/app/**/*.config.js',
             'public/app/**/*.service.js',
             'node_modules/angular-mocks/angular-mocks.js',
             'tests/unit/*.test.js',
