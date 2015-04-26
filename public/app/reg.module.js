@@ -41,7 +41,11 @@ app.controller('RegisztracioCtrl', ['$http', '$scope', 'RegisztracioService', 'm
           })
           .error(function(data, status, headers, config) {
             console.log(data, status);
-            reg.hiba = 'Hiba történt a regisztráció mentésekor, próbáld meg újra!'
+            if (status === 409) {
+              reg.hiba = 'Ezzel az email címmel már van regisztráció! [' + data.errorCode + ']';
+            } else {
+              reg.hiba = 'Hiba történt a regisztráció mentésekor, próbáld meg újra! [' + data.errorCode + ']';
+            }
           });
 
       } catch (e) {

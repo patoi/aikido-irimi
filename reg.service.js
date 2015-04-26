@@ -3,6 +3,7 @@
 
 var _ = require('lodash');
 var is = require('is_js');
+var moment = require('moment-timezone');
 
 var DISCOUNTS = {
   deadline: -20,
@@ -145,37 +146,53 @@ var transform = function(reg) {
   regNew.nev = reg.nev ? reg.nev.toUpperCase() : reg.nev;
   regNew.email = reg.email ? reg.email.toLowerCase() : reg.email;
   regNew.dojo = reg.dojo ? reg.dojo.toUpperCase() : reg.dojo;
+  regNew.time = moment().tz("Europe/Budapest").format('YYYY.MM.DD hh:mm:ss');;
   return regNew;
 };
 
 // registration email
-var toText = function(reg) {
+var toHtml = function(reg) {
+
+  var rowRender = function(header, value) {
+    header = header || '&nbsp;';
+    value = value || '&nbsp;';
+    return '<div class="row" style="height: 1.4em"><div class="col s6" style="display: inline-block; width: 180px;">' + header + '</div><div class="col s6" style="display: inline-block; font-weight: bold">' + value + '</div></div>';
+  };
+
   var txt = '';
-  txt += 'Aikido 2015 regisztráció\n'
-  txt += _.padRight('\nReg. kód: ', 20) + reg._id;
-  txt += _.padRight('\nNév: ', 20) + reg.nev;
-  txt += _.padRight('\nEmail: ', 20) + reg.email;
-  txt += _.padRight('\nDojo: ', 20) + reg.dojo;
-  txt += _.padRight('\nTelefon: ', 20) + reg.tel;
-  txt += _.padRight('\nPénznem: ', 20) + MAPS[reg.penznem];
-  txt += _.padRight('\nMKDE tag: ', 20) + (reg.mkdeTag ? 'Igen' : 'Nem');
-  txt += _.padRight('\nDojo vezető: ', 20) + (reg.dojovezeto ? 'Igen' : 'Nem');
-  txt += _.padRight('\nBankett jegy: ', 20) + (reg.bankett ? 'Igen' : 'Nem');
-  txt += _.padRight('\nEdzés jegy: ', 20) + MAPS[reg.edzesjegy];
+  txt += '<html><head><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.96.1/css/materialize.min.css"></head><body style="background-color: #fff">'
+  txt += '<div class="container">'
+  txt += '<h3 class="blue-text">Aikido 2015 regisztráció</h3>'
+  txt += rowRender('Reg. kód', reg._id);
+  txt += rowRender('Reg. időpont', reg.time);
+  txt += rowRender('Név', reg.nev);
+  txt += rowRender('Email', reg.email);
+  txt += rowRender('Dojo', reg.dojo);
+  txt += rowRender('Telefon', reg.tel);
+  // txt += rowRender('Pénznem', MAPS[reg.penznem]);
+  txt += rowRender('', '');
+  txt += rowRender('MKDE tag', (reg.mkdeTag ? 'Igen' : 'Nem'));
+  txt += rowRender('Dojo vezető', (reg.dojovezeto ? 'Igen' : 'Nem'));
+  txt += rowRender('Bankett jegy', (reg.bankett ? 'Igen' : 'Nem'));
+  txt += rowRender('Edzés jegy', MAPS[reg.edzesjegy]);
 
   if (reg.etkezes) {
-    txt += _.padRight('\nSzállás: ', 20) + MAPS[reg.szallas];
-    txt += _.padRight('\nÉtkezés: ', 20) + (reg.etkezes.reggeli ? 'Reggeli' : '-------')
+    txt += rowRender('', '');
+    txt += rowRender('Szállás', MAPS[reg.szallas]);
+    txt += rowRender('Étkezés', (reg.etkezes.reggeli ? 'Reggeli' : '-------'));
     txt += (reg.etkezes.ebed ? ' Ebéd' : ' ----');
     txt += (reg.etkezes.vacsora ? ' Vacsora' : '-------');
   }
-  txt += _.padRight('\n\nUtalandó összeg: ', 20) + reg.price + " " + MAPS[reg.penznem];
-  txt += '\n\nElfogadom a rendezvényre és a regisztrációra vonatkozó feltételeket.';
+  txt += rowRender('', '');
+  txt += rowRender('\nUtalandó összeg', reg.price + " " + MAPS[reg.penznem]);
+  txt += rowRender('', '');
+  txt += '<div class="row" style="height: 1.4em"><div class="col s12" style="display: inline-block;">Elfogadom a rendezvényre és a regisztrációra vonatkozó feltételeket.</div></div>';
+  txt += '</div></body></html>';
   return txt;
 };
 
 exports.validate = validate;
 exports.transform = transform;
-exports.toText = toText;
+exports.toHtml = toHtml;
 exports.getPrice = getPrice;
 exports.PRICES = PRICES;

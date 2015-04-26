@@ -11,6 +11,7 @@
     "is_js": "^0.7.3",
     "livereload": "^0.3.7",
     "lodash": "^3.6.0",
+    "moment-timezone": "^0.3.1",
     "morgan": "^1.5.2",
     "nedb": "^1.1.2",
     "winston": "^1.0.0"

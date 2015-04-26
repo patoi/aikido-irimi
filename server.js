@@ -77,7 +77,7 @@ app.route('/api/registrations')
 
             dbReg.insert(reg, function(err, newDoc) {
               if (err) {
-                res.json({
+                res.status(500).json({
                   'errorCode': 'e.reg.insert'
                 });
               } else {
@@ -92,11 +92,11 @@ app.route('/api/registrations')
                   },
                   Message: {
                     Subject: {
-                      Data: config.email.subject
+                      Data: config.email.subject + ' - ' + reg.nev + ' - reg. kód: ' + reg._id
                     },
                     Body: {
-                      Text: {
-                        Data: regService.toText(newDoc)
+                      Html: {
+                        Data: regService.toHtml(newDoc)
                       }
                     }
                   }
@@ -104,21 +104,21 @@ app.route('/api/registrations')
                   if (err) {
                     winston.error('SMTP: reg. send: ' + err.message);
                   } else {
-                    winston.info('Email sent to from reg.: ' + reg.email + ", " + reg._id);
+                    winston.info('Email sent to reg.: ' + reg.email + ", " + reg._id);
                   }
                 });
                 res.json(newDoc);
               }
             });
           } else {
-            res.json({
+            res.status(409).json({
               'errorCode': 'v.reg.not.unique'
             });
           }
         });
     } catch (e) {
       winston.error(e.message);
-      res.json({
+      res.status(500).json({
         'errorCode': e.message
       });
     }
