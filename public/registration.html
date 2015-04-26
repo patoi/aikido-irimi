@@ -2,30 +2,31 @@
 <html>
 
 <head>
-  <title>Aikido Edzőtábor</title>
-  <!--Import materialize.css-->
+  <title>Aikido</title>
   <link type="text/css" rel="stylesheet" href="css/materialize.min.css" media="screen,projection" />
-
-  <!--Let browser know website is optimized for mobile-->
+  <link type="text/css" rel="stylesheet" href="css/reg.css" media="screen,projection" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
-  <script type="application/ld+json">
-    { "@context" : "http://schema.org", "@type" : "Aikido", "name" : "Aikido Edzőtábor Tata - 2015", "image" : "./img/aikido.jpg", "startDate" : "2015-08-06T08:00", "typicalAgeRange" : "All Ages", "location" : { "@type" : "EventVenue", "name" : "Eötvös Iskola
-    tornaterme", "address" : "2890 Tata, Tanoda tér 5." } }
-  </script>
+
+  <script type="text/javascript" src="./js/jquery.min.js"></script>
+  <script type="text/javascript" src="./js/materialize.min.js"></script>
+  <script type="text/javascript" src="./js/is.min.js"></script>
+  <script type="text/javascript" src="./js/lodash.min.js"></script>
+  <script type="text/javascript" src="./js/angular.min.js"></script>
+  <script type="text/javascript" src="./js/angular-cookies.min.js"></script>
+  <script type="text/javascript" src="./js/angular-translate.min.js"></script>
+  <script type="text/javascript" src="./js/angular-translate-storage-local.min.js"></script>
+  <script type="text/javascript" src="./js/angular-translate-storage-cookie.min.js"></script>
+  <script type="text/javascript" src="./app/reg.module.js"></script>
+  <script type="text/javascript" src="./app/reg.config.js"></script>
+  <script type="text/javascript" src="./app/reg.service.js"></script>
 </head>
 
 <body ng-app="Reg">
 
-  <script src="./js/angular.min.js"></script>
-  <script src="./js/is.min.js"></script>
-  <script src="./js/lodash.min.js"></script>
-  <script src="./app/reg.module.js"></script>
-  <script src="./app/reg.service.js"></script>
-
   <div class="container" ng-controller="RegisztracioCtrl as reg">
     <div class="row">
       <div class="offset-m2 col s12 m8 section">
-        <h5 class="blue-text text-darken-2">Regisztráció</h5>
+        <h5 class="blue-text text-darken-2">{{'reg' | translate}}</h5>
         <p>
           Az következőképpen regisztrálhatsz az Aikido edzőtáborra:
           <ol style="font-weight: 300;">
@@ -107,15 +108,15 @@
 
         <div class="row">
           <div class="input-field offset-m2 col s12 m8">
-            <h5 class="blue-text text-darken-2">Regisztrációs adatok</h5>
+            <h5 class="blue-text text-darken-2">{{'reg-form' | translate}}</h5>
           </div>
         </div>
 
         <div class="row">
           <div class="input-field offset-m2 col s12 m8">
-            <input ng-model="reg.nev" ng-required="true" ng-pattern="/^([a-zöüóőúéáűíä \-\.]){6,100}$/i" name="nev" type="text" class="form-control" class="validate" ng-class="{invalid: regForm.nev.$invalid}">
-            <span ng-show="regForm.nev.$invalid && regForm.nev.$dirty">Minimum 6, maximum 100 karakter</span>
-            <label for="nev">Név / Name
+            <input ng-model="reg.nev" ng-required="true" ng-pattern="/^([a-zöüóőúéáűíä \-\.]){6,100}$/i" name="nev" type="text" class="form-control" ng-class="{invalid: regForm.nev.$invalid}">
+            <span ng-show="regForm.nev.$invalid && regForm.nev.$dirty">{{'validate-name' | translate}}</span>
+            <label for="nev">{{'label-name' | translate}}
               <span class="red-text"> *</span>
             </label>
           </div>
@@ -123,8 +124,8 @@
 
         <div class="row">
           <div class="input-field offset-m2 col s12 m8">
-            <input ng-model="reg.email" ng-required="true" name="email" type="email" class="validate" ng-class="{invalid: regForm.email.$invalid}" ng-pattern='/^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/'>
-            <span ng-show="regForm.email.$invalid && regForm.email.$dirty">Nem érvényes a megadott email cím</span>
+            <input ng-model="reg.email" ng-required="true" name="email" type="email" class="form-control" ng-class="{invalid: regForm.email.$invalid}" ng-pattern='/^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/'>
+            <span ng-show="regForm.email.$invalid && regForm.email.$dirty">{{'validate-email' | translate}}</span>
             <label for="email">Email
               <span class="red-text"> *</span>
             </label>
@@ -133,8 +134,8 @@
 
         <div class="row">
           <div class="input-field offset-m2 col s12 m8">
-            <input ng-model="reg.dojo" ng-required="true" ng-pattern="/^([a-zöüóőúéáűíä\ \-\.]){6,100}/i" name="dojo" type="text" class="validate" ng-class="{invalid: regForm.dojo.$invalid}">
-            <span ng-show="regForm.dojo.$invalid && regForm.dojo.$dirty">Minimum 6, maximum 100 karakter</span>
+            <input ng-model="reg.dojo" ng-required="true" ng-pattern="/^([a-zöüóőúéáűíä\ \-\.]){2,100}/i" name="dojo" type="text" class="form-control" ng-class="{invalid: regForm.dojo.$invalid}">
+            <span ng-show="regForm.dojo.$invalid && regForm.dojo.$dirty">{{'validate-dojo' | translate}}</span>
             <label for="dojo">Dojo
               <span class="red-text"> *</span>
             </label>
@@ -143,9 +144,9 @@
 
         <div class="row">
           <div class="input-field offset-m2 col s12 m8">
-            <input ng-model="reg.tel" ng-required="true" ng-pattern="/^([0-9 \-\+]){7,16}$/" name="tel" type="text" class="validate" ng-class="{invalid: regForm.tel.$invalid}">
-            <span ng-show="regForm.tel.$invalid && regForm.tel.$dirty">Csak számot, szóközt, kötőjelet és + jel adható meg 7-16 hosszon</span>
-            <label for="tel">Telefon / Telephone
+            <input ng-model="reg.tel" maxlength="16" ng-required="true" ng-minlength="7" ng-maxlength="16" ng-pattern="/^([0-9\ \-\+]){7,16}$/" name="tel" type="text" class="form-control" ng-class="{invalid: regForm.tel.$invalid}">
+            <span ng-show="regForm.tel.$invalid && regForm.tel.$dirty">{{'validate-tel' | translate}}</span>
+            <label for="tel">{{'label-tel' | translate}}
               <span class="red-text"> *</span>
             </label>
           </div>
@@ -153,48 +154,48 @@
 
         <div class="row">
           <div class="offset-m2 input-field col m8 s12">
-            <input ng-model="reg.mkdeTag" type="checkbox" class="filled-in" id="mkdeTag" />
-            <label for="mkdeTag">MKDE tag vagyok</label>
+            <input ng-model="reg.mkdeTag" type="checkbox" class="form-control filled-in" id="mkdeTag" />
+            <label for="mkdeTag">{{'label-mkdetag' | translate}}</label>
           </div>
         </div>
 
         <div class="row">
           <div class="offset-m2 input-field col m8 s12">
-            <input ng-model="reg.dojovezeto" type="checkbox" class="filled-in" id="dojo_vezeto" />
-            <label for="dojo_vezeto">Dojo vezető vagyok</label>
+            <input ng-model="reg.dojovezeto" type="checkbox" class="form-control filled-in" id="dojo_vezeto" />
+            <label for="dojo_vezeto">{{'label-dojoleader' | translate}}</label>
           </div>
         </div>
 
         <div class="row">
           <div class="offset-m2 input-field col m8 s12">
-            <input ng-model="reg.bankett" type="checkbox" class="filled-in" id="bankett" />
-            <label for="bankett">Bankett jegyet foglalok</label>
+            <input ng-model="reg.bankett" type="checkbox" class="form-control filled-in" id="bankett" />
+            <label for="bankett">{{'label-banquet' | translate}}</label>
           </div>
         </div>
 
         <div class="row">
           <div class="input-field offset-m2 col m8 s12">
-            <select ng-model="reg.edzesjegy" ng-required="true" class="browser-default validate" name="edzesjegy" id="edzesjegy">
-              <option value="" disabled selected>Válassz jegyet!</option>
-              <option value="teljes">Teljes tábor / Whole Camp</option>
-              <option value="1napi">1 napi jegy / daily ticket</option>
-              <option value="2napi">2 napi jegy / daily ticket</option>
-              <option value="3napi">3 napi jegy / daily ticket</option>
-              <option value="4napi">4 napi jegy / daily ticket</option>
-              <option value="1edzes">1 edzés jegy / training ticket</option>
-              <option value="2edzes">2 edzés jegy / training ticket</option>
-              <option value="3edzes">3 edzés jegy / training ticket</option>
-              <option value="4edzes">4 edzés jegy / training ticket</option>
-              <option value="5edzes">5 edzés jegy / training ticket</option>
-              <option value="6edzes">6 edzés jegy / training ticket</option>
-              <option value="7edzes">7 edzés jegy / training ticket</option>
+            <select ng-model="reg.edzesjegy" ng-required="true" class="form-control browser-default" name="edzesjegy" id="edzesjegy">
+              <option value="" disabled selected>{{'option-label-ticket' | translate}}</option>
+              <option value="teljes">{{'teljes' | translate}}</option>
+              <option value="1napi">{{'1napi' | translate}}</option>
+              <option value="2napi">{{'2napi' | translate}}</option>
+              <option value="3napi">{{'3napi' | translate}}</option>
+              <option value="4napi">{{'4napi' | translate}}</option>
+              <option value="1edzes">{{'1edzes' | translate}}</option>
+              <option value="2edzes">{{'2edzes' | translate}}</option>
+              <option value="3edzes">{{'3edzes' | translate}}</option>
+              <option value="4edzes">{{'4edzes' | translate}}</option>
+              <option value="5edzes">{{'5edzes' | translate}}</option>
+              <option value="6edzes">{{'6edzes' | translate}}</option>
+              <option value="7edzes">{{'7edzes' | translate}}</option>
             </select>
           </div>
         </div>
 
         <div class="row">
           <div class="input-field offset-m2 col m8 s12">
-            <select ng-model="reg.szallas" class="browser-default validate" name="szallas" id="szallas">
+            <select ng-model="reg.szallas" class="form-control browser-default" name="szallas" id="szallas">
               <option value="" selected>Válassz szállást!</option>
               <option value="1agyas">Egyágyas elhelyezés, augusztus 6 - 8 (3 éj)</option>
               <option value="2agyas">Kétágyas elhelyezés, augusztus 6 - 8 (3 éj)</option>
@@ -234,10 +235,10 @@
         <div class="row">
           <div class="input-field offset-m2 col m8 s12">
             <p style="text-align: justify">
-              A fent leírtakat elolvastam és tudomásul vettem, az összeget átutalom. A regisztráció csak a befizetett összeg beérkezését követően válik érvényessé! The registration became valid, after the transferred amount is arrived to our account!
+              {{'agreement' | translate}}
             </p>
-            <input ng-model="reg.elfogadom" ng-required="true" type="checkbox" class="filled-in" id="elfogadom" />
-            <label for="elfogadom">Elfogadom / Agree
+            <input ng-model="reg.elfogadom" ng-required="true" type="checkbox" class="form-control filled-in" id="elfogadom" />
+            <label for="elfogadom">{{'agree' | translate}}
               <span class="red-text"> *</span>
             </label>
           </div>
@@ -250,10 +251,11 @@
         </div>
 
         <div class="row">
-          <div class="input-field offset-m2 col m8 s12">
-            <button ng-disabled="regForm.$invalid" class="btn waves-effect waves-light" type="submit" name="action">Regisztrálok
-              <i class="mdi-content-send right"></i>
-            </button>
+          <div class="offset-m2 col m8 s12">
+            <p>
+              <button ng-disabled="regForm.$invalid" class="waves-effect waves-light btn white-text" type="submit" name="action">{{'reg' | translate}}
+              </button>
+            </p>
           </div>
         </div>
 
@@ -272,8 +274,7 @@
 
   </div>
 
-  <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
-  <script type="text/javascript" src="js/materialize.min.js"></script>
+
 </body>
 
 </html>

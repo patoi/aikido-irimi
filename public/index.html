@@ -2,20 +2,27 @@
 <html>
 
 <head>
-  <title>Aikido Edzőtábor</title>
-  <!--Import materialize.css-->
+  <title>Aikido</title>
   <link type="text/css" rel="stylesheet" href="css/materialize.min.css" media="screen,projection" />
+  <link type="text/css" rel="stylesheet" href="css/reg.css" media="screen,projection" />
   <link rel="alternate" hreflang="hu" href="http://aikido-tabor.info/" />
-
-  <!--Let browser know website is optimized for mobile-->
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
-  <script type="application/ld+json">
-    { "@context" : "http://schema.org", "@type" : "Event", "name" : "Aikido Edzőtábor Tata - 2015", "image" : "./img/aikido.jpg", "startDate" : "2015-08-06T08:00", "location" : { "@type" : "EventVenue", "name" : "Eötvös Iskola
-    tornaterme", "address" : "2890 Tata, Tanoda tér 5." } }
-  </script>
+
+  <script type="text/javascript" src="./js/jquery.min.js"></script>
+  <script type="text/javascript" src="./js/materialize.min.js"></script>
+  <script type="text/javascript" src="./js/is.min.js"></script>
+  <script type="text/javascript" src="./js/lodash.min.js"></script>
+  <script type="text/javascript" src="./js/angular.min.js"></script>
+  <script type="text/javascript" src="./js/angular-cookies.min.js"></script>
+  <script type="text/javascript" src="./js/angular-translate.min.js"></script>
+  <script type="text/javascript" src="./js/angular-translate-storage-local.min.js"></script>
+  <script type="text/javascript" src="./js/angular-translate-storage-cookie.min.js"></script>
+  <script type="text/javascript" src="./app/reg.module.js"></script>
+  <script type="text/javascript" src="./app/reg.config.js"></script>
+  <script type="text/javascript" src="./app/reg.service.js"></script>
 </head>
 
-<body>
+<body ng-app="Reg" translate-cloak>
   <div class="container">
     <div class="row">
       <div class="offset-m2 col s12 m8">
@@ -24,14 +31,28 @@
             <img class="responsive-img" src="./img/aikido.jpg">
           </div>
           <div class="center-align">
-            <h5 class="blue-text" style="padding-top: 0.7em;">2015. augusztus 6-9.</h5>
-            <h5 class="blue-text">Kobayashi Hiroaki (7.dan) shihan</h5>
-            <p style="padding-top: 2em;"><a class="waves-effect waves-light btn white-text" href="registration.html">REGISZTRÁCIÓ</a></p>
-            <h6 style="padding-top: 2em;" class="blue-text">HELYSZÍN</h6>
-            <h6 class="blue-text">2890 Tata, Tanoda tér 5. - Eötvös József gimnázium tornaterme</h6>
+            <p style="padding-top: 2em;" ng-controller="RegisztracioCtrl as reg">
+              <button class="waves-effect waves-light btn grey white-text" ng-click="reg.changeLanguage('hu')" translate="lang-hu"></button>
+              <button class="waves-effect waves-light btn grey white-text" href="" ng-click="reg.changeLanguage('en')" translate="lang-en"></button>
+            </p>
+            <div class="h-event">
+              <h1 class="p-name">{{ 'title' | translate }}</h1>
+              <p>
+                <time class="dt-start" datetime="2015-08-06">{{'from' | translate}}</time>
+                -
+                <time class="dt-end" datetime="2013-06-09">{{'to' | translate}}</time>
+                <div class="p-location">{{'location' | translate}}</div>
+              </p>
+              <p class="p-summary blue-text" style="font-size: 200%">Kobayashi Hiroaki (7.dan) shihan</p>
+            </div>
 
-            <h6 class="blue-text" style="padding-top: 2em;">SZERVEZŐ</h6>
-            <h6><a href="http://www.renseikandojo.hu">Renseikan Aikido Egyesület</a> - <a href="http://www.mkde.hu">Magyarországi Kobayashi Dojók Egyesületének tagja</a></h6>
+            <p style="padding-top: 2em;">
+              <a class="waves-effect waves-light btn blue white-text" href="registration.html">{{'reg' | translate}}</a>
+            </p>
+
+            <h6 class="blue-text" style="padding-top: 2em;">{{'organizer' | translate}}</h6>
+            <h6><a href="http://www.renseikandojo.hu">{{'organizer-name' | translate}}</a>
+              <br> <a href="http://www.mkde.hu">{{'mkde' | translate}}</a></h6>
             <iframe style="padding-top: 4em;" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d21505.95018507278!2d18.309839974394944!3d47.64082951922854!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x476a45e1c6b90aaf%3A0xf6fc8c521501f8bd!2sTanoda+t%C3%A9r+5%2C+Tata%2C+2890!5e0!3m2!1shu!2shu!4v1429982671416"
             width="400" height="250" frameborder="0" style="border:0"></iframe>
           </div>
@@ -59,23 +80,18 @@
           Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam vulputate nibh eu urna imperdiet, ac ultrices erat sollicitudin. Donec quis aliquet diam. Donec sed neque nec lorem elementum aliquam. Sed dapibus maximus fringilla. Ut sagittis malesuada
           ipsum, in porttitor felis consequat ac. Suspendisse potenti. Duis ullamcorper pharetra mauris, eu vulputate orci bibendum et. Duis a tellus bibendum, varius dolor tristique, consectetur quam. Cras ultrices massa sit amet suscipit viverra. Nunc
           orci lorem, aliquam sit amet sapien in, rutrum scelerisque mi. Praesent ut ligula vel dui ultricies faucibus. Suspendisse ut mauris vitae dui tristique rutrum viverra non dolor. Nullam at dolor aliquam, mollis nunc molestie, egestas arcu. Pellentesque
-          ac pretium dolor. Morbi euismod nibh molestie libero consequat ornare.<br><span class="blue-text" style="padding-top: 2em;">Reggeli</span> In hac habitasse platea dictumst. Etiam ante sem, cursus quis laoreet nec, aliquet non est. Fusce at odio ut est convallis pretium et id sem. Nam sed ornare leo. Aenean suscipit
-          dignissim bibendum. Proin ut tincidunt erat. Phasellus erat sem, ultrices ac diam vitae, pellentesque commodo augue. Morbi posuere mauris eu accumsan consectetur. Cras placerat metus vel erat placerat, ac scelerisque diam facilisis. Cras metus
-          tortor, convallis eu consectetur in, auctor sed dui. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Nam quis volutpat dolor. Sed venenatis in justo ac dictum. Cras orci massa, gravida nec fringilla at,
-          blandit sit amet lacus. Aliquam dapibus placerat bibendum. Mauris porttitor magna nec vestibulum varius. Vivamus dictum erat eu nunc egestas scelerisque. Proin libero massa, suscipit ac accumsan vitae, dictum in nibh. Vivamus ut facilisis est,
-          in convallis ex. Mauris a tortor sed sem finibus pretium nec a ligula. Duis aliquam rutrum sapien sit amet faucibus.
+          ac pretium dolor. Morbi euismod nibh molestie libero consequat ornare.
+          <br>
+          <span class="blue-text" style="padding-top: 2em;">Reggeli</span> In hac habitasse platea dictumst. Etiam ante sem, cursus quis laoreet nec, aliquet non est. Fusce at odio ut est convallis pretium et id sem. Nam sed ornare leo. Aenean suscipit dignissim bibendum. Proin ut tincidunt erat. Phasellus
+          erat sem, ultrices ac diam vitae, pellentesque commodo augue. Morbi posuere mauris eu accumsan consectetur. Cras placerat metus vel erat placerat, ac scelerisque diam facilisis. Cras metus tortor, convallis eu consectetur in, auctor sed dui.
+          Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Nam quis volutpat dolor. Sed venenatis in justo ac dictum. Cras orci massa, gravida nec fringilla at, blandit sit amet lacus. Aliquam dapibus placerat bibendum.
+          Mauris porttitor magna nec vestibulum varius. Vivamus dictum erat eu nunc egestas scelerisque. Proin libero massa, suscipit ac accumsan vitae, dictum in nibh. Vivamus ut facilisis est, in convallis ex. Mauris a tortor sed sem finibus pretium
+          nec a ligula. Duis aliquam rutrum sapien sit amet faucibus.
         </p>
       </div>
     </div>
   </div>
 
-  <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
-  <script type="text/javascript" src="js/materialize.min.js"></script>
-  <script src="./js/angular.min.js"></script>
-  <script src="./js/is.min.js"></script>
-  <script src="./js/lodash.min.js"></script>
-  <script src="./app/reg.module.js"></script>
-  <script src="./app/reg.service.js"></script>
 </body>
 
 </html>

@@ -1,6 +1,6 @@
 'use strict';
 
-var app = angular.module('Reg', []);
+var app = angular.module('Reg', ['pascalprecht.translate', 'ngCookies']);
 
 app.constant(
   'msg', {
@@ -18,14 +18,18 @@ app.constant(
   }
 );
 
-app.controller('RegisztracioCtrl', ['$http', '$scope', 'RegisztracioService', 'msg',
-  function($animate$http, $scope, RegisztracioService, msg) {
+app.controller('RegisztracioCtrl', ['$translate', '$http', '$scope', 'RegisztracioService', 'msg',
+  function($translate, $http, $scope, RegisztracioService, msg) {
 
     $scope.showReg = true;
 
     var reg = this;
     reg.mkdeTag = '1';
     reg.penznem = 'huf';
+
+    reg.changeLanguage = function(langKey) {
+      $translate.use(langKey);
+    };
 
     reg.regisztracio = function() {
       reg.hiba = undefined;

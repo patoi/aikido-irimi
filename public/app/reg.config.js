@@ -1,0 +1,83 @@
+'use strict';
+
+app.config(['$translateProvider', function($translateProvider) {
+  $translateProvider.translations('en', {
+    'title': 'Aikido Training Camp',
+    'from': '06 Aug 2015',
+    'to': '09 Aug 2015',
+    'location': '2890 Tata, Tanoda tér 5. - Eötvös József high school\'s gym',
+    'reg': 'Registration',
+    'organizer': 'ORGANIZER',
+    'organizer-name': 'Renseikan Aikido Association',
+    'mkde': 'member of the Hungarian Kobayashi Dojos\' Federation',
+    'reg-form': 'Registration form',
+    'label-name': 'Name',
+    'validate-name': 'Minimum 6, maximum 100 characters',
+    'validate-email': 'Invalid email address',
+    'validate-dojo': 'Minimum 2, maximum 100 characters',
+    'validate-tel': 'Valid characters are numbers, space, hyphen and plus sign, the length between 7 to 16',
+    'label-tel': 'Phone',
+    'label-mkdetag': 'I am an MKDE member',
+    'label-dojoleader': 'I am a Dojo leader',
+    'label-banquet': 'Booking ticket to Banquet',
+    'option-label-ticket': 'Choose a ticket!',
+    'teljes': 'Whole Training Camp',
+    '1napi': 'One day',
+    '2napi': 'Two day',
+    '3napi': 'Three day',
+    '4napi': 'Four day',
+    '1edzes': '1 training ticket',
+    '2edzes': '2 training ticket',
+    '3edzes': '3 training ticket',
+    '4edzes': '4 training ticket',
+    '5edzes': '5 training ticket',
+    '6edzes': '6 training ticket',
+    '7edzes': '7 training ticket',
+    'agreement': ' The registration became valid, after the transferred amount is arrived to our account!',
+    'agree': 'Agree',
+    'lang-en': 'English',
+    'lang-hu': 'Magyar'
+  });
+
+  $translateProvider.translations('hu', {
+    'title': 'Aikido Edzőtábor',
+    'from': '2015. augusztus 6.',
+    'to': '2015. augusztus 9.',
+    'location': '2890 Tata, Tanoda tér 5. - Eötvös József gimnázium tornaterme',
+    'reg': 'Regisztráció',
+    'organizer': 'SZERVEZŐ',
+    'organizer-name': 'Renseikan Aikido Egyesület',
+    'mkde': 'Magyarországi Kobayashi Dojok Egyesületének tagja',
+    'reg-form': 'Regisztrációs űrlap',
+    'label-name': 'Név',
+    'validate-name': 'Minimum 6, maximum 100 karakter',
+    'validate-email': 'Nem érvényes a megadott email cím',
+    'validate-dojo': 'Minimum 2, maximum 100 karakter',
+    'validate-tel': 'Csak számot, szóközt, kötőjelet és + jel adható meg 7-16 hosszon',
+    'label-tel': 'Telefon',
+    'label-mkdetag': 'MKDE tag vagyok',
+    'label-dojoleader': 'Dojo vezető vagyok',
+    'label-banquet': 'Bankett jegyet foglalok',
+    'option-label-ticket': 'Válassz jegyet!',
+    'teljes': 'Teljes Edzőtábor',
+    '1napi': '1 napi jegy',
+    '2napi': '2 napi jegy',
+    '3napi': '3 napi jegy',
+    '4napi': '4 napi jegy',
+    '1edzes': '1 edzés jegy',
+    '2edzes': '2 edzés jegy',
+    '3edzes': '3 edzés jegy',
+    '4edzes': '4 edzés jegy',
+    '5edzes': '5 edzés jegy',
+    '6edzes': '6 edzés jegy',
+    '7edzes': '7 edzés jegy',
+    'agreement': 'A fent leírtakat elolvastam és tudomásul vettem, az összeget átutalom. A regisztráció csak a befizetett összeg beérkezését követően válik érvényessé!',
+    'agree': 'Elfogadom',
+    'lang-en': 'English',
+    'lang-hu': 'Magyar'
+  });
+
+  $translateProvider.preferredLanguage('hu');
+  $translateProvider.useLocalStorage();
+
+}]);
