@@ -3,6 +3,22 @@
   "version": "0.0.1",
   "description": "Aikido 2015 Tata edzőtábor",
   "main": "index.js",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/patoi/aikido-irimi.git"
+  },
+  "keywords": [
+    "tata",
+    "aikido",
+    "2015",
+    "edzőtábor"
+  ],
+  "author": "Pató István",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/patoi/aikido-irimi/issues"
+  },
+  "homepage": "https://github.com/patoi/aikido-irimi",
   "dependencies": {
     "aws-sdk": "^2.1.24",
     "body-parser": "^1.12.2",
@@ -34,23 +50,7 @@
     "test-client": "./karma start --single-run",
     "coverage": "./node_modules/istanbul/lib/cli.js cover ./_mocha -- -R spec",
     "start-dev": "NODE_ENV=dev nodemon server.js",
-    "start-staging": "NODE_ENV=staging forever start -c nodemon server.js",
-    "start-prod": "NODE_ENV=prod forever start -c nodemon server.js"
-  },
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/patoi/aikido-irimi.git"
-  },
-  "keywords": [
-    "tata",
-    "aikido",
-    "2015",
-    "edzőtábor"
-  ],
-  "author": "Pató István",
-  "license": "MIT",
-  "bugs": {
-    "url": "https://github.com/patoi/aikido-irimi/issues"
-  },
-  "homepage": "https://github.com/patoi/aikido-irimi"
+    "start-staging": "NODE_ENV=staging forever start -c node server.js",
+    "start-prod": "NODE_ENV=prod forever start -c node server.js"
+  }
 }
