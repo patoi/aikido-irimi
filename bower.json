@@ -5,13 +5,14 @@
   "authors": [
     "István Pató <istvan.pato@gmail.com>"
   ],
-  "description": "Aikido Nyári Tábor - 2015",
+  "description": "Aikido Tábor",
   "main": "index.html",
   "keywords": [
     "aikido",
     "2015",
     "magyarország",
-    "tata",
+    "registration",
+    "regisztráció",
     "tábor"
   ],
   "license": "MIT",
