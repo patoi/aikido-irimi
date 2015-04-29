@@ -35,8 +35,18 @@ app.config(['$translateProvider', function($translateProvider) {
     '7edzes': '7 training ticket',
     'agreement': ' The registration became valid, after the transferred amount is arrived to our account!',
     'agree': 'Agree',
+    'option-label-menu': 'No booking ticket to Banquet',
     'lang-en': 'English',
-    'lang-hu': 'Magyar'
+    'lang-hu': 'Magyar',
+    'label-menu': 'Choose a menu, if you want booking to banquet!',
+    'menu_A': 'Menu A',
+    'menu_B': 'Menu B',
+    'menu_C': 'Menu C',
+    'menu_D': 'Menu D',
+    'menu_E': 'Menu E',
+    'menu_F': 'Menu F',
+    'menu_G': 'Menu G',
+    'vega': 'vegetarian menu'
   });
 
   $translateProvider.translations('hu', {
@@ -74,7 +84,17 @@ app.config(['$translateProvider', function($translateProvider) {
     'agreement': 'A fent leírtakat elolvastam és tudomásul vettem, az összeget átutalom. A regisztráció csak a befizetett összeg beérkezését követően válik érvényessé!',
     'agree': 'Elfogadom',
     'lang-en': 'English',
-    'lang-hu': 'Magyar'
+    'lang-hu': 'Magyar',
+    'option-label-menu': 'Nem megyek bankettre',
+    'label-menu': 'Ha szeretnél bankettre menni, akkor válassz egy menüt!',
+    'menu_A': 'A menü',
+    'menu_B': 'B menü',
+    'menu_C': 'C menü',
+    'menu_D': 'D menü',
+    'menu_E': 'E menü',
+    'menu_F': 'F menü',
+    'menu_G': 'G menü',
+    'vega': 'vegetáriánus menü'
   });
 
   $translateProvider.preferredLanguage('hu');

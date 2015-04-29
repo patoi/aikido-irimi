@@ -4,7 +4,7 @@ var connect = require('connect'),
 var app = connect();
 
 app.use(serveStatic("./public"));
-app.listen(5000);
+app.listen(4000);
 
 livereload = require('livereload');
 server = livereload.createServer();
