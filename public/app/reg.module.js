@@ -6,39 +6,46 @@ app.constant(
   'msg', {
     'hu': {
       'v.required': 'Ellenőrizd, hogy minden kötelező mezőt megadtál-e!',
-      'v.nev.hiba': 'Hibás név.',
-      'v.email.hiba': 'Hibás email.',
-      'v.dojo.hiba': 'Hibás a dojo neve.',
-      'v.tel.hiba': 'Hibás telefonszám.',
-      'v.penznem.hiba': 'Hibás a pénznem kiválasztás.',
-      'v.edzesjegy.hiba': 'Nem megfelelő az edzésjegy.',
-      'v.szallas.hiba': 'Nem megfelelő a szállás.',
-      'v.elfogadom.hiba': 'El kell fogadni a feltételeket!'
+      'v.name.error': 'Hibás név.',
+      'v.email.error': 'Hibás email.',
+      'v.dojo.error': 'Hibás a dojo neve.',
+      'v.tel.error': 'Hibás telefonszám.',
+      'v.ticket.error': 'Nem megfelelő az edzésjegy.',
+      'v.agree.error': 'El kell fogadni a feltételeket!',
+      'v.email.unique.error': 'zzel az email címmel már van regisztráció!',
+      'v.app.error': 'Hiba történt a regisztráció mentésekor, próbáld meg újra!'
+    },
+    'en': {
+      'v.required': 'Check all required fields!',
+      'v.name.error': 'Wrong name pattern.',
+      'v.email.error': 'Wrong email address.',
+      'v.dojo.error': 'Wrong Dojo name pattern.',
+      'v.tel.error': 'Wrong phone number.',
+      'v.ticket.error': 'Choose an apropiate ticket!',
+      'v.agree.error': 'You must click on agreement!',
+      'v.email.unique.error': 'This email address already used to a registration.',
+      'v.app.error': 'Application error, please try again!'
     }
   }
 );
 
-app.controller('RegisztracioCtrl', ['$translate', '$http', '$scope', 'RegisztracioService', 'msg',
-  function($translate, $http, $scope, RegisztracioService, msg) {
+app.controller('RegistrationCtrl', ['$translate', '$http', '$scope', 'RegistrationService', 'msg',
+  function($translate, $http, $scope, RegistrationService, msg) {
 
     $scope.showReg = true;
 
     var reg = this;
     reg.mkdeTag = '1';
-    reg.penznem = 'huf';
 
     reg.changeLanguage = function(langKey) {
       $translate.use(langKey);
     };
 
-    reg.regisztracio = function() {
-      reg.hiba = undefined;
+    reg.registration = function() {
+      reg.msg = undefined;
       try {
-        if (!reg.szallas && reg.etkezes) {
-          delete reg.etkezes;
-        }
-        RegisztracioService.validate(reg);
-        RegisztracioService.create(reg)
+        RegistrationService.validate(reg);
+        RegistrationService.create(reg)
           .success(function(data, status, headers, config) {
             console.log(data, status);
             $scope.showReg = false;
@@ -46,15 +53,15 @@ app.controller('RegisztracioCtrl', ['$translate', '$http', '$scope', 'Regisztrac
           .error(function(data, status, headers, config) {
             console.log(data, status);
             if (status === 409) {
-              reg.hiba = 'Ezzel az email címmel már van regisztráció! [' + data.errorCode + ']';
+              reg.msg = msg['hu']['v.email.unique.error'] + '[' + data.errorCode + ']';
             } else {
-              reg.hiba = 'Hiba történt a regisztráció mentésekor, próbáld meg újra! [' + data.errorCode + ']';
+              reg.msg = msg['hu']['v.app.error'] + '[' + data.errorCode + ']';
             }
           });
 
       } catch (e) {
         console.log(e.message);
-        reg.hiba = msg['hu'][e.message];
+        reg.msg = msg['hu'][e.message];
       }
     }
   }

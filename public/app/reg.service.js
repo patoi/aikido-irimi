@@ -1,6 +1,6 @@
 'use strict';
 
-app.factory('RegisztracioService', [
+app.factory('RegistrationService', [
   '$http',
   '$window',
   function($http, $window) {
@@ -11,58 +11,54 @@ app.factory('RegisztracioService', [
 
     var validate = function(reg) {
       var required =
-        _.trim(reg.nev) &&
+        _.trim(reg.name) &&
         _.trim(reg.email) &&
         _.trim(reg.dojo) &&
         _.trim(reg.tel) &&
-        _.trim(reg.penznem) &&
-        _.trim(reg.edzesjegy) &&
-        reg.elfogadom;
+        _.trim(reg.ticket) &&
+        reg.agree;
 
       if (!required) {
         throw new Error('v.required');
       } else {}
 
-      var nevRegEx = /^([a-zöüóőúéáűíä \-\.]){6,100}$/gi;
-      var dojoNevRegEx = /^([a-zöüóőúéáűíä \-\.]){6,100}$/gi;
+      var nameRegex = /^([a-zöüóőúéáűíä \-\.]){6,100}$/gi;
+      var dojonameRegex = /^([a-zöüóőúéáűíä \-\.]){6,100}$/gi;
       var telRegEx = /^([0-9 \-\+]){7,16}$/gi;
 
-      if (!nevRegEx.test(reg.nev)) {
-        throw new Error('v.nev.hiba');
+      if (!nameRegex.test(reg.nev)) {
+        throw new Error('v.name.error');
       }
       if (!is.email(reg.email)) {
-        throw new Error('v.email.hiba');
+        throw new Error('v.email.error');
       }
-      if (!dojoNevRegEx.test(reg.dojo)) {
-        throw new Error('v.dojo.hiba');
+      if (!dojonameRegex.test(reg.dojo)) {
+        throw new Error('v.dojo.error');
       }
       if (!telRegEx.test(reg.tel)) {
-        throw new Error('v.tel.hiba');
+        throw new Error('v.tel.error');
       }
-      if (reg.penznem !== 'huf' && reg.penznem !== 'euro') {
-        throw new Error('v.penznem.hiba');
+      if (reg.ticket !== 'whole' &&
+        reg.ticket !== '1day' &&
+        reg.ticket !== '2day' &&
+        reg.ticket !== '3day' &&
+        reg.ticket !== '4day' &&
+        reg.ticket !== '1keiko' &&
+        reg.ticket !== '2keiko' &&
+        reg.ticket !== '3keiko' &&
+        reg.ticket !== '4keiko' &&
+        reg.ticket !== '5keiko' &&
+        reg.ticket !== '6keiko' &&
+        reg.ticket !== '7keiko') {
+        throw new Error('v.ticket.error');
       }
-      if (reg.edzesjegy !== 'teljes' &&
-        reg.edzesjegy !== '1napi' &&
-        reg.edzesjegy !== '2napi' &&
-        reg.edzesjegy !== '3napi' &&
-        reg.edzesjegy !== '4napi' &&
-        reg.edzesjegy !== '1edzes' &&
-        reg.edzesjegy !== '2edzes' &&
-        reg.edzesjegy !== '3edzes' &&
-        reg.edzesjegy !== '4edzes' &&
-        reg.edzesjegy !== '5edzes' &&
-        reg.edzesjegy !== '6edzes' &&
-        reg.edzesjegy !== '7edzes') {
-        throw new Error('v.edzesjegy.hiba');
+      if (reg.quarters &&
+        reg.quarters !== 'javorka' &&
+        reg.quarters !== 'blathy') {
+        throw new Error('v.quarters.error');
       }
-      if (reg.szallas &&
-        reg.szallas !== '2agyas' &&
-        reg.szallas !== '1agyas') {
-        throw new Error('v.szallas.hiba');
-      }
-      if (reg.elfogadom !== true) {
-        throw new Error('v.elfogadom.hiba');
+      if (reg.agree !== true) {
+        throw new Error('v.agree.error');
       }
       return true;
     };
