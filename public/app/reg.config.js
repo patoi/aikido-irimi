@@ -2,6 +2,7 @@
 
 app.config(['$translateProvider', function($translateProvider) {
   $translateProvider.translations('en', {
+    'lang': 'en',
     'title': 'Aikido Training Camp',
     'from': '06 Aug 2015',
     'to': '09 Aug 2015',
@@ -39,6 +40,7 @@ app.config(['$translateProvider', function($translateProvider) {
     'lang-en': 'English',
     'lang-hu': 'Magyar',
     'label-menu': 'Choose a menu, if you want booking to banquet!',
+    'a-menu-list': 'Show menu',
     'menu_A': 'Menu A',
     'menu_B': 'Menu B',
     'menu_C': 'Menu C',
@@ -50,6 +52,7 @@ app.config(['$translateProvider', function($translateProvider) {
   });
 
   $translateProvider.translations('hu', {
+    'lang': 'hu',
     'title': 'Aikido Edzőtábor',
     'from': '2015. augusztus 6.',
     'to': '2015. augusztus 9.',
@@ -87,6 +90,7 @@ app.config(['$translateProvider', function($translateProvider) {
     'lang-hu': 'Magyar',
     'option-label-menu': 'Nem megyek bankettre',
     'label-menu': 'Ha szeretnél bankettre menni, akkor válassz egy menüt!',
+    'a-menu-list': 'Menü megtekintése',
     'menu_A': 'A menü',
     'menu_B': 'B menü',
     'menu_C': 'C menü',

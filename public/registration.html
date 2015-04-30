@@ -2,7 +2,7 @@
 <html>
 
 <head>
-  <title>Aikido</title>
+  <title>Aikido Reg.</title>
   <meta http-equiv="Cache-Control" content="max-age=3600, must-revalidate">
   <link type="text/css" rel="stylesheet" href="css/materialize.min.css" media="screen,projection" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
@@ -120,9 +120,12 @@
         </table>
 
         <h6 class="blue-text text-darken-2" style="padding-top: 2em">Évfordulós bankett</h6>
-        <p>
-          Évfordulós bankettünkön megünnepeljük, hogy a Renseikan Dojo - Tatabánya idén ünnepli 15. éves évfordulóját. A bankett 80 főre biztosított, külön belépőjegy nincs, a menürendelés a részvétel feltétele. Az ital fogyasztása egyénileg, külön fizetendő. Helyszín:
-          <a href="https://goo.gl/maps/k36qb" target="_blank">Fregatt Hotel és Étterem, cím: 2890 Tata, Almási u. 2.</a>
+        <p style="font-weight: 300">
+          Évfordulós bankettünkön megünnepeljük, hogy a Renseikan Dojo - Tatabánya idén ünnepli 15. éves évfordulóját. A bankett 80 főre biztosított, külön belépőjegy nincs, a menürendelés a részvétel feltétele. Az ital fogyasztása egyénileg, külön fizetendő.
+          <br/><br/><span style="font-weight: 400">A részletes menüt és árakat a regisztrációnál megtalálod.</span>
+          <br/> Helyszín:
+          <a href="http://www.kalozfregatt.hu" target="_blank">Fregatt Hotel és Étterem</a>
+          <br/>Cím: <a href="https://goo.gl/maps/k36qb" target="_blank">2890 Tata, Almási u. 2.</a>
           <div style="text-align: justify">
             <span class="red-text">Fontos </span>
             Kérünk, hogy a bankettre pontosan érkezz, megfelelő ruházatban.
@@ -132,8 +135,8 @@
         <h6 class="blue-text text-darken-2" style="padding-top: 1em">Szállás és étkezés</h6>
         <p style="font-weight: 300;">
           A szállás igény szerint a regisztrációkor foglalható. Az elhelyezés kollégiumokban történik:
-          <a href="https://goo.gl/maps/TWh8k" target="_blank">Jávorka Sándor kollégium, cím: 2890 Tata, Új út 19.</a> és
-          <a href="https://goo.gl/maps/iP2u2" target="_blank">Bláthy Ottó kollégium, cím: 2890 Tata, Hősök tere 9.</a>
+          <br/><span style="font-weight: 400">2 800 Ft/fő/éj</span> - <a href="https://goo.gl/maps/TWh8k" target="_blank">Jávorka Sándor kollégium, cím: 2890 Tata, Új út 19.</a>
+          <br/><span style="font-weight: 400">3 000 Ft/fő/éj</span> - <a href="https://goo.gl/maps/iP2u2" target="_blank">Bláthy Ottó kollégium, cím: 2890 Tata, Hősök tere 9.</a>
         </p>
       </div>
     </div>
@@ -202,7 +205,7 @@
         </div>
 
         <div class="row">
-          <p class="offset-m2 col m8 s12">{{'label-menu' | translate}}</p>
+          <p class="offset-m2 col m8 s12">{{'label-menu' | translate}} <a href="menu_{{'lang' | translate}}.html" target="_blank">{{'a-menu-list' | translate}}</a></p>
           <div class="input-field offset-m2 col m8 s12">
             <select ng-model="reg.menu" ng-required="true" class="form-control browser-default" name="menu" id="menu">
               <option value="" selected>{{'option-label-menu' | translate}}</option>
@@ -249,8 +252,8 @@
           <div class="input-field offset-m2 col m8 s12">
             <select ng-model="reg.szallas" class="form-control browser-default" name="szallas" id="szallas">
               <option value="" selected>Válassz szállást!</option>
-              <option value="1agyas">Egyágyas elhelyezés, augusztus 6 - 8 (3 éj)</option>
-              <option value="2agyas">Kétágyas elhelyezés, augusztus 6 - 8 (3 éj)</option>
+              <option value="1agyas">Jávorka Sándor kollégium, augusztus 6 - 8 (3 éj)</option>
+              <option value="2agyas">Bláthy Ottó kollégium, augusztus 6 - 8 (3 éj)</option>
             </select>
           </div>
         </div>
