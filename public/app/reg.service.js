@@ -9,6 +9,10 @@ app.factory('RegistrationService', [
       return $http.post('/api/registrations', reg);
     };
 
+    var calcPrice = function(reg) {
+      return $http.post('/api/price', reg);
+    };
+
     var validate = function(reg) {
       var required =
         _.trim(reg.name) &&
@@ -65,7 +69,8 @@ app.factory('RegistrationService', [
 
     return {
       create: create,
-      validate: validate
+      validate: validate,
+      calcPrice: calcPrice
     };
   }
 ]);

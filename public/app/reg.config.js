@@ -50,7 +50,8 @@ app.config(['$translateProvider', function($translateProvider) {
     'vega': 'vegetarian menu',
     'option-label-quarters': 'Choose a quarters!',
     'javorka': 'Jávorka Sándor dorm: 6-8 aug. 3 night',
-    'blathy': 'Bláthy Ottó dorm: 6-8 aug. 3 night'
+    'blathy': 'Bláthy Ottó dorm: 6-8 aug. 3 night',
+    'calcPrice': 'Total'
   });
 
   $translateProvider.translations('hu', {
@@ -102,7 +103,8 @@ app.config(['$translateProvider', function($translateProvider) {
     'vega': 'vegetáriánus menü',
     'option-label-quarters': 'Válassz szállást!',
     'javorka': 'Jávorka Sándor kollégium: aug. 6-8. 3 éj',
-    'blathy': 'Bláthy Ottó kollégium: aug. 6-8. 3 éj'
+    'blathy': 'Bláthy Ottó kollégium: aug. 6-8. 3 éj',
+    'calcPrice': 'Összesen'
   });
 
   $translateProvider.preferredLanguage('hu');

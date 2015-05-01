@@ -48,9 +48,14 @@ app.use(morgan('combined', {
 app.route('/api/price')
   .post(function(req, res) {
     winston.info('price in', req.body);
-    var reg = regService.transform(req.body);
-    var price = regService.getPrice(reg, config.deadlineDiscount);
-    winston.info('price out', price);
+    try {
+      var reg = regService.transform(req.body);
+      var price = regService.getPrice(reg);
+      winston.info('price out', price);
+    } catch (e) {
+      // unchecked
+      price = 0;
+    }
     res.json({
       'price': price
     });
@@ -207,7 +212,7 @@ var server = app.listen(config.port, function() {
 });
 
 // shutdown
-process.on('SIGTERM', function () {
+process.on('SIGTERM', function() {
   winston.info("Shutdown reg application...");
   server.close();
 });

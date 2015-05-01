@@ -87,7 +87,7 @@ var getPriceOfTicket = function(isMkdeTag, ticket) {
   if (ticket) {
     return isMkdeTag ? PRICES['huf']['mkdeTag'][ticket] : PRICES['huf']['non-mkdeTag'][ticket];
   } else {
-    throw Error('app error in getPriceOfTicket: missing ticket param');
+    return 0;
   }
 }
 

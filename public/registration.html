@@ -211,14 +211,14 @@
 
         <div class="row">
           <div class="offset-m2 input-field col m8 s12">
-            <input ng-model="reg.mkdeTag" type="checkbox" class="form-control filled-in" id="mkdeTag" name="mkdeTag" />
+            <input ng-model="reg.mkdeTag" type="checkbox" class="form-control filled-in" id="mkdeTag" name="mkdeTag" ng-change="reg.calcPrice()" />
             <label for="mkdeTag">{{'label-mkdetag' | translate}}</label>
           </div>
         </div>
 
         <div class="row">
           <div class="offset-m2 input-field col m8 s12">
-            <input ng-model="reg.dojoleader" type="checkbox" class="form-control filled-in" id="dojoleader" name="dojoleader"/>
+            <input ng-model="reg.dojoleader" type="checkbox" class="form-control filled-in" id="dojoleader" name="dojoleader" />
             <label for="dojoleader">{{'label-dojoleader' | translate}}</label>
           </div>
         </div>
@@ -226,7 +226,7 @@
         <div class="row">
           <p class="offset-m2 col m8 s12">{{'label-menu' | translate}} <a href="menu_{{'lang' | translate}}.html" target="_blank">{{'a-menu-list' | translate}}</a></p>
           <div class="input-field offset-m2 col m8 s12">
-            <select ng-model="reg.menu" class="form-control browser-default" name="menu" id="menu">
+            <select ng-model="reg.menu" class="form-control browser-default" name="menu" id="menu" ng-change="reg.calcPrice()">
               <option value="" selected>{{'option-label-menu' | translate}}</option>
               <option value="menu_A">{{'menu_A' | translate}}</option>
               <option value="menu_B">{{'menu_B' | translate}}</option>
@@ -243,7 +243,7 @@
 
         <div class="row">
           <div class="input-field offset-m2 col m8 s12">
-            <select ng-model="reg.ticket" ng-required="true" class="form-control browser-default" name="ticket" id="ticket">
+            <select ng-model="reg.ticket" ng-required="true" class="form-control browser-default" name="ticket" id="ticket" ng-change="reg.calcPrice()">
               <option value="" disabled selected>{{'option-label-ticket' | translate}}</option>
               <optgroup label="">
                 <option value="whole" selected>{{'whole' | translate}}</option>
@@ -269,7 +269,7 @@
 
         <div class="row">
           <div class="input-field offset-m2 col m8 s12">
-            <select ng-model="reg.quarters" class="form-control browser-default" name="quarters" id="quarters">
+            <select ng-model="reg.quarters" class="form-control browser-default" name="quarters" id="quarters" ng-change="reg.calcPrice()">
               <option value="" selected>{{'option-label-quarters' | translate}}</option>
               <option value="javorka">{{'javorka' | translate}}</option>
               <option value="blathy">{{'blathy' | translate}}</option>
@@ -296,11 +296,12 @@
         </div>
 
         <div class="row">
-          <div class="offset-m2 col m8 s12">
-            <p>
-              <button id="reg" ng-disabled="regForm.$invalid" class="waves-effect waves-light btn white-text" type="submit" name="action">{{'reg' | translate}}
-              </button>
-            </p>
+          <div class="offset-m2 col m5 s12">
+            <button ng-disabled="true" type="button" class="waves-effect waves-light btn white-text green">{{'calcPrice' | translate}}: {{reg.price}} HUF</button>
+          </div>
+          <div class="col m5 s12">
+            <button id="reg" ng-disabled="regForm.$invalid" class="waves-effect waves-light btn white-text" type="submit" name="action">{{'reg' | translate}}
+              <i class="mdi-content-send right"></i></button>
           </div>
         </div>
 

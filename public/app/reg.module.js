@@ -36,8 +36,22 @@ app.controller('RegistrationCtrl', ['$translate', '$http', '$scope', 'Registrati
 
     var reg = this;
 
+    reg.price = 0;
+
     reg.changeLanguage = function(langKey) {
       $translate.use(langKey);
+    };
+
+    reg.calcPrice = function() {
+      RegistrationService.calcPrice(reg)
+        .success(function(data, status, headers, config) {
+          console.log(data, status);
+          reg.price = data.price;
+        })
+        .error(function(data, status, headers, config) {
+          console.log(data, status);
+          reg.msg = msg['hu']['v.app.error'] + '[' + data.errorCode + ']';
+        });
     };
 
     reg.registration = function() {
