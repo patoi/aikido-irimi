@@ -10,6 +10,7 @@ var bodyParser = require('body-parser');
 var winston = require('winston');
 var Datastore = require('nedb');
 var regService = require('./reg.service.js');
+var Q = require('q');
 
 // init SMTP
 aws.config.loadFromPath('./config.aws.json');
@@ -55,76 +56,105 @@ app.route('/api/price')
     });
   });
 
+// query email
+var checkUniqueEmail = function(reg) {
+  console.log("checkUniqueEmail");
+  var deferred = Q.defer();
+  dbReg.find({
+    'email': reg.email
+  }, function(err, docs) {
+    if (err) {
+      console.log('reject');
+      return deferred.reject(err);
+    } else {
+      console.log('resolve', docs);
+      if (docs.length === 0) {
+        // registration is unique
+        // calculating price
+        reg.price = regService.getPrice(reg);
+        return deferred.resolve(reg);
+      } else {
+        return deferred.reject(new Error('v.reg.not.unique'));
+      }
+    };
+  });
+  return deferred.promise;
+};
+
+// insert registration
+var dbInsertReg = function(reg) {
+  console.log("dbInsertReg");
+  var deferred = Q.defer();
+  dbReg.insert(reg, function(err, doc) {
+    if (err) {
+      return deferred.reject(err);
+    } else {
+      return deferred.resolve(doc);
+    };
+  });
+  return deferred.promise;
+};
+
+// sent registration email
+var sendRegistrationEmail = function(newDoc) {
+  console.log("sendRegistrationEmail");
+  var deferred = Q.defer();
+  // email admin and user
+  ses.sendEmail({
+    Source: config.email.from,
+    Destination: {
+      ToAddresses: [newDoc.email],
+      BccAddresses: [config.email.bcc]
+    },
+    Message: {
+      Subject: {
+        Data: config.email.subject + ' - ' + newDoc.name + ' - reg. kód: ' + newDoc._id
+      },
+      Body: {
+        Html: {
+          Data: regService.toHtml(newDoc)
+        }
+      }
+    }
+  }, function(err, data) {
+    if (err) {
+      return deferred.reject(err);
+    } else {
+      winston.info('Email sent to reg.: ' + newDoc.email + ", " + newDoc._id);
+      return deferred.resolve(newDoc);
+    }
+  });
+  return deferred.promise;
+};
+
 // registration
 app.route('/api/registrations')
   .post(function(req, res) {
     winston.info('registration in', req.body);
     // transform registration data
     var reg = regService.transform(req.body);
-    try {
-      // validate registration data
-      regService.validate(reg);
-      // validate unique registration
-      dbReg.find({
-          'email': reg.email
-        },
-        function(err, docs) {
-          if (docs.length === 0) {
-            // registration is unique
-
-            // calculating price
-            reg.price = regService.getPrice(reg, config.deadlineDiscount);
-
-            dbReg.insert(reg, function(err, newDoc) {
-              if (err) {
-                res.status(500).json({
-                  'errorCode': 'e.reg.insert'
-                });
-              } else {
-                // registration code is _id
-                winston.info('registration out', newDoc);
-                // email admin and user
-                ses.sendEmail({
-                  Source: config.email.from,
-                  Destination: {
-                    ToAddresses: [reg.email],
-                    BccAddresses: [config.email.bcc]
-                  },
-                  Message: {
-                    Subject: {
-                      Data: config.email.subject + ' - ' + reg.name + ' - reg. kód: ' + reg._id
-                    },
-                    Body: {
-                      Html: {
-                        Data: regService.toHtml(newDoc)
-                      }
-                    }
-                  }
-                }, function(err, data) {
-                  if (err) {
-                    winston.error('SMTP: reg. send: ' + err.message);
-                  } else {
-                    winston.info('Email sent to reg.: ' + reg.email + ", " + reg._id);
-                  }
-                });
-                res.json(newDoc);
-              }
-            });
-          } else {
-            res.status(409).json({
-              'errorCode': 'v.reg.not.unique'
-            });
-          }
-        });
-
-    } catch (e) {
-      winston.error(e.message);
-      res.status(500).json({
-        'errorCode': e.message
-      });
-    }
-
-
+    // validate registration data
+    regService.validate(reg);
+    // validate unique registration
+    checkUniqueEmail(reg)
+      .then(dbInsertReg)
+      .then(sendRegistrationEmail)
+      .then(function(newDoc) {
+        winston.info('registration out', newDoc);
+        res.json(newDoc);
+      })
+      .catch(function(e) {
+        winston.error(e.message);
+        if (e.message == 'v.reg.not.unique') {
+          res.status(409).json({
+            'errorCode': 'v.reg.not.unique'
+          });
+        } else {
+          res.status(500).json({
+            'errorCode': e.message
+          });
+        }
+      }).done();
   })
   .get(function(req, res) {
     // get all registration data
@@ -162,6 +192,22 @@ app.route('/api/registrations')
     }
   });
 
-app.listen(config.port, function() {
+// express error handling
+app.use(function(e, req, res, next) {
+  console.log('err:', e);
+  winston.error(e.message);
+  res.status(500).json({
+    'errorCode': e.message
+  });
+});
+
+// boot app
+var server = app.listen(config.port, function() {
   winston.info('Listen on port ' + config.port + ' NODE_ENV: ' + process.env.NODE_ENV);
+});
+
+// shutdown
+process.on('SIGTERM', function () {
+  winston.info("Shutdown reg application...");
+  server.close();
 });

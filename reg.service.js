@@ -75,7 +75,7 @@ var MAPS = {
   'menu_G': 'G menü',
 };
 
-var getPrice = function(reg, deadlineDiscount) {
+var getPrice = function(reg) {
   var sum = 0;
   sum = getPriceOfTicket(reg.mkdeTag, reg.ticket);
   sum += getPriceOfMenu(reg.menu);
