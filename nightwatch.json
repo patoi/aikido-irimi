@@ -1,0 +1,49 @@
+{
+  "src_folders": ["tests/e2e"],
+  "output_folder": "reports/e2e",
+  "custom_commands_path": "tests/e2e/custom-commands",
+  "custom_assertions_path": "tests/e2e/custom-assertions",
+  "page_objects_path": "",
+  "globals_path": "",
+
+  "selenium": {
+    "start_process": true,
+    "server_path": "./node_modules/selenium-server-standalone-jar/jar/selenium-server-standalone-2.45.0.jar",
+    "log_path": "",
+    "host": "127.0.0.1",
+    "port": 4444,
+    "cli_args": {
+      "webdriver.chrome.driver": "./node_modules/chromedriver/lib/chromedriver/chromedriver",
+      "webdriver.ie.driver": ""
+    }
+  },
+
+  "test_settings": {
+    "default": {
+      "launch_url": "http://localhost:4000",
+      "selenium_port": 4444,
+      "selenium_host": "localhost",
+      "silent": true,
+      "screenshots": {
+        "enabled": false,
+        "path": ""
+      },
+      "desiredCapabilities": {
+        "browserName": "firefox",
+        "javascriptEnabled": true,
+        "acceptSslCerts": true
+      },
+      "globals": {
+        "waitForConditionTimeout": 8000
+      }
+    },
+
+    "chrome": {
+      "desiredCapabilities": {
+        "browserName": "chrome",
+        "javascriptEnabled": true,
+        "acceptSslCerts": true
+      }
+    }
+  }
+}

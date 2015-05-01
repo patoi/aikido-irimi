@@ -142,6 +142,21 @@
           <br/>
           <span style="font-weight: 400">3 000 Ft/fő/éj</span> - <a href="https://goo.gl/maps/iP2u2" target="_blank">Bláthy Ottó kollégium, cím: 2890 Tata, Hősök tere 9.</a>
         </p>
+
+        <h6 class="blue-text text-darken-2" style="padding-top: 1em">Utalás</h6>
+        <p style="font-weight: 300;">
+          A regisztrációban megadott alapján kiszámoljuk az összeget, amelyet az alábbi bankszámlára utalhatsz:
+          <br/>
+          <br/> Számla tulajdonosa:
+          <span style="font-weight: 400">Virga János</span>
+          <br/> Budapest Bank:
+          <span style="font-weight: 400">10103623-25432900-01000004</span>
+          <br/>
+          <br/>
+          <div style="font-weight: 400">
+            <span class="red-text">Fontos </span>Regisztrációd csak a beérkezett összeg után válik érvényessé. A befizetésedről néhány napon belül kapsz egy visszaigazoló emailt. Ha nem kapsz ilyet, akkor vedd fel a kapcsolatot a megadott email címen!
+          </div>
+        </p>
       </div>
     </div>
 
@@ -156,7 +171,7 @@
 
         <div class="row">
           <div class="input-field offset-m2 col s12 m8">
-            <input ng-model="reg.name" ng-required="true" ng-pattern="/^([a-zöüóőúéáűíä \-\.]){6,100}$/i" name="name" type="text" class="form-control" ng-class="{invalid: regForm.name.$invalid}">
+            <input ng-model="reg.name" ng-required="true" ng-pattern="/^([a-zöüóőúéáűíä \-\.]){6,100}$/i" id="name" name="name" type="text" class="form-control" ng-class="{invalid: regForm.name.$invalid}">
             <span ng-show="regForm.name.$invalid && regForm.name.$dirty">{{'validate-name' | translate}}</span>
             <label for="nev">{{'label-name' | translate}}
               <span class="red-text"> *</span>
@@ -166,7 +181,7 @@
 
         <div class="row">
           <div class="input-field offset-m2 col s12 m8">
-            <input ng-model="reg.email" ng-required="true" name="email" type="email" class="form-control" ng-class="{invalid: regForm.email.$invalid}" ng-pattern='/^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/'>
+            <input ng-model="reg.email" ng-required="true" id="email" name="email" type="email" class="form-control" ng-class="{invalid: regForm.email.$invalid}" ng-pattern='/^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/'>
             <span ng-show="regForm.email.$invalid && regForm.email.$dirty">{{'validate-email' | translate}}</span>
             <label for="email">Email
               <span class="red-text"> *</span>
@@ -176,7 +191,7 @@
 
         <div class="row">
           <div class="input-field offset-m2 col s12 m8">
-            <input ng-model="reg.dojo" ng-required="true" ng-pattern="/^([a-zöüóőúéáűíä\ \-\.]){2,100}/i" name="dojo" type="text" class="form-control" ng-class="{invalid: regForm.dojo.$invalid}">
+            <input ng-model="reg.dojo" ng-required="true" ng-pattern="/^([a-zöüóőúéáűíä\ \-\.]){2,100}/i" id="dojo" name="dojo" type="text" class="form-control" ng-class="{invalid: regForm.dojo.$invalid}">
             <span ng-show="regForm.dojo.$invalid && regForm.dojo.$dirty">{{'validate-dojo' | translate}}</span>
             <label for="dojo">Dojo
               <span class="red-text"> *</span>
@@ -186,7 +201,7 @@
 
         <div class="row">
           <div class="input-field offset-m2 col s12 m8">
-            <input ng-model="reg.tel" maxlength="16" ng-required="true" ng-minlength="7" ng-maxlength="16" ng-pattern="/^([0-9\ \-\+]){7,16}$/" name="tel" type="text" class="form-control" ng-class="{invalid: regForm.tel.$invalid}">
+            <input ng-model="reg.tel" maxlength="16" ng-required="true" ng-minlength="7" ng-maxlength="16" ng-pattern="/^([0-9\ \-\+]){7,16}$/" id="tel" name="tel" type="text" class="form-control" ng-class="{invalid: regForm.tel.$invalid}">
             <span ng-show="regForm.tel.$invalid && regForm.tel.$dirty">{{'validate-tel' | translate}}</span>
             <label for="tel">{{'label-tel' | translate}}
               <span class="red-text"> *</span>
@@ -196,14 +211,14 @@
 
         <div class="row">
           <div class="offset-m2 input-field col m8 s12">
-            <input ng-model="reg.mkdeTag" type="checkbox" class="form-control filled-in" id="mkdeTag" />
+            <input ng-model="reg.mkdeTag" type="checkbox" class="form-control filled-in" id="mkdeTag" name="mkdeTag" />
             <label for="mkdeTag">{{'label-mkdetag' | translate}}</label>
           </div>
         </div>
 
         <div class="row">
           <div class="offset-m2 input-field col m8 s12">
-            <input ng-model="reg.dojoleader" type="checkbox" class="form-control filled-in" id="dojoleader" />
+            <input ng-model="reg.dojoleader" type="checkbox" class="form-control filled-in" id="dojoleader" name="dojoleader"/>
             <label for="dojoleader">{{'label-dojoleader' | translate}}</label>
           </div>
         </div>
@@ -211,7 +226,7 @@
         <div class="row">
           <p class="offset-m2 col m8 s12">{{'label-menu' | translate}} <a href="menu_{{'lang' | translate}}.html" target="_blank">{{'a-menu-list' | translate}}</a></p>
           <div class="input-field offset-m2 col m8 s12">
-            <select ng-model="reg.menu" ng-required="true" class="form-control browser-default" name="menu" id="menu">
+            <select ng-model="reg.menu" class="form-control browser-default" name="menu" id="menu">
               <option value="" selected>{{'option-label-menu' | translate}}</option>
               <option value="menu_A">{{'menu_A' | translate}}</option>
               <option value="menu_B">{{'menu_B' | translate}}</option>
@@ -231,7 +246,7 @@
             <select ng-model="reg.ticket" ng-required="true" class="form-control browser-default" name="ticket" id="ticket">
               <option value="" disabled selected>{{'option-label-ticket' | translate}}</option>
               <optgroup label="">
-                <option value="teljes" selected>{{'teljes' | translate}}</option>
+                <option value="whole" selected>{{'whole' | translate}}</option>
               </optgroup>
               <optgroup label="">
                 <option value="1day">{{'1day' | translate}}</option>
@@ -255,9 +270,9 @@
         <div class="row">
           <div class="input-field offset-m2 col m8 s12">
             <select ng-model="reg.quarters" class="form-control browser-default" name="quarters" id="quarters">
-              <option value="" selected>Válassz szállást!</option>
-              <option value="javorka">Jávorka Sándor kollégium, augusztus 6 - 8 (3 éj)</option>
-              <option value="blathy">Bláthy Ottó kollégium, augusztus 6 - 8 (3 éj)</option>
+              <option value="" selected>{{'option-label-quarters' | translate}}</option>
+              <option value="javorka">{{'javorka' | translate}}</option>
+              <option value="blathy">{{'blathy' | translate}}</option>
             </select>
           </div>
         </div>
@@ -276,14 +291,14 @@
 
         <div class="row" ng-show="reg.msg">
           <div class="input-field offset-m2 col m8 s12">
-            <div class="red-text">{{reg.msg}}</div>
+            <div id="msg" class="red-text">{{reg.msg}}</div>
           </div>
         </div>
 
         <div class="row">
           <div class="offset-m2 col m8 s12">
             <p>
-              <button ng-disabled="regForm.$invalid" class="waves-effect waves-light btn white-text" type="submit" name="action">{{'reg' | translate}}
+              <button id="reg" ng-disabled="regForm.$invalid" class="waves-effect waves-light btn white-text" type="submit" name="action">{{'reg' | translate}}
               </button>
             </p>
           </div>
@@ -292,7 +307,7 @@
       </form>
     </div>
 
-    <div class="row" ng-show="!showReg">
+    <div class="row" ng-show="!showReg" id="success">
       <div class="offset-m2 col s12 m8 section">
         <h5 class="blue-text text-darken-2">Regisztrációd sikeres!</h5>
         <p>Regisztrációs adataidról és az utalandó összegről emailt küldtünk.</p>

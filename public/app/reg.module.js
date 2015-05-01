@@ -12,7 +12,7 @@ app.constant(
       'v.tel.error': 'Hibás telefonszám.',
       'v.ticket.error': 'Nem megfelelő az edzésjegy.',
       'v.agree.error': 'El kell fogadni a feltételeket!',
-      'v.email.unique.error': 'zzel az email címmel már van regisztráció!',
+      'v.email.unique.error': 'Ezzel az email címmel már van regisztráció!',
       'v.app.error': 'Hiba történt a regisztráció mentésekor, próbáld meg újra!'
     },
     'en': {
@@ -35,7 +35,6 @@ app.controller('RegistrationCtrl', ['$translate', '$http', '$scope', 'Registrati
     $scope.showReg = true;
 
     var reg = this;
-    reg.mkdeTag = '1';
 
     reg.changeLanguage = function(langKey) {
       $translate.use(langKey);

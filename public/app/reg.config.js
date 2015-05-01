@@ -20,9 +20,8 @@ app.config(['$translateProvider', function($translateProvider) {
     'label-tel': 'Phone',
     'label-mkdetag': 'I am an MKDE member',
     'label-dojoleader': 'I am a Dojo leader',
-    'label-banquet': 'Booking ticket to Banquet',
     'option-label-ticket': 'Choose a ticket!',
-    'teljes': 'Whole Training Camp',
+    'whole': 'Whole Training Camp',
     '1day': 'One day',
     '2day': 'Two day',
     '3day': 'Three day',
@@ -34,9 +33,9 @@ app.config(['$translateProvider', function($translateProvider) {
     '5keiko': '5 training ticket',
     '6keiko': '6 training ticket',
     '7keiko': '7 training ticket',
-    'agreement': ' The registration became valid, after the transferred amount is arrived to our account!',
+    'agreement': 'The registration became valid, after the transferred amount is arrived to our account!',
     'agree': 'Agree',
-    'option-label-menu': 'No booking ticket to Banquet',
+    'option-label-menu': 'No booking to Banquet',
     'lang-en': 'English',
     'lang-hu': 'Magyar',
     'label-menu': 'Choose a menu, if you want booking to banquet!',
@@ -48,7 +47,10 @@ app.config(['$translateProvider', function($translateProvider) {
     'menu_E': 'Menu E',
     'menu_F': 'Menu F',
     'menu_G': 'Menu G',
-    'vega': 'vegetarian menu'
+    'vega': 'vegetarian menu',
+    'option-label-quarters': 'Choose a quarters!',
+    'javorka': 'Jávorka Sándor dorm: 6-8 aug. 3 night',
+    'blathy': 'Bláthy Ottó dorm: 6-8 aug. 3 night'
   });
 
   $translateProvider.translations('hu', {
@@ -70,9 +72,8 @@ app.config(['$translateProvider', function($translateProvider) {
     'label-tel': 'Telefon',
     'label-mkdetag': 'MKDE tag vagyok',
     'label-dojoleader': 'Dojo vezető vagyok',
-    'label-banquet': 'Bankett jegyet foglalok',
     'option-label-ticket': 'Válassz jegyet!',
-    'teljes': 'Teljes Edzőtábor',
+    'whole': 'Teljes Edzőtábor',
     '1day': '1 napi jegy',
     '2day': '2 napi jegy',
     '3day': '3 napi jegy',
@@ -98,7 +99,10 @@ app.config(['$translateProvider', function($translateProvider) {
     'menu_E': 'E menü',
     'menu_F': 'F menü',
     'menu_G': 'G menü',
-    'vega': 'vegetáriánus menü'
+    'vega': 'vegetáriánus menü',
+    'option-label-quarters': 'Válassz szállást!',
+    'javorka': 'Jávorka Sándor kollégium: aug. 6-8. 3 éj',
+    'blathy': 'Bláthy Ottó kollégium: aug. 6-8. 3 éj'
   });
 
   $translateProvider.preferredLanguage('hu');

@@ -1,6 +1,7 @@
 bower_components
 node_modules
 coverage
+reports
 tests/out/
 config.dev.js
 config.prod.js

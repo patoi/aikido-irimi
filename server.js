@@ -92,7 +92,7 @@ app.route('/api/registrations')
                   },
                   Message: {
                     Subject: {
-                      Data: config.email.subject + ' - ' + reg.nev + ' - reg. kód: ' + reg._id
+                      Data: config.email.subject + ' - ' + reg.name + ' - reg. kód: ' + reg._id
                     },
                     Body: {
                       Html: {
@@ -116,6 +116,7 @@ app.route('/api/registrations')
             });
           }
         });
+
     } catch (e) {
       winston.error(e.message);
       res.status(500).json({
@@ -129,7 +130,9 @@ app.route('/api/registrations')
     // get all registration data
     winston.info('registration download, user: ', req.query.key);
     if (req.query.key === config.adminKey) {
-      dbReg.find({}).sort({ time: 1 }).exec(function(err, docs) {
+      dbReg.find({}).sort({
+        time: 1
+      }).exec(function(err, docs) {
         ses.sendEmail({
           Source: config.email.from,
           Destination: {
