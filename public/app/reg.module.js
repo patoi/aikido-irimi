@@ -41,12 +41,14 @@ app.controller('RegistrationCtrl', ['$log', '$interval', '$translate', '$http', 
     // page variable
     reg.price = 0;
     reg.isMenuLimitExceeded = false;
+    reg.isJavorkaLimitExceeded = false;
+    reg.isBlathyLimitExceeded = false;
 
     reg.changeLanguage = function(langKey) {
       $translate.use(langKey);
     };
 
-    var checkMenuLimit = function() {
+    var checkLimits = function() {
       RegistrationService.checkMenuLimit()
         .success(function(data, status, headers, config) {
           // menu limit isn't reached
@@ -56,14 +58,41 @@ app.controller('RegistrationCtrl', ['$log', '$interval', '$translate', '$http', 
         .error(function(data, status, headers, config) {
           // menu limit exceeded
           $log.log(data, status);
-          reg.msg = msg['hu'][data.errorCode];
           delete reg.menu;
           reg.isMenuLimitExceeded = true;
+        });
+      RegistrationService.checkJavorkaLimit()
+        .success(function(data, status, headers, config) {
+          // javorka limit isn't reached
+          $log.log(data, status);
+          reg.isJavorkaLimitExceeded = false;
+        })
+        .error(function(data, status, headers, config) {
+          // javorka limit exceeded
+          $log.log(data, status);
+          if (reg.quarters && reg.quarters === 'javorka') {
+            delete reg.quarters;
+          }
+          reg.isJavorkaLimitExceeded = true;
+        });
+      RegistrationService.checkBlathyLimit()
+        .success(function(data, status, headers, config) {
+          // blathy limit isn't reached
+          $log.log(data, status);
+          reg.isBlathyLimitExceeded = false;
+        })
+        .error(function(data, status, headers, config) {
+          // Blathy limit exceeded
+          $log.log(data, status);
+          if (reg.quarters && reg.quarters === 'blathy') {
+            delete reg.quarters;
+          }
+          reg.isBlathyLimitExceeded = true;
         });
     };
     //var refreshMenuLimit = $interval(checkMenuLimit, 5000);
 
-    checkMenuLimit();
+    checkLimits();
 
     reg.calcPrice = function() {
       RegistrationService.calcPrice(reg)
@@ -83,6 +112,8 @@ app.controller('RegistrationCtrl', ['$log', '$interval', '$translate', '$http', 
         RegistrationService.validate(reg);
         // page variable remove
         delete reg.isMenuLimitExceeded;
+        delete reg.isJavorkaLimitExceeded;
+        delete reg.isBlathyLimitExceeded;
         delete reg.price;
 
         RegistrationService.create(reg)

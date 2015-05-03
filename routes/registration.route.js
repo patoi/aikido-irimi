@@ -1,7 +1,7 @@
 // registration route
 'use strict';
 
-var menuLimitPromise = require('../promises/menu.limit.promise');
+var limitPromise = require('../promises/limit.promise');
 
 module.exports = function(Q, winston, config, ses, dbReg, regService) {
 
@@ -36,7 +36,37 @@ module.exports = function(Q, winston, config, ses, dbReg, regService) {
   };
 
   // check menu limit
-  var menuLimit = menuLimitPromise(Q, winston, config, dbReg);
+  var menuLimitPromise = limitPromise(Q, winston, dbReg,
+    config.menuLimit, {
+      $where: function() {
+        return this.menu !== undefined;
+      }
+    },
+    'v.menu.limit',
+    function(reg) {
+      return reg.menu || !reg.name;
+    }
+  );
+  // javorka limit check
+  var javorkaLimitPromise = limitPromise(Q, winston, dbReg,
+    config.quarters.javorkaLimit, {
+      'quarters': 'javorka'
+    },
+    'v.quarters.javorka.limit',
+    function(reg) {
+      return (reg.quarters && reg.quarters === 'javorka') || !reg.name;
+    }
+  );
+  // blathy limit check
+  var blathyLimitPromise = limitPromise(Q, winston, dbReg,
+    config.quarters.blathyLimit, {
+      'quarters': 'blathy'
+    },
+    'v.quarters.blathy.limit',
+    function(reg) {
+      return (reg.quarters && reg.quarters === 'blathy') || !reg.name;
+    }
+  );
 
   // insert registration
   var dbInsertReg = function(reg) {
@@ -100,7 +130,9 @@ module.exports = function(Q, winston, config, ses, dbReg, regService) {
       regService.validate(reg);
       // validate unique registration
       checkUniqueEmail(reg)
-        .then(menuLimit)
+        .then(menuLimitPromise)
+        .then(javorkaLimitPromise)
+        .then(blathyLimitPromise)
         .then(dbInsertReg)
         .then(sendRegistrationEmail)
         .then(function(newDoc) {

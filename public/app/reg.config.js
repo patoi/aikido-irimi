@@ -52,7 +52,10 @@ app.config(['$translateProvider', function($translateProvider) {
     'javorka': 'Jávorka Sándor dorm: 6-8 aug. 3 night',
     'blathy': 'Bláthy Ottó dorm: 6-8 aug. 3 night',
     'calcPrice': 'Total',
-    'no-banquet': 'You can\'t booking to banquet, because we have exceeded the maximum limit.'
+    'no-banquet': 'You can\'t booking to banquet, because we have exceeded the maximum limit.',
+    'no-javorka': 'All of the rooms rented in the Jávorka Sándor dorm.',
+    'no-blathy': 'All of the rooms rented in the Bláthy Ottó dorm.',
+    'no-quarters': 'All of the rooms rented.'
   });
 
   $translateProvider.translations('hu', {
@@ -106,7 +109,11 @@ app.config(['$translateProvider', function($translateProvider) {
     'javorka': 'Jávorka Sándor kollégium: aug. 6-8. 3 éj',
     'blathy': 'Bláthy Ottó kollégium: aug. 6-8. 3 éj',
     'calcPrice': 'Összesen',
-    'no-banquet': 'Sajnáljuk, de már nincs több hely a bankettre.'
+    'no-banquet': 'Sajnáljuk, de már nincs több hely a bankettre.',
+    'no-javorka': 'Már minden szoba ki lett adva a Jávorka Sándor kollégiumban.',
+    'no-blathy': 'Már minden szoba ki lett adva a Bláthy Ottó kollégiumban.',
+    'no-quarters': 'Már minden szoba ki lett adva.'
+
   });
 
   $translateProvider.preferredLanguage('hu');

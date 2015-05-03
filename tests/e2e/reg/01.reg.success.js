@@ -56,7 +56,7 @@ module.exports = {
         "Ezzel az email címmel már van regisztráció! [v.reg.not.unique]");
   },
 
-  "Shown menu limit exceeded message": function(browser) {
+  "Shown menu and javorka limit exceeded message": function(browser) {
     var reg = function() {
       browser
         .url(url)
@@ -83,10 +83,50 @@ module.exports = {
       .waitForElementVisible('#success')
       .assert.visible('#success');
 
-    // third reg. must show that menu limit exceeded
+    // third reg. must show that menu and javorka limit exceeded
     reg()
-      .assert.containsText("#msg",
-        "Sajnáljuk, de már nincs több hely a bankettre.")
-      .assert.attributeEquals("#menu", "disabled", "true");;
+      .assert.visible('#menuLimit')
+      .assert.visible('#javorkaLimit')
+      .assert.hidden('#blathyLimit')
+      .assert.attributeEquals("#menu", "disabled", "true");
+  },
+
+  "Shown quarters limit exceeded message": function(browser) {
+    var reg = function(x) {
+      browser
+        .url(url)
+        .waitForElementVisible('body')
+        .click('#startReg')
+        .waitForElementVisible('body')
+        .setValue('#name', 'Peter Pal')
+        .setValue('#email', x + '.limit.test@neversendthisemail.org')
+        .setValue('#dojo', 'Dojo Name')
+        .setValue('#tel', '+36 12 345 6789')
+        .click('label[for="mkdeTag"]')
+        .click('label[for="dojoleader"]')
+        .click('#menu option[value="menu_A"]')
+        .click('#ticket option[value="whole"]')
+        .click('#quarters option[value="blathy"]')
+        .click('label[for="agree"]')
+        .pause(300);
+      return browser;
+    }
+
+    // first blathy reg.
+    reg(1)
+      .click('#reg')
+      .waitForElementVisible('#success')
+      .assert.visible('#success');
+    // second blathy reg.
+    reg(2)
+      .click('#reg')
+      .waitForElementVisible('#success')
+      .assert.visible('#success');
+
+    // third reg. must show that quarters limit exceeded
+    reg(3)
+      .assert.hidden('#javorkaLimit')
+      .assert.hidden('#blathyLimit')
+      .assert.visible('#quartersLimit');
   }
 };

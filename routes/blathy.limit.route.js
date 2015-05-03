@@ -1,39 +1,39 @@
-// check menu limit
+// check blathy limit
 'use strict';
 
 var limitPromise = require('../promises/limit.promise');
 
-module.exports = function(Q, winston, config, dbReg, regService) {
+module.exports = function(Q, winston, dbReg, regService, limit) {
 
   var Q = Q,
     winston = winston,
-    config = config,
+    limit = limit,
     dbReg = dbReg,
     regService = regService;
 
-  var menuLimitPromise = limitPromise(Q, winston, dbReg,
-    config.menuLimit, {
-      $where: function() {
-        return this.menu !== undefined;
-      }
+  var errorId = 'v.quarters.blathy.limit';
+
+  var blathyLimitPromise = limitPromise(Q, winston, dbReg,
+    limit, {
+      'quarters': 'blathy'
     },
-    'v.menu.limit',
+    errorId,
     function(reg) {
-      return reg.menu || !reg.name;
+      return true;
     }
   );
 
   return function(req, res) {
     var reg = regService.transform(req.body);
-    menuLimitPromise(reg)
+    blathyLimitPromise(reg)
       .then(function() {
         res.status(200).end();
       })
       .catch(function(e) {
         winston.error(e.message);
-        if (e.message == 'v.menu.limit') {
+        if (e.message == errorId) {
           res.status(406).json({
-            'errorCode': 'v.menu.limit'
+            'errorCode': errorId
           });
         } else {
           res.status(500).json({

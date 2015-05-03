@@ -226,7 +226,7 @@
         <div class="row">
           <p class="offset-m2 col m8 s12">{{'label-menu' | translate}} <a href="menu_{{'lang' | translate}}.html" target="_blank">{{'a-menu-list' | translate}}</a></p>
           <div class="input-field offset-m2 col m8 s12">
-            <div ng-show="reg.isMenuLimitExceeded">{{'no-banquet' | translate}}</div>
+            <div id="menuLimit" ng-show="reg.isMenuLimitExceeded">{{'no-banquet' | translate}}</div>
             <select ng-disabled="reg.isMenuLimitExceeded" ng-model="reg.menu" class="form-control browser-default" name="menu" id="menu" ng-change="reg.calcPrice()">
               <option value="" selected>{{'option-label-menu' | translate}}</option>
               <option value="menu_A">{{'menu_A' | translate}}</option>
@@ -247,7 +247,7 @@
             <select ng-model="reg.ticket" ng-required="true" class="form-control browser-default" name="ticket" id="ticket" ng-change="reg.calcPrice()">
               <option value="" disabled selected>{{'option-label-ticket' | translate}}</option>
               <optgroup label="">
-                <option value="whole" selected>{{'whole' | translate}}</option>
+                <option value="whole">{{'whole' | translate}}</option>
               </optgroup>
               <optgroup label="">
                 <option value="1day">{{'1day' | translate}}</option>
@@ -270,10 +270,13 @@
 
         <div class="row">
           <div class="input-field offset-m2 col m8 s12">
-            <select ng-model="reg.quarters" class="form-control browser-default" name="quarters" id="quarters" ng-change="reg.calcPrice()">
+            <div id="javorkaLimit" ng-show="reg.isJavorkaLimitExceeded && !reg.isBlathyLimitExceeded">{{'no-javorka' | translate}}</div>
+            <div id="blathyLimit" ng-show="!reg.isJavorkaLimitExceeded && reg.isBlathyLimitExceeded">{{'no-blathy' | translate}}</div>
+            <div id="quartersLimit" ng-show="reg.isJavorkaLimitExceeded && reg.isBlathyLimitExceeded">{{'no-quarters' | translate}}</div>
+            <select ng-disabled="reg.isJavorkaLimitExceeded && reg.isBlathyLimitExceeded" ng-model="reg.quarters" class="form-control browser-default" name="quarters" id="quarters" ng-change="reg.calcPrice()">
               <option value="" selected>{{'option-label-quarters' | translate}}</option>
-              <option value="javorka">{{'javorka' | translate}}</option>
-              <option value="blathy">{{'blathy' | translate}}</option>
+              <option value="javorka" ng-disabled="reg.isJavorkaLimitExceeded">{{'javorka' | translate}}</option>
+              <option value="blathy" ng-disabled="reg.isBlathyLimitExceeded">{{'blathy' | translate}}</option>
             </select>
           </div>
         </div>
