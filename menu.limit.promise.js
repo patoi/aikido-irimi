@@ -24,7 +24,14 @@ module.exports = function(Q, winston, config, dbReg) {
         if (count >= config.menuLimit) {
           winston.info('menu limit exceeded');
           // menuLimit has been reached
-          return deferred.reject(new Error('v.menu.limit'));
+          // !reg.name check the first call
+          if (reg.menu || !reg.name) {
+            // error: limit reached
+            return deferred.reject(new Error('v.menu.limit'));
+          } else {
+            // no error: user is not booking to banquet
+            return deferred.resolve(reg);
+          }
 
         } else {
           return deferred.resolve(reg);
