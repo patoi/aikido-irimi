@@ -1,7 +1,7 @@
 // check menu limit
 'use strict';
 
-var menuLimitPromise = require('../menu.limit.promise');
+var menuLimitPromise = require('../promises/menu.limit.promise');
 
 module.exports = function(Q, winston, config, dbReg, regService) {
 

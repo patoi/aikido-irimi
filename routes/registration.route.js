@@ -1,7 +1,7 @@
 // registration route
 'use strict';
 
-var menuLimitPromise = require('../menu.limit.promise');
+var menuLimitPromise = require('../promises/menu.limit.promise');
 
 module.exports = function(Q, winston, config, ses, dbReg, regService) {
 
@@ -56,31 +56,38 @@ module.exports = function(Q, winston, config, ses, dbReg, regService) {
   var sendRegistrationEmail = function(newDoc) {
     console.log('sendRegistrationEmail');
     var deferred = Q.defer();
-    // email admin and user
-    ses.sendEmail({
-      Source: config.email.from,
-      Destination: {
-        ToAddresses: [newDoc.email],
-        BccAddresses: [config.email.bcc]
-      },
-      Message: {
-        Subject: {
-          Data: config.email.subject + ' - ' + newDoc.name + ' - reg. kód: ' + newDoc._id
+
+    if (process.env.NODE_ENV === 'ci') {
+      console.log("CI: do not send email");
+      deferred.resolve(newDoc);
+    } else {
+
+      // email admin and user
+      ses.sendEmail({
+        Source: config.email.from,
+        Destination: {
+          ToAddresses: [newDoc.email],
+          BccAddresses: [config.email.bcc]
         },
-        Body: {
-          Html: {
-            Data: regService.toHtml(newDoc)
+        Message: {
+          Subject: {
+            Data: config.email.subject + ' - ' + newDoc.name + ' - reg. kód: ' + newDoc._id
+          },
+          Body: {
+            Html: {
+              Data: regService.toHtml(newDoc)
+            }
           }
         }
-      }
-    }, function(err, data) {
-      if (err) {
-        return deferred.reject(err);
-      } else {
-        winston.info('Email sent to reg.: ' + newDoc.email + ', ' + newDoc._id);
-        return deferred.resolve(newDoc);
-      }
-    });
+      }, function(err, data) {
+        if (err) {
+          return deferred.reject(err);
+        } else {
+          winston.info('Email sent to reg.: ' + newDoc.email + ', ' + newDoc._id);
+          return deferred.resolve(newDoc);
+        }
+      });
+    }
     return deferred.promise;
   };
 

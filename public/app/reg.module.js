@@ -12,7 +12,7 @@ app.constant(
       'v.tel.error': 'Hibás telefonszám.',
       'v.ticket.error': 'Nem megfelelő az edzésjegy.',
       'v.agree.error': 'El kell fogadni a feltételeket!',
-      'v.email.unique.error': 'Ezzel az email címmel már van regisztráció!',
+      'v.reg.not.unique': 'Ezzel az email címmel már van regisztráció!',
       'v.app.error': 'Hiba történt a regisztráció mentésekor, próbáld meg újra!',
       'v.menu.limit': 'Sajnáljuk, de már nincs több hely a bankettre.'
     },
@@ -24,7 +24,7 @@ app.constant(
       'v.tel.error': 'Wrong phone number.',
       'v.ticket.error': 'Choose an apropiate ticket!',
       'v.agree.error': 'You must click on agreement!',
-      'v.email.unique.error': 'This email address already used to a registration.',
+      'v.reg.not.unique': 'This email address already used to a registration.',
       'v.app.error': 'Application error, please try again!',
       'v.menu.limit': 'You can\'t booking to banquet, because we have exceeded the maximum limit.'
     }
