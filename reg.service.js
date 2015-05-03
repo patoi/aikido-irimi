@@ -168,7 +168,7 @@ var transform = function(reg) {
   regNew.name = reg.name ? reg.name.toUpperCase() : reg.name;
   regNew.email = reg.email ? reg.email.toLowerCase() : reg.email;
   regNew.dojo = reg.dojo ? reg.dojo.toUpperCase() : reg.dojo;
-  regNew.time = moment().tz("Europe/Budapest").format('YYYY.MM.DD hh:mm:ss');;
+  regNew.time = moment().tz("Europe/Budapest").format('YYYY.MM.DD HH:mm:ss');
   return regNew;
 };
 
