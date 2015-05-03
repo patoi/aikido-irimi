@@ -1,6 +1,8 @@
 // registration route
 'use strict';
 
+var menuLimitPromise = require('../menu.limit.promise');
+
 module.exports = function(Q, winston, config, ses, dbReg, regService) {
 
   var Q = Q,
@@ -12,16 +14,14 @@ module.exports = function(Q, winston, config, ses, dbReg, regService) {
 
   // query email
   var checkUniqueEmail = function(reg) {
-    console.log("checkUniqueEmail");
+    console.log('checkUniqueEmail');
     var deferred = Q.defer();
     dbReg.find({
       'email': reg.email
     }, function(err, docs) {
       if (err) {
-        console.log('reject');
         return deferred.reject(err);
       } else {
-        console.log('resolve', docs);
         if (docs.length === 0) {
           // registration is unique
           // calculating price
@@ -35,9 +35,12 @@ module.exports = function(Q, winston, config, ses, dbReg, regService) {
     return deferred.promise;
   };
 
+  // check menu limit
+  var menuLimit = menuLimitPromise(Q, winston, config, dbReg);
+
   // insert registration
   var dbInsertReg = function(reg) {
-    console.log("dbInsertReg");
+    console.log('dbInsertReg');
     var deferred = Q.defer();
     dbReg.insert(reg, function(err, doc) {
       if (err) {
@@ -51,7 +54,7 @@ module.exports = function(Q, winston, config, ses, dbReg, regService) {
 
   // sent registration email
   var sendRegistrationEmail = function(newDoc) {
-    console.log("sendRegistrationEmail");
+    console.log('sendRegistrationEmail');
     var deferred = Q.defer();
     // email admin and user
     ses.sendEmail({
@@ -74,7 +77,7 @@ module.exports = function(Q, winston, config, ses, dbReg, regService) {
       if (err) {
         return deferred.reject(err);
       } else {
-        winston.info('Email sent to reg.: ' + newDoc.email + ", " + newDoc._id);
+        winston.info('Email sent to reg.: ' + newDoc.email + ', ' + newDoc._id);
         return deferred.resolve(newDoc);
       }
     });
@@ -90,6 +93,7 @@ module.exports = function(Q, winston, config, ses, dbReg, regService) {
       regService.validate(reg);
       // validate unique registration
       checkUniqueEmail(reg)
+        .then(menuLimit)
         .then(dbInsertReg)
         .then(sendRegistrationEmail)
         .then(function(newDoc) {

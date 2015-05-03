@@ -226,7 +226,8 @@
         <div class="row">
           <p class="offset-m2 col m8 s12">{{'label-menu' | translate}} <a href="menu_{{'lang' | translate}}.html" target="_blank">{{'a-menu-list' | translate}}</a></p>
           <div class="input-field offset-m2 col m8 s12">
-            <select ng-model="reg.menu" class="form-control browser-default" name="menu" id="menu" ng-change="reg.calcPrice()">
+            <div ng-show="reg.isMenuLimitExceeded">{{'no-banquet' | translate}}</div>
+            <select ng-disabled="reg.isMenuLimitExceeded" ng-model="reg.menu" class="form-control browser-default" name="menu" id="menu" ng-change="reg.calcPrice()">
               <option value="" selected>{{'option-label-menu' | translate}}</option>
               <option value="menu_A">{{'menu_A' | translate}}</option>
               <option value="menu_B">{{'menu_B' | translate}}</option>

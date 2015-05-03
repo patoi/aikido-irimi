@@ -13,7 +13,8 @@ app.constant(
       'v.ticket.error': 'Nem megfelelő az edzésjegy.',
       'v.agree.error': 'El kell fogadni a feltételeket!',
       'v.email.unique.error': 'Ezzel az email címmel már van regisztráció!',
-      'v.app.error': 'Hiba történt a regisztráció mentésekor, próbáld meg újra!'
+      'v.app.error': 'Hiba történt a regisztráció mentésekor, próbáld meg újra!',
+      'v.menu.limit': 'Sajnáljuk, de már nincs több hely a bankettre.'
     },
     'en': {
       'v.required': 'Check all required fields!',
@@ -24,33 +25,55 @@ app.constant(
       'v.ticket.error': 'Choose an apropiate ticket!',
       'v.agree.error': 'You must click on agreement!',
       'v.email.unique.error': 'This email address already used to a registration.',
-      'v.app.error': 'Application error, please try again!'
+      'v.app.error': 'Application error, please try again!',
+      'v.menu.limit': 'You can\'t booking to banquet, because we have exceeded the maximum limit.'
     }
   }
 );
 
-app.controller('RegistrationCtrl', ['$translate', '$http', '$scope', 'RegistrationService', 'msg',
-  function($translate, $http, $scope, RegistrationService, msg) {
+app.controller('RegistrationCtrl', ['$log', '$interval', '$translate', '$http', '$scope', 'RegistrationService', 'msg',
+  function($log, $interval, $translate, $http, $scope, RegistrationService, msg) {
 
     $scope.showReg = true;
 
     var reg = this;
 
+    // page variable
     reg.price = 0;
+    reg.isMenuLimitExceeded = false;
 
     reg.changeLanguage = function(langKey) {
       $translate.use(langKey);
     };
 
+    var checkMenuLimit = function() {
+      RegistrationService.checkMenuLimit()
+        .success(function(data, status, headers, config) {
+          // menu limit isn't reached
+          $log.log(data, status);
+          reg.isMenuLimitExceeded = false;
+        })
+        .error(function(data, status, headers, config) {
+          // menu limit exceeded
+          $log.log(data, status);
+          reg.msg = msg['hu'][data.errorCode];
+          delete reg.menu;
+          reg.isMenuLimitExceeded = true;
+        });
+    };
+    //var refreshMenuLimit = $interval(checkMenuLimit, 5000);
+
+    checkMenuLimit();
+
     reg.calcPrice = function() {
       RegistrationService.calcPrice(reg)
         .success(function(data, status, headers, config) {
-          console.log(data, status);
+          $log.log(data, status);
           reg.price = data.price;
         })
         .error(function(data, status, headers, config) {
-          console.log(data, status);
-          reg.msg = msg['hu']['v.app.error'] + '[' + data.errorCode + ']';
+          $log.log(data, status);
+          reg.msg = msg['hu']['v.app.error'];
         });
     };
 
@@ -58,22 +81,30 @@ app.controller('RegistrationCtrl', ['$translate', '$http', '$scope', 'Registrati
       reg.msg = undefined;
       try {
         RegistrationService.validate(reg);
+        // page variable remove
+        delete reg.isMenuLimitExceeded;
+        delete reg.price;
+
         RegistrationService.create(reg)
           .success(function(data, status, headers, config) {
-            console.log(data, status);
+            $log.log(data, status);
             $scope.showReg = false;
           })
           .error(function(data, status, headers, config) {
-            console.log(data, status);
-            if (status === 409) {
-              reg.msg = msg['hu']['v.email.unique.error'] + '[' + data.errorCode + ']';
+            $log.log(data, status);
+            if (msg['hu'][data.errorCode]) {
+              reg.msg = msg['hu'][data.errorCode] + ' [' + data.errorCode + ']';
             } else {
-              reg.msg = msg['hu']['v.app.error'] + '[' + data.errorCode + ']';
+              reg.msg = msg['hu']['v.app.error'] + ' [' + data.errorCode + ']';
+            }
+            // limit check error
+            if ('v.menu.limit' === data.errorCode) {
+              reg.menu = undefined;
             }
           });
 
       } catch (e) {
-        console.log(e.message);
+        $log.log(e.message);
         reg.msg = msg['hu'][e.message];
       }
     }

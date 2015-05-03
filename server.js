@@ -40,6 +40,8 @@ var priceRoute = require('./routes/price.route.js')
   (winston, regService);
 var regRoute = require('./routes/registration.route.js')
   (Q, winston, config, ses, dbReg, regService);
+var menuLimitRoute = require('./routes/menu.limit.route.js')
+  (Q, winston, config, dbReg, regService);
 
 // middleware config
 app.use(bodyParser.json());
@@ -56,6 +58,8 @@ app.use(morgan('combined', {
 // routes
 app.route('/api/price')
   .post(priceRoute);
+app.route('/api/menulimit')
+  .get(menuLimitRoute);
 app.route('/api/registrations')
   .post(regRoute.registration)
   .get(regRoute.readAll);

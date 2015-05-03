@@ -122,7 +122,7 @@ var validate = function(reg) {
   } else {}
 
   var nameRegex = /^([a-zöüóőúéáűíä \-\.]){6,100}$/gi;
-  var dojonameRegex = /^([a-zöüóőúéáűíä \-\.]){6,100}$/gi;
+  var dojonameRegex = /^([a-zöüóőúéáűíä\ \-\.\']){2,100}$/gi;
   var telRegEx = /^([0-9 \-\+]){7,16}$/gi;
 
   if (!nameRegex.test(reg.nev)) {

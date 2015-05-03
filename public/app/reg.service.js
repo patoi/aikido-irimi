@@ -13,6 +13,10 @@ app.factory('RegistrationService', [
       return $http.post('/api/price', reg);
     };
 
+    var checkMenuLimit = function() {
+      return $http.get('/api/menulimit');
+    };
+
     var validate = function(reg) {
       var required =
         _.trim(reg.name) &&
@@ -27,7 +31,7 @@ app.factory('RegistrationService', [
       } else {}
 
       var nameRegex = /^([a-zöüóőúéáűíä \-\.]){6,100}$/gi;
-      var dojonameRegex = /^([a-zöüóőúéáűíä \-\.]){6,100}$/gi;
+      var dojonameRegex = /^([a-zöüóőúéáűíä \-\.]){2,100}$/gi;
       var telRegEx = /^([0-9 \-\+]){7,16}$/gi;
 
       if (!nameRegex.test(reg.nev)) {
@@ -70,7 +74,8 @@ app.factory('RegistrationService', [
     return {
       create: create,
       validate: validate,
-      calcPrice: calcPrice
+      calcPrice: calcPrice,
+      checkMenuLimit: checkMenuLimit
     };
   }
 ]);
