@@ -207,6 +207,7 @@ var toHtml = function(reg) {
   }
   txt += rowRender('\nUtalandó összeg', reg.price + " HUF");
   txt += fullRowRender('Elfogadom a rendezvényre és a regisztrációra vonatkozó feltételeket.');
+  txt += fullRowRender('A közlemény rovatban legyetek szívesek feltüntetni a neveteket!');
   txt += fullRowRender('Az alábbi bankszámlára utalhatod a fenti összeget:<br/>Számla tulajdonosa:<span style="font-weight: 400">Virga János</span><br/>Budapest Bank:<span style="font-weight: 400">10103623-25432900-01000004</span>');
   txt += fullRowRender('<b>Fontos </b>Regisztrációd csak a beérkezett összeg után válik érvényessé. A befizetésedről néhány napon belül kapsz egy visszaigazoló emailt. Ha nem kapsz ilyet, akkor vedd fel a kapcsolatot a megadott email címen!');
   txt += fullRowRender('Köszönjük a regisztrációdat!<br/>Szervezők');

@@ -28,17 +28,17 @@
       <div class="offset-m2 col s12 m8 section">
         <h5 class="blue-text text-darken-2">{{'reg' | translate}}</h5>
         <p>
-          Az következőképpen regisztrálhatsz az Aikido edzőtáborra:
+          {{'reg_step' | translate}}
           <ol style="font-weight: 300;">
-            <li>Tekintsd át az árakat!</li>
-            <li>Add meg, hogy milyen pólót szeretnél rendelni!</li>
-            <li>Regisztrálj!</li>
-            <li>A rendelésedről és regisztrációdról emailt küldünk, melyben szerepelnek az utaláshoz szükséges adatok.</li>
-            <li>Ellenőrizd, majd utald át az összeget.</li>
+            <li>{{'reg_step_1' | translate}}</li>
+            <li>{{'reg_step_2' | translate}}</li>
+            <li>{{'reg_step_3' | translate}}</li>
+            <li>{{'reg_step_4' | translate}}</li>
+            <li>{{'reg_step_5' | translate}}</li>
           </ol>
         </p>
         <div style="text-align: justify">
-          <span class="red-text">Fontos </span>Regisztrációd csak a beérkezett összeg után válik érvényessé. A befizetésedről néhány napon belül kapsz egy visszaigazoló emailt. Ha nem kapsz ilyet, akkor vedd fel a kapcsolatot a megadott email címen!
+          <span class="red-text">{{'important' | translate}} </span>{{'reg_msg2' | translate}}
         </div>
       </div>
     </div>
@@ -46,11 +46,11 @@
     <div class="row">
       <div class="offset-m2 col s12 m8 section">
 
-        <h6 class="blue-text text-darken-2" style="padding-top: 1em">Rendezvénynaptár és vizsga időpontok</h6>
+        <h6 class="blue-text text-darken-2" style="padding-top: 1em">{{'events' | translate}}</h6>
         <table>
           <tr class="grey lighten-4">
             <td>08.06.</td>
-            <td>csütörtök</td>
+            <td>{{'thursday' | translate}}</td>
             <td>11.00 - 12.30 keiko</td>
             <td>16.00 - 17.30 keiko</td>
             <td>&nbsp;</td>
@@ -58,7 +58,7 @@
           </tr>
           <tr class="grey lighten-5">
             <td>08.07.</td>
-            <td>péntek</td>
+            <td>{{'friday' | translate}}</td>
             <td>10.00 - 11.30 keiko</td>
             <td>16.00 - 17.30 keiko</td>
             <td>&nbsp;</td>
@@ -66,52 +66,52 @@
           </tr>
           <tr class="grey lighten-4">
             <td>08.08.</td>
-            <td>szombat</td>
+            <td>{{'saturday' | translate}}</td>
             <td>10.00 - 11.30 keiko</td>
             <td>15.00 - 16.30 keiko</td>
-            <td>17.00-tól bemutató</td>
-            <td>19.00-tól bankett</td>
+            <td>17.00 - {{'demo' | translate}}</td>
+            <td>19.00 - {{'bq' | translate}}</td>
           </tr>
           <tr class="grey lighten-5">
             <td>08.09.</td>
-            <td>vasárnap</td>
+            <td>{{'sunday' | translate}}</td>
             <td>10.00 - 11.30 keiko</td>
-            <td>12.00-tól dan vizsga</td>
+            <td>12.00 - {{'danexam' | translate}}</td>
             <td>&nbsp;</td>
             <td>&nbsp;</td>
           </tr>
         </table>
 
-        <h6 class="blue-text text-darken-2" style="padding-top: 2em">Jegyárak forintban</h6>
+        <h6 class="blue-text text-darken-2" style="padding-top: 2em">{{'ticketPrice' | translate}}</h6>
         <table>
           <tr class="grey lighten-5">
             <th>&nbsp;</th>
-            <th colspan="2" style="text-align: center">MKDE tagoknak</th>
-            <th colspan="2" style="text-align: center">Nem MKDE tagoknak</th>
+            <th colspan="2" style="text-align: center">{{'mkdeM' | translate}}</th>
+            <th colspan="2" style="text-align: center">{{'noMkdeM' | translate}}</th>
           </tr>
           <tr class="grey lighten-4">
-            <th>Jegy</th>
-            <th class="right-align">Elővétel</th>
-            <th class="right-align">Helyszín</th>
-            <th class="right-align">Elővétel</th>
-            <th class="right-align">Helyszín</th>
+            <th>{{'ticket' | translate}}</th>
+            <th class="right-align">{{'prepaid' | translate}}</th>
+            <th class="right-align">{{'onsite' | translate}}</th>
+            <th class="right-align">{{'prepaid' | translate}}</th>
+            <th class="right-align">{{'onsite' | translate}}</th>
           </tr>
           <tr class="grey lighten-5">
-            <td>Teljes tábor</td>
+            <td>{{'wholeCamp' | translate}}</td>
             <td class="right-align">13 000</td>
             <td class="right-align">15 000</td>
             <td class="right-align">17 000</td>
             <td class="right-align">20 0000</td>
           </tr>
           <tr class="grey lighten-4">
-            <td>Napijegy</td>
+            <td>{{'dailyTicket' | translate}}</td>
             <td class="right-align">4 000</td>
             <td class="right-align">5 000</td>
             <td class="right-align">6 000</td>
             <td class="right-align">7 000</td>
           </tr>
           <tr class="grey lighten-5">
-            <td>Edzésjegy</td>
+            <td>{{'keikoTicket' | translate}}</td>
             <td class="right-align">2 500</td>
             <td class="right-align">3 000</td>
             <td class="right-align">3 500</td>
@@ -119,42 +119,41 @@
           </tr>
         </table>
 
-        <h6 class="blue-text text-darken-2" style="padding-top: 2em">Évfordulós bankett</h6>
+        <h6 class="blue-text text-darken-2" style="padding-top: 2em">{{'ab' | translate}}</h6>
         <p style="font-weight: 300">
-          Évfordulós bankettünkön megünnepeljük, hogy a Renseikan Dojo - Tatabánya idén ünnepli 15. éves évfordulóját. A bankett 80 főre biztosított, külön belépőjegy nincs, a menürendelés a részvétel feltétele. Az ital fogyasztása egyénileg, külön fizetendő.
+          {{'abText' | translate}}
           <br/>
-          <br/>
-          <span style="font-weight: 400">A részletes menüt és árakat a regisztrációnál megtalálod.</span>
-          <br/> Helyszín:
+          <br/> {{'locationStr' | translate}}:
           <a href="http://www.kalozfregatt.hu" target="_blank">Fregatt Hotel és Étterem</a>
-          <br/>Cím: <a href="https://goo.gl/maps/k36qb" target="_blank">2890 Tata, Almási u. 2.</a>
+          <br/>{{'address' | translate}}: <a href="https://goo.gl/maps/k36qb" target="_blank"><i class="mdi-maps-place"></i> 2890 Tata, Almási u. 2.</a>
           <div style="text-align: justify">
-            <span class="red-text">Fontos </span>
+            <span class="red-text">{{'important' | translate}} </span>
             Kérünk, hogy a bankettre pontosan érkezz, megfelelő ruházatban.
           </div>
         </p>
 
-        <h6 class="blue-text text-darken-2" style="padding-top: 1em">Szállás és étkezés</h6>
+        <h6 class="blue-text text-darken-2" style="padding-top: 1em">{{'quarters' | translate}}</h6>
         <p style="font-weight: 300;">
           A szállás igény szerint a regisztrációkor foglalható. Az elhelyezés kollégiumokban történik:
           <br/>
-          <span style="font-weight: 400">2 800 Ft/fő/éj</span> - <a href="https://goo.gl/maps/TWh8k" target="_blank">Jávorka Sándor kollégium, cím: 2890 Tata, Új út 19.</a>
+          <span style="font-weight: 400">2 800 {{'hufpersonnight' | translate}}</span> - <a href="https://goo.gl/maps/TWh8k" target="_blank">Jávorka Sándor kollégium, <i class="mdi-maps-place"></i> 2890 Tata, Új út 19.</a>
           <br/>
-          <span style="font-weight: 400">3 000 Ft/fő/éj</span> - <a href="https://goo.gl/maps/iP2u2" target="_blank">Bláthy Ottó kollégium, cím: 2890 Tata, Hősök tere 9.</a>
+          <span style="font-weight: 400">3 000 {{'hufpersonnight' | translate}}</span> - <a href="https://goo.gl/maps/iP2u2" target="_blank">Bláthy Ottó kollégium, <i class="mdi-maps-place"></i> 2890 Tata, Hősök tere 9.</a>
         </p>
 
         <h6 class="blue-text text-darken-2" style="padding-top: 1em">Utalás</h6>
         <p style="font-weight: 300;">
           A regisztrációban megadott alapján kiszámoljuk az összeget, amelyet az alábbi bankszámlára utalhatsz:
           <br/>
-          <br/> Számla tulajdonosa:
+          <br/> {{'baOwner' | translate}}:
           <span style="font-weight: 400">Virga János</span>
           <br/> Budapest Bank:
           <span style="font-weight: 400">10103623-25432900-01000004</span>
           <br/>
+          <br/> {{'trDetails' | translate}}
           <br/>
           <div style="font-weight: 400">
-            <span class="red-text">Fontos </span>Regisztrációd csak a beérkezett összeg után válik érvényessé. A befizetésedről néhány napon belül kapsz egy visszaigazoló emailt. Ha nem kapsz ilyet, akkor vedd fel a kapcsolatot a megadott email címen!
+            <span class="red-text">{{'important' | translate}} </span>{{'reg_msg2' | translate}}
           </div>
         </p>
       </div>
@@ -314,10 +313,10 @@
 
     <div class="row" ng-show="!showReg" id="success">
       <div class="offset-m2 col s12 m8 section">
-        <h5 class="blue-text text-darken-2">Regisztrációd sikeres!</h5>
-        <p>Regisztrációs adataidról és az utalandó összegről emailt küldtünk.</p>
+        <h5 class="blue-text text-darken-2">{{'reg-success' | translate}}</h5>
+        <p>{{'reg_msg1' | translate}}</p>
         <div style="text-align: justify">
-          <span class="red-text">Fontos </span>Regisztrációd csak a beérkezett összeg után válik érvényessé. A befizetésedről néhány napon belül kapsz egy visszaigazoló emailt. Ha nem kapsz ilyet, akkor vedd fel a kapcsolatot a megadott email címen!
+          <span class="red-text">{{'important' | translate}} </span>{{'reg_msg2' | translate}}
         </div>
       </div>
     </div>
