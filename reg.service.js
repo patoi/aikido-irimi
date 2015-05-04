@@ -21,7 +21,7 @@ var PRICES = {
       '6keiko': 15000,
       '7keiko': 17500
     },
-    'non-mkdeTag': {
+    'nonMkdeTag': {
       'whole': 17000,
       '1day': 6000,
       '2day': 12000,
@@ -85,7 +85,7 @@ var getPrice = function(reg) {
 
 var getPriceOfTicket = function(isMkdeTag, ticket) {
   if (ticket) {
-    return isMkdeTag ? PRICES['huf']['mkdeTag'][ticket] : PRICES['huf']['non-mkdeTag'][ticket];
+    return isMkdeTag ? PRICES['huf']['mkdeTag'][ticket] : PRICES['huf']['nonMkdeTag'][ticket];
   } else {
     return 0;
   }

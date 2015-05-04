@@ -1,38 +1,32 @@
+// registration validation on client
 'use strict';
 
-describe('Regisztráció validálás', function() {
+describe('Validate a registration', function() {
 
   var service;
 
   beforeEach(module('Reg'));
 
-  beforeEach(inject(function(_RegisztracioService_) {
-    service = _RegisztracioService_;
+  beforeEach(inject(function(_RegistrationService_) {
+    service = _RegistrationService_;
   }));
 
   var reg = {
-    'nev': 'Teszt Elek',
+    'name': 'Teszt Elek',
     'email': 'tesztelek@gmail.com',
     'dojo': 'Aikido Dojo',
     'tel': '+36 12 345 6789',
-    'mkdeTag': 1,
-    'penznem': 'huf',
-    'dojovezeto': true,
-    'bankett': true,
-    'edzesjegy': 'teljes',
-    'szallas': '1agyas',
-    'etkezes': {
-      'reggeli': true,
-      'ebed': true,
-      'vacsora': true
-    },
-    'elfogadom': true
+    'mkdeTag': true,
+    'dojoleader': true,
+    'ticket': 'whole',
+    'quarters': 'javorka',
+    'agree': true
   };
 
-  // required teszt
-  it('kötelező mezők ellenőrzés hiba, nincs név: v.required', function() {
+  // required
+  it('name required: v.required', function() {
     var data = _.cloneDeep(reg);
-    data.nev = undefined;
+    data.name = undefined;
     try {
       expect(service.validate(data)).toThrow();
     } catch (e) {
@@ -40,7 +34,7 @@ describe('Regisztráció validálás', function() {
     }
   });
 
-  it('kötelező mezők ellenőrzés hiba, nincs email: v.required', function() {
+  it('email required: v.required', function() {
     var data = _.cloneDeep(reg);
     data.email = undefined;
     try {
@@ -50,7 +44,7 @@ describe('Regisztráció validálás', function() {
     }
   });
 
-  it('kötelező mezők ellenőrzés hiba, nincs dojo: v.required', function() {
+  it('dojo required: v.required', function() {
     var data = _.cloneDeep(reg);
     data.dojo = undefined;
     try {
@@ -60,9 +54,9 @@ describe('Regisztráció validálás', function() {
     }
   });
 
-  it('kötelező mezők ellenőrzés hiba, nincs edzésjegy: v.required', function() {
+  it('ticket required: v.required', function() {
     var data = _.cloneDeep(reg);
-    data.edzesjegy = undefined;
+    data.ticket = undefined;
     try {
       expect(service.validate(data)).toThrow();
     } catch (e) {
@@ -70,9 +64,9 @@ describe('Regisztráció validálás', function() {
     }
   });
 
-  it('kötelező mezők ellenőrzés hiba, nincs elfogadom: v.required', function() {
+  it('agree required: v.required', function() {
     var data = _.cloneDeep(reg);
-    data.elfogadom = undefined;
+    data.agree = undefined;
     try {
       expect(service.validate(data)).toThrow();
     } catch (e) {
@@ -80,10 +74,10 @@ describe('Regisztráció validálás', function() {
     }
   });
 
-  it('kötelező mezők ellenőrzés hiba, nincs elfogadom és név: v.required', function() {
+  it('agree and name required: v.required', function() {
     var data = _.cloneDeep(reg);
-    data.elfogadom = undefined;
-    data.nev = undefined;
+    data.agree = undefined;
+    data.name = undefined;
     try {
       expect(service.validate(data)).toThrow();
     } catch (e) {
@@ -91,9 +85,9 @@ describe('Regisztráció validálás', function() {
     }
   });
 
-  it('kötelező mezők ellenőrzés hiba, név üres: v.required', function() {
+  it('empty name not allowed: v.required', function() {
     var data = _.cloneDeep(reg);
-    data.nev = '     ';
+    data.name = '     ';
     try {
       expect(service.validate(data)).toThrow();
     } catch (e) {
@@ -101,127 +95,104 @@ describe('Regisztráció validálás', function() {
     }
   });
 
-  // név hossz teszt, max 100
-  it('név hosszú ellenőrzés hiba: v.nev.hiba', function() {
+  it('too long name: v.name.error', function() {
     var data = _.cloneDeep(reg);
-    data.nev = "AAAAABBBBBAAAAABBBBBAAAAABBBBBAAAAABBBBBAAAAABBBBBAAAAA BBBBBAAAAABBBBBAAAAABBBBBAAAAABBBBBAAAAABBBBBAAAAABBBBB";
+    data.name = "AAAAABBBBBAAAAABBBBBAAAAABBBBBAAAAABBBBBAAAAABBBBBAAAAA BBBBBAAAAABBBBBAAAAABBBBBAAAAABBBBBAAAAABBBBBAAAAABBBBB";
     try {
       expect(service.validate(data)).toThrow();
     } catch (e) {
-      expect(e.message).toBe('v.nev.hiba');
+      expect(e.message).toBe('v.name.error');
     }
   });
 
-  it('név rövid ellenőrzés hiba: v.nev.hiba', function() {
+  it('too short name: v.name.error', function() {
     var data = _.cloneDeep(reg);
-    data.nev = "A A";
+    data.name = "A A";
     try {
       expect(service.validate(data)).toThrow();
     } catch (e) {
-      expect(e.message).toBe('v.nev.hiba');
+      expect(e.message).toBe('v.name.error');
     }
   });
 
-  it('név hossz ellenőrzés sikeres', function() {
+  it('name contains number', function() {
     var data = _.cloneDeep(reg);
-    expect(service.validate(data)).toBe(true);
-  });
-
-  // típus teszt
-  it('név típus ellenőrzés hiba', function() {
-    var data = _.cloneDeep(reg);
-    data.nev = '123 123';
+    data.name = '123 123';
     try {
       expect(service.validate(data)).toThrow();
     } catch (e) {
-      expect(e.message).toBe('v.nev.hiba');
+      expect(e.message).toBe('v.name.error');
     }
   });
 
-  it('email típus ellenőrzés hiba', function() {
+  it('email validation failed', function() {
     var data = _.cloneDeep(reg);
-    data.email = 'rossz';
+    data.email = 'notavalidemail';
     try {
       expect(service.validate(data)).toThrow();
     } catch (e) {
-      expect(e.message).toBe('v.email.hiba');
+      expect(e.message).toBe('v.email.error');
     }
   });
 
-  it('email típus ellenőrzés sikeres', function() {
+  it('email validation success', function() {
     var data = _.cloneDeep(reg);
     data.email = 'v@v.hu';
     expect(service.validate(data)).toBe(true);
   });
 
 
-  it('dojo típus ellenőrzés hiba', function() {
+  it('dojo contains number', function() {
     var data = _.cloneDeep(reg);
     data.dojo = '123 123';
     try {
       expect(service.validate(data)).toThrow();
     } catch (e) {
-      expect(e.message).toBe('v.dojo.hiba');
+      expect(e.message).toBe('v.dojo.error');
     }
   });
 
-  it('pénznem típus ellenőrzés hiba', function() {
+  it('invalid ticket type', function() {
     var data = _.cloneDeep(reg);
-    data.penznem = 'xxx';
+    data.ticket = 'xxx';
     try {
       expect(service.validate(data)).toThrow();
     } catch (e) {
-      expect(e.message).toBe('v.penznem.hiba');
+      expect(e.message).toBe('v.ticket.error');
     }
   });
 
-  it('pénznem típus ellenőrzés sikeres', function() {
+  it('ticket type valid', function() {
     var data = _.cloneDeep(reg);
-    data.penznem = 'huf';
+    data.ticket = '1day';
     expect(service.validate(data)).toBe(true);
   });
 
-  it('edzésjegy típus ellenőrzés hiba', function() {
+  it('quarters type invalid', function() {
     var data = _.cloneDeep(reg);
-    data.edzesjegy = 'xxx';
+    data.quarters = 'notavalidquarters';
     try {
       expect(service.validate(data)).toThrow();
     } catch (e) {
-      expect(e.message).toBe('v.edzesjegy.hiba');
+      expect(e.message).toBe('v.quarters.error');
     }
   });
 
-  it('edzésjegy típus ellenőrzés sikeres', function() {
+  it('quarters type valid', function() {
     var data = _.cloneDeep(reg);
-    data.edzesjegy = '1napi';
+    data.szallas = 'javorka';
     expect(service.validate(data)).toBe(true);
   });
 
-  it('szállás típus ellenőrzés hiba', function() {
+  it('quarters is optional', function() {
     var data = _.cloneDeep(reg);
-    data.szallas = '10agyas';
-    try {
-      expect(service.validate(data)).toThrow();
-    } catch (e) {
-      expect(e.message).toBe('v.szallas.hiba');
-    }
-  });
-
-  it('szállás típus ellenőrzés sikeres', function() {
-    var data = _.cloneDeep(reg);
-    data.szallas = '1agyas';
+    data.quarters = undefined;
     expect(service.validate(data)).toBe(true);
   });
 
-  it('szállás típus ellenőrzés sikeres, mert opcionális', function() {
+  it('must agree', function() {
     var data = _.cloneDeep(reg);
-    data.szallas = undefined;
-    expect(service.validate(data)).toBe(true);
-  });
-
-  it('elfogadom ellenőrzés hiba, mert false az értéke', function() {
-    var data = _.cloneDeep(reg);
-    data.elfogadom = false;
+    data.agree = false;
     try {
       expect(service.validate(data)).toThrow();
     } catch (e) {
@@ -229,9 +200,9 @@ describe('Regisztráció validálás', function() {
     }
   });
 
-  it('elfogadom ellenőrzése: mindig true-nak kell lennie', function() {
+  it('agree valid', function() {
     var data = _.cloneDeep(reg);
-    data.elfogadom = true;
+    data.agree = true;
     expect(service.validate(data)).toBe(true);
   });
 

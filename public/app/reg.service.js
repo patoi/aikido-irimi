@@ -40,7 +40,7 @@ app.factory('RegistrationService', [
       var dojonameRegex = /^([a-zöüóőúéáűíä \-\.]){2,100}$/gi;
       var telRegEx = /^([0-9 \-\+]){7,16}$/gi;
 
-      if (!nameRegex.test(reg.nev)) {
+      if (!nameRegex.test(reg.name)) {
         throw new Error('v.name.error');
       }
       if (!is.email(reg.email)) {

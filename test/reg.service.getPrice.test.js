@@ -1,110 +1,117 @@
+// regService.getPrice unit test
 'use strict';
 
 var regService = require('../reg.service.js');
 var assert = require('chai').assert;
 
-// FIXME: we need more test
+var prices = regService.PRICES.huf;
 
 var reg;
-var deadlineDiscount;
+
 beforeEach(function() {
-  deadlineDiscount = false;
   reg = {
     'nev': 'Teszt Elek',
     'email': 'tesztelek@gmail.com',
     'dojo': 'Aikido Dojo',
     'tel': '+36 12 345 6789',
-    'mkdeTag': 1,
-    'penznem': 'huf',
-    'dojovezeto': true,
-    'bankett': true,
-    'edzesjegy': 'teljes',
-    'szallas': '1agyas',
-    'etkezes': {
-      'reggeli': true,
-      'ebed': true,
-      'vacsora': true
-    },
-    'elfogadom': true
+    'mkdeTag': true,
+    'dojoleader': true,
+    'menu': 'menu_A',
+    'ticket': 'whole',
+    'quarters': 'javorka',
+    'agree': true
   };
 });
 
 describe('getPrice in HUF', function() {
-  context('registration is a full day workout and no deadline discounts', function() {
-    it('should return 20000', function() {
-      deadlineDiscount = false;
-      reg.dojovezeto = false;
+
+  context('registration is a full day workout and not member of the MKDE', function() {
+    it('should return ' + prices.nonMkdeTag.whole, function() {
       reg.mkdeTag = false;
-      reg.bankett = false;
-      delete reg.etkezes;
-      delete reg.szallas;
-      assert.equal(regService.PRICES.huf.workout.teljes, regService.getPrice(reg, deadlineDiscount));
+      delete reg.menu;
+      delete reg.quarters;
+      assert.equal(prices.nonMkdeTag.whole, regService.getPrice(reg));
     });
   });
-  context('registration is a full day workout and has discounts', function() {
-    it('should return 20000', function() {
-      deadlineDiscount = true;
-      reg.dojovezeto = false;
-      reg.mkdeTag = false;
-      reg.bankett = false;
-      delete reg.etkezes;
-      delete reg.szallas;
-      assert.equal(16000, regService.getPrice(reg, deadlineDiscount));
+
+  context('registration is a full day workout and member of the MKDE', function() {
+    it('should return ' + prices.mkdeTag.whole, function() {
+      delete reg.menu;
+      delete reg.quarters;
+      assert.equal(prices.mkdeTag.whole, regService.getPrice(reg));
     });
   });
-  context('registration is a full day workout and has discounts and dojovezeto', function() {
-    it('should return 20000', function() {
-      deadlineDiscount = true;
-      reg.dojovezeto = true;
-      reg.mkdeTag = false;
-      reg.bankett = false;
-      delete reg.etkezes;
-      delete reg.szallas;
-      assert.equal(12000, regService.getPrice(reg, deadlineDiscount));
+
+  context('registration is a 1 day workout and member of the MKDE', function() {
+    it('should return ' + prices.mkdeTag['1day'], function() {
+      delete reg.menu;
+      delete reg.quarters;
+      reg.ticket = '1day';
+      assert.equal(prices.mkdeTag['1day'], regService.getPrice(reg));
     });
   });
-  context('registration is a full day workout and has discounts and dojovezeto and mkdeTag', function() {
-    it('should return 20000', function() {
-      deadlineDiscount = true;
-      reg.dojovezeto = true;
-      reg.mkdeTag = true;
-      reg.bankett = false;
-      delete reg.etkezes;
-      delete reg.szallas;
-      assert.equal(10000, regService.getPrice(reg, deadlineDiscount));
+
+  context('registration is a 1 keiko and member of the MKDE', function() {
+    it('should return ' + prices.mkdeTag['1keiko'], function() {
+      delete reg.menu;
+      delete reg.quarters;
+      reg.ticket = '1keiko';
+      assert.equal(prices.mkdeTag['1keiko'], regService.getPrice(reg));
     });
   });
-  context('registration is a full day workout and has discounts and dojovezeto and mkdeTag and bankett', function() {
-    it('should return 20000', function() {
-      deadlineDiscount = true;
-      reg.dojovezeto = true;
-      reg.mkdeTag = true;
-      reg.bankett = true;
-      delete reg.etkezes;
-      delete reg.szallas;
-      assert.equal(18000, regService.getPrice(reg, deadlineDiscount));
+
+  context('registration is a full day workout and has a menu A and MKDE member', function() {
+    var expected = prices.mkdeTag.whole + prices.menu.menu_A;
+    it('should return '  + expected, function() {
+      reg.menu = 'menu_A';
+      delete reg.quarters;
+
+      assert.equal(expected, regService.getPrice(reg));
     });
   });
-  context('registration is a full day workout and has discounts and not dojovezeto and mkdeTag and bankett', function() {
-    it('should return 20000', function() {
-      deadlineDiscount = true;
-      reg.dojovezeto = false;
-      reg.mkdeTag = true;
-      reg.bankett = true;
-      delete reg.etkezes;
-      delete reg.szallas;
-      assert.equal(22000, regService.getPrice(reg, deadlineDiscount));
+
+  context('registration is a full day workout and has a menu F and MKDE member', function() {
+    var expected = prices.mkdeTag.whole + prices.menu.menu_F;
+    it('should return '  + expected, function() {
+      reg.menu = 'menu_F';
+      delete reg.quarters;
+
+      assert.equal(expected, regService.getPrice(reg));
     });
   });
-  context('registration is a full day workout and has discounts and not dojovezeto and not mkdeTag and bankett', function() {
-    it('should return 20000', function() {
-      deadlineDiscount = true;
-      reg.dojovezeto = false;
-      reg.mkdeTag = false;
-      reg.bankett = true;
-      delete reg.etkezes;
-      delete reg.szallas;
-      assert.equal(24000, regService.getPrice(reg, deadlineDiscount));
+
+  context('registration is a full day workout and has a menu F and MKDE member and has a javorka quarters', function() {
+    var expected = prices.mkdeTag.whole + prices.menu.menu_F + prices.quarters.javorka;
+    it('should return '  + expected, function() {
+      reg.menu = 'menu_F';
+      reg.quarters = 'javorka';
+
+      assert.equal(expected, regService.getPrice(reg));
     });
   });
+
+  context('registration is a full day workout and has a menu F and MKDE member and has a blathy quarters', function() {
+    var expected = prices.mkdeTag.whole + prices.menu.menu_F + prices.quarters.blathy;
+    it('should return '  + expected, function() {
+      reg.menu = 'menu_F';
+      reg.quarters = 'blathy';
+
+      assert.equal(expected, regService.getPrice(reg));
+    });
+  });
+
+  context('registration is a full day workout and has a menu F and MKDE member and has a blathy quarters', function() {
+    var javorka = prices.mkdeTag.whole + prices.menu.menu_F + prices.quarters.javorka;
+    var blathy = prices.mkdeTag.whole + prices.menu.menu_F + prices.quarters.blathy;
+    it('should not equals a javorka quarters', function() {
+      reg.menu = 'menu_F';
+      reg.quarters = 'javorka';
+      var javorka = regService.getPrice(reg);
+      reg.quarters = 'blathy';
+      var blathy = regService.getPrice(reg);
+
+      assert.notEqual(javorka, blathy);
+    });
+  });
+
 });
