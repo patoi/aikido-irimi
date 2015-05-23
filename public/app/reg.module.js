@@ -35,6 +35,7 @@ app.controller('RegistrationCtrl', ['$log', '$interval', '$translate', '$http', 
   function($log, $interval, $translate, $http, $scope, RegistrationService, msg) {
 
     $scope.showReg = true;
+    $scope.disableRegButton = false;
 
     var reg = this;
 
@@ -108,14 +109,9 @@ app.controller('RegistrationCtrl', ['$log', '$interval', '$translate', '$http', 
 
     reg.registration = function() {
       reg.msg = undefined;
+      $scope.disableRegButton = true;
       try {
         RegistrationService.validate(reg);
-        // page variable remove
-        delete reg.isMenuLimitExceeded;
-        delete reg.isJavorkaLimitExceeded;
-        delete reg.isBlathyLimitExceeded;
-        delete reg.price;
-
         RegistrationService.create(reg)
           .success(function(data, status, headers, config) {
             $log.log(data, status);
@@ -132,11 +128,13 @@ app.controller('RegistrationCtrl', ['$log', '$interval', '$translate', '$http', 
             if ('v.menu.limit' === data.errorCode) {
               reg.menu = undefined;
             }
+            $scope.disableRegButton = false;
           });
 
       } catch (e) {
         $log.log(e.message);
         reg.msg = msg['hu'][e.message];
+        $scope.disableRegButton = false;
       }
     }
   }

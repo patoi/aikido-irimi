@@ -304,7 +304,7 @@
             <button ng-disabled="true" type="button" class="waves-effect waves-light btn white-text green">{{'calcPrice' | translate}}: {{reg.price}} HUF</button>
           </div>
           <div class="col m5 s12">
-            <button id="reg" ng-disabled="regForm.$invalid" class="waves-effect waves-light btn white-text" type="submit" name="action">{{'reg' | translate}}
+            <button id="reg" ng-disabled="regForm.$invalid || disableRegButton" class="waves-effect waves-light btn white-text" type="submit" name="action">{{'reg' | translate}}
               <i class="mdi-content-send right"></i></button>
           </div>
         </div>

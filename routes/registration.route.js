@@ -126,6 +126,11 @@ module.exports = function(Q, winston, config, ses, dbReg, regService) {
       winston.info('registration in', req.body);
       // transform registration data
       var reg = regService.transform(req.body);
+      // delete calculated value from reg. page
+      delete reg.isMenuLimitExceeded;
+      delete reg.isJavorkaLimitExceeded;
+      delete reg.isBlathyLimitExceeded;
+      delete reg.price;
       // validate registration data
       regService.validate(reg);
       // validate unique registration
