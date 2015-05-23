@@ -136,7 +136,8 @@
         <h6 class="blue-text text-darken-2" style="padding-top: 1em">{{'quarters' | translate}}</h6>
         <p style="font-weight: 300;">
           {{'quartersAccom' | translate}} <a href="./elhelyezes.pdf" target="_blank">{{'roomsandbeds' | translate}} - PDF</a>
-          <br/><br/>
+          <br/>
+          <br/>
           <span style="font-weight: 400">2 800 {{'hufpersonnight' | translate}}</span> - <a href="https://goo.gl/maps/TWh8k" target="_blank">Jávorka Sándor kollégium, <i class="mdi-maps-place"></i> 2890 Tata, Új út 19.</a>
           <br/>
           <span style="font-weight: 400">3 000 {{'hufpersonnight' | translate}}</span> - <a href="https://goo.gl/maps/iP2u2" target="_blank">Bláthy Ottó kollégium, <i class="mdi-maps-place"></i> 2890 Tata, Hősök tere 9.</a>
@@ -210,42 +211,21 @@
         </div>
 
         <div class="row">
-          <div class="offset-m2 input-field col m8 s12">
+          <div class="offset-m2 input-field col m4 s6">
             <input ng-model="reg.mkdeTag" type="checkbox" class="form-control filled-in" id="mkdeTag" name="mkdeTag" ng-change="reg.calcPrice()" />
             <label for="mkdeTag">{{'label-mkdetag' | translate}}</label>
           </div>
-        </div>
-
-        <div class="row">
-          <div class="offset-m2 input-field col m8 s12">
+          <div class="input-field col m4 s6">
             <input ng-model="reg.dojoleader" type="checkbox" class="form-control filled-in" id="dojoleader" name="dojoleader" />
             <label for="dojoleader">{{'label-dojoleader' | translate}}</label>
           </div>
         </div>
 
-        <div class="row">
-          <p class="offset-m2 col m8 s12">{{'label-menu' | translate}} <a href="menu_{{'lang' | translate}}.html" target="_blank">{{'a-menu-list' | translate}}</a></p>
-          <div class="input-field offset-m2 col m8 s12">
-            <div id="menuLimit" ng-show="reg.isMenuLimitExceeded">{{'no-banquet' | translate}}</div>
-            <select ng-disabled="reg.isMenuLimitExceeded" ng-model="reg.menu" class="form-control browser-default" name="menu" id="menu" ng-change="reg.calcPrice()">
-              <option value="" selected>{{'option-label-menu' | translate}}</option>
-              <option value="menu_A">{{'menu_A' | translate}}</option>
-              <option value="menu_B">{{'menu_B' | translate}}</option>
-              <option value="menu_C">{{'menu_C' | translate}}</option>
-              <option value="menu_D">{{'menu_D' | translate}}</option>
-              <option value="menu_E">{{'menu_E' | translate}}</option>
-              <optgroup label="{{'vega' | translate}}">
-                <option value="menu_F">{{'menu_F' | translate}}</option>
-                <option value="menu_G">{{'menu_G' | translate}}</option>
-              </optgroup>
-            </select>
-          </div>
-        </div>
 
         <div class="row">
           <div class="input-field offset-m2 col m8 s12">
             <select ng-model="reg.ticket" ng-required="true" class="form-control browser-default" name="ticket" id="ticket" ng-change="reg.calcPrice()">
-              <option value="" disabled selected>{{'option-label-ticket' | translate}}</option>
+              <option value="" disabled selected>{{'option-label-ticket' | translate}}<span class="red-text"> *</span></option>
               <optgroup label="">
                 <option value="whole">{{'whole' | translate}}</option>
               </optgroup>
@@ -269,15 +249,44 @@
         </div>
 
         <div class="row">
+          <p class="offset-m2 col m8 s12">{{'label-menu' | translate}} <a href="menu_{{'lang' | translate}}.html" target="_blank">{{'a-menu-list' | translate}}</a></p>
           <div class="input-field offset-m2 col m8 s12">
+            <div id="menuLimit" ng-show="reg.isMenuLimitExceeded">{{'no-banquet' | translate}}</div>
+            <select ng-disabled="reg.isMenuLimitExceeded" ng-model="reg.menu" class="form-control browser-default" name="menu" id="menu" ng-change="reg.calcPrice()">
+              <option value="" selected>{{'option-label-menu' | translate}}</option>
+              <option value="menu_A">{{'menu_A' | translate}}</option>
+              <option value="menu_B">{{'menu_B' | translate}}</option>
+              <option value="menu_C">{{'menu_C' | translate}}</option>
+              <option value="menu_D">{{'menu_D' | translate}}</option>
+              <option value="menu_E">{{'menu_E' | translate}}</option>
+              <optgroup label="{{'vega' | translate}}">
+                <option value="menu_F">{{'menu_F' | translate}}</option>
+                <option value="menu_G">{{'menu_G' | translate}}</option>
+              </optgroup>
+            </select>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="input-field offset-m2 col m5 s6">
             <div id="javorkaLimit" ng-show="reg.isJavorkaLimitExceeded && !reg.isBlathyLimitExceeded">{{'no-javorka' | translate}}</div>
             <div id="blathyLimit" ng-show="!reg.isJavorkaLimitExceeded && reg.isBlathyLimitExceeded">{{'no-blathy' | translate}}</div>
             <div id="quartersLimit" ng-show="reg.isJavorkaLimitExceeded && reg.isBlathyLimitExceeded">{{'no-quarters' | translate}}</div>
-            <select ng-disabled="reg.isJavorkaLimitExceeded && reg.isBlathyLimitExceeded" ng-model="reg.quarters" class="form-control browser-default" name="quarters" id="quarters" ng-change="reg.calcPrice()">
+            <select ng-change="reg.resetDay()" ng-disabled="reg.isJavorkaLimitExceeded && reg.isBlathyLimitExceeded" ng-model="reg.quarters" class="form-control browser-default" name="quarters" id="quarters" ng-change="reg.calcPrice()">
               <option value="" selected>{{'option-label-quarters' | translate}}</option>
               <option value="javorka" ng-disabled="reg.isJavorkaLimitExceeded">{{'javorka' | translate}}</option>
               <option value="blathy" ng-disabled="reg.isBlathyLimitExceeded">{{'blathy' | translate}}</option>
             </select>
+          </div>
+          <div class="input-field col m3 s6">
+            <input ng-disabled="!reg.quarters" ng-model="reg.d1" type="checkbox" id="d1" name="d1" class="form-control filled-in" />
+            <label ng-disabled="!reg.quarters" for="d1">{{'thursday' | translate}}</label>
+            <br/>
+            <input ng-disabled="!reg.quarters" ng-model="reg.d2" type="checkbox" id="d2" name="d2" class="form-control filled-in" />
+            <label ng-disabled="!reg.quarters" for="d2">{{'friday' | translate}}</label>
+            <br/>
+            <input ng-disabled="!reg.quarters" ng-model="reg.d3" type="checkbox" id="d3" name="d3" class="form-control filled-in" />
+            <label ng-disabled="!reg.quarters" for="d3">{{'saturday' | translate}}</label>
           </div>
         </div>
 

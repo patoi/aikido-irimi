@@ -5,6 +5,7 @@ var app = angular.module('Reg', ['pascalprecht.translate', 'ngCookies']);
 app.constant(
   'msg', {
     'hu': {
+      'v.quarters.required': 'Válassz legalább egy napot a szálláshoz!',
       'v.required': 'Ellenőrizd, hogy minden kötelező mezőt megadtál-e!',
       'v.name.error': 'Hibás név.',
       'v.email.error': 'Hibás email.',
@@ -17,6 +18,7 @@ app.constant(
       'v.menu.limit': 'Sajnáljuk, de már nincs több hely a bankettre.'
     },
     'en': {
+      'v.quarters.required': 'Choose a day for quarters!',
       'v.required': 'Check all required fields!',
       'v.name.error': 'Wrong name pattern.',
       'v.email.error': 'Wrong email address.',
@@ -38,6 +40,9 @@ app.controller('RegistrationCtrl', ['$log', '$interval', '$translate', '$http', 
     $scope.disableRegButton = false;
 
     var reg = this;
+    reg.d1 = false;
+    reg.d2 = false;
+    reg.d3 = false;
 
     // page variable
     reg.price = 0;
@@ -107,7 +112,18 @@ app.controller('RegistrationCtrl', ['$log', '$interval', '$translate', '$http', 
         });
     };
 
+    reg.resetDay = function() {
+      reg.d1 = false;
+      reg.d2 = false;
+      reg.d3 = false;
+    }
+
     reg.registration = function() {
+      // need at least one day if user choose a quarters
+      if (quarters && !reg.d1 && !reg.d2 && !reg.d3) {
+        reg.msg = msg['hu']['v.quarters.required'];
+        return false;
+      }
       reg.msg = undefined;
       $scope.disableRegButton = true;
       try {

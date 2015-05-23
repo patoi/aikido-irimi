@@ -19,6 +19,9 @@ beforeEach(function() {
     'menu': 'menu_A',
     'ticket': 'whole',
     'quarters': 'javorka',
+    'd1': true,
+    'd2': true,
+    'd3': true,
     'agree': true
   };
 });
@@ -81,17 +84,16 @@ describe('getPrice in HUF', function() {
   });
 
   context('registration is a full day workout and has a menu F and MKDE member and has a javorka quarters', function() {
-    var expected = prices.mkdeTag.whole + prices.menu.menu_F + prices.quarters.javorka;
+    var expected = prices.mkdeTag.whole + prices.menu.menu_F + 3 * prices.quarters.javorka;
     it('should return '  + expected, function() {
       reg.menu = 'menu_F';
       reg.quarters = 'javorka';
-
       assert.equal(expected, regService.getPrice(reg));
     });
   });
 
   context('registration is a full day workout and has a menu F and MKDE member and has a blathy quarters', function() {
-    var expected = prices.mkdeTag.whole + prices.menu.menu_F + prices.quarters.blathy;
+    var expected = prices.mkdeTag.whole + prices.menu.menu_F + 3 * prices.quarters.blathy;
     it('should return '  + expected, function() {
       reg.menu = 'menu_F';
       reg.quarters = 'blathy';
@@ -101,8 +103,8 @@ describe('getPrice in HUF', function() {
   });
 
   context('registration is a full day workout and has a menu F and MKDE member and has a blathy quarters', function() {
-    var javorka = prices.mkdeTag.whole + prices.menu.menu_F + prices.quarters.javorka;
-    var blathy = prices.mkdeTag.whole + prices.menu.menu_F + prices.quarters.blathy;
+    var javorka = prices.mkdeTag.whole + prices.menu.menu_F + 3 * prices.quarters.javorka;
+    var blathy = prices.mkdeTag.whole + prices.menu.menu_F + 3 * prices.quarters.blathy;
     it('should not equals a javorka quarters', function() {
       reg.menu = 'menu_F';
       reg.quarters = 'javorka';

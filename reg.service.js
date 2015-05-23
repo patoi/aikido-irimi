@@ -36,8 +36,8 @@ var PRICES = {
       '7keiko': 24500
     },
     'quarters': {
-      'javorka': 8400,
-      'blathy': 9000
+      'javorka': 2800,
+      'blathy': 3000
     },
     'menu': {
       'menu_A': 3500,
@@ -64,8 +64,8 @@ var MAPS = {
   '5keiko': '5 edzés jegy',
   '6keiko': '6 edzés jegy',
   '7keiko': '7 edzés jegy',
-  'javorka': 'Jávorka Sándor kollégium: aug. 6-8. 3 éj',
-  'blathy': 'Bláthy Ottó kollégium: aug. 6-8. 3 éj',
+  'javorka': 'Jávorka Sándor kollégium',
+  'blathy': 'Bláthy Ottó kollégium',
   'menu_A': 'A menü',
   'menu_B': 'B menü',
   'menu_C': 'C menü',
@@ -79,7 +79,7 @@ var getPrice = function(reg) {
   var sum = 0;
   sum = getPriceOfTicket(reg.mkdeTag, reg.ticket);
   sum += getPriceOfMenu(reg.menu);
-  sum += getPriceOfQuerters(reg.quarters);
+  sum += getPriceOfQuerters(reg);
   return sum;
 };
 
@@ -99,9 +99,13 @@ var getPriceOfMenu = function(menu) {
   }
 }
 
-var getPriceOfQuerters = function(quarters) {
-  if (quarters) {
-    return PRICES['huf']['quarters'][quarters];
+var getPriceOfQuerters = function(reg) {
+  if (reg.quarters) {
+    var quartersPrice = 0;
+    quartersPrice += reg.d1 ? PRICES['huf']['quarters'][reg.quarters] : 0;
+    quartersPrice += reg.d2 ? PRICES['huf']['quarters'][reg.quarters] : 0;
+    quartersPrice += reg.d3 ? PRICES['huf']['quarters'][reg.quarters] : 0;
+    return quartersPrice;
   } else {
     return 0;
   }
@@ -151,10 +155,14 @@ var validate = function(reg) {
     reg.ticket !== '7keiko') {
     throw new Error('v.ticket.error');
   }
-  if (reg.quarters &&
-    reg.quarters !== 'javorka' &&
-    reg.quarters !== 'blathy') {
-    throw new Error('v.quarters.error');
+  if (reg.quarters) {
+    if (reg.quarters !== 'javorka' &&
+      reg.quarters !== 'blathy') {
+      throw new Error('v.quarters.error');
+    }
+    if (!reg.d1 && !reg.d2 && !reg.d3) {
+      throw new Error('v.quarters.required');
+    }
   }
   if (reg.agree !== true) {
     throw new Error('v.agree.error');
