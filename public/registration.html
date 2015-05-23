@@ -26,6 +26,7 @@
   <div class="container" ng-controller="RegistrationCtrl as reg">
     <div class="row">
       <div class="offset-m2 col s12 m8 section">
+        <div class="white-text red" style="font-size: 1.5em; text-align: center">{{'regDeadLine' | translate}}&nbsp;2015.06.30</div>
         <h5 class="blue-text text-darken-2">{{'reg' | translate}}</h5>
         <p>
           {{'reg_step' | translate}}
@@ -124,26 +125,26 @@
           {{'abText' | translate}}
           <br/>
           <br/> {{'locationStr' | translate}}:
-          <a href="http://www.kalozfregatt.hu" target="_blank">Fregatt Hotel és Étterem</a>
+          <a href="http://www.kalozfregatt.hu" target="_blank">Kalóz Fregatt Hotel és Étterem</a>
           <br/>{{'address' | translate}}: <a href="https://goo.gl/maps/k36qb" target="_blank"><i class="mdi-maps-place"></i> 2890 Tata, Almási u. 2.</a>
           <div style="text-align: justify">
             <span class="red-text">{{'important' | translate}} </span>
-            Kérünk, hogy a bankettre pontosan érkezz, megfelelő ruházatban.
+            {{'abSuite' | translate}}
           </div>
         </p>
 
         <h6 class="blue-text text-darken-2" style="padding-top: 1em">{{'quarters' | translate}}</h6>
         <p style="font-weight: 300;">
-          A szállás igény szerint a regisztrációkor foglalható. Az elhelyezés kollégiumokban történik:
-          <br/>
+          {{'quartersAccom' | translate}} <a href="./elhelyezes.pdf" target="_blank">{{'roomsandbeds' | translate}} - PDF</a>
+          <br/><br/>
           <span style="font-weight: 400">2 800 {{'hufpersonnight' | translate}}</span> - <a href="https://goo.gl/maps/TWh8k" target="_blank">Jávorka Sándor kollégium, <i class="mdi-maps-place"></i> 2890 Tata, Új út 19.</a>
           <br/>
           <span style="font-weight: 400">3 000 {{'hufpersonnight' | translate}}</span> - <a href="https://goo.gl/maps/iP2u2" target="_blank">Bláthy Ottó kollégium, <i class="mdi-maps-place"></i> 2890 Tata, Hősök tere 9.</a>
         </p>
 
-        <h6 class="blue-text text-darken-2" style="padding-top: 1em">Utalás</h6>
+        <h6 class="blue-text text-darken-2" style="padding-top: 1em">{{'transfer' | translate}}</h6>
         <p style="font-weight: 300;">
-          A regisztrációban megadott alapján kiszámoljuk az összeget, amelyet az alábbi bankszámlára utalhatsz:
+          {{'paymentDetails' | translate}}
           <br/>
           <br/> {{'baOwner' | translate}}:
           <span style="font-weight: 400">Virga János</span>
