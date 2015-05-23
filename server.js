@@ -42,10 +42,10 @@ var regRoute = require('./routes/registration.route.js')
   (Q, winston, config, ses, dbReg, regService);
 var menuLimitRoute = require('./routes/menu.limit.route.js')
   (Q, winston, config, dbReg, regService);
-var javorkaLimitRoute = require('./routes/javorka.limit.route.js')
-  (Q, winston, dbReg, regService, config.quarters.javorkaLimit);
-var blathyLimitRoute = require('./routes/blathy.limit.route.js')
-  (Q, winston, dbReg, regService, config.quarters.blathyLimit);
+var quartersLimitRoute = require('./routes/quarters.limit.route.js')
+  (Q, winston, dbReg,
+    config.quarters.javorkaLimit,
+    config.quarters.blathyLimit);
 
 // middleware config
 app.use(bodyParser.json());
@@ -64,10 +64,8 @@ app.route('/api/price')
   .post(priceRoute);
 app.route('/api/limits/menu')
   .get(menuLimitRoute);
-app.route('/api/limits/javorka')
-  .get(javorkaLimitRoute);
-app.route('/api/limits/blathy')
-  .get(blathyLimitRoute);
+app.route('/api/limits/quarters')
+  .get(quartersLimitRoute);
 app.route('/api/registrations')
   .post(regRoute.registration)
   .get(regRoute.readAll);

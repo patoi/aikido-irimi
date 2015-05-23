@@ -15,7 +15,8 @@ app.constant(
       'v.agree.error': 'El kell fogadni a feltételeket!',
       'v.reg.not.unique': 'Ezzel az email címmel már van regisztráció!',
       'v.app.error': 'Hiba történt a regisztráció mentésekor, próbáld meg újra!',
-      'v.menu.limit': 'Sajnáljuk, de már nincs több hely a bankettre.'
+      'v.menu.limit': 'Sajnáljuk, de már nincs több hely a bankettre.',
+      'v.quarters.full': 'Nincs már szabad szoba.'
     },
     'en': {
       'v.quarters.required': 'Choose a day for quarters!',
@@ -28,7 +29,8 @@ app.constant(
       'v.agree.error': 'You must click on agreement!',
       'v.reg.not.unique': 'This email address already used to a registration.',
       'v.app.error': 'Application error, please try again!',
-      'v.menu.limit': 'You can\'t booking to banquet, because we have exceeded the maximum limit.'
+      'v.menu.limit': 'You can\'t booking to banquet, because we have exceeded the maximum limit.',
+      'v.quarters.full': 'There is no free room.'
     }
   }
 );
@@ -47,8 +49,6 @@ app.controller('RegistrationCtrl', ['$log', '$interval', '$translate', '$http', 
     // page variable
     reg.price = 0;
     reg.isMenuLimitExceeded = false;
-    reg.isJavorkaLimitExceeded = false;
-    reg.isBlathyLimitExceeded = false;
 
     reg.changeLanguage = function(langKey) {
       $translate.use(langKey);
@@ -67,11 +67,11 @@ app.controller('RegistrationCtrl', ['$log', '$interval', '$translate', '$http', 
           delete reg.menu;
           reg.isMenuLimitExceeded = true;
         });
-      RegistrationService.checkJavorkaLimit()
+      RegistrationService.checkQuarters()
         .success(function(data, status, headers, config) {
           // javorka limit isn't reached
           $log.log(data, status);
-          reg.isJavorkaLimitExceeded = false;
+          $scope.freeRooms = data;
         })
         .error(function(data, status, headers, config) {
           // javorka limit exceeded
@@ -79,21 +79,6 @@ app.controller('RegistrationCtrl', ['$log', '$interval', '$translate', '$http', 
           if (reg.quarters && reg.quarters === 'javorka') {
             delete reg.quarters;
           }
-          reg.isJavorkaLimitExceeded = true;
-        });
-      RegistrationService.checkBlathyLimit()
-        .success(function(data, status, headers, config) {
-          // blathy limit isn't reached
-          $log.log(data, status);
-          reg.isBlathyLimitExceeded = false;
-        })
-        .error(function(data, status, headers, config) {
-          // Blathy limit exceeded
-          $log.log(data, status);
-          if (reg.quarters && reg.quarters === 'blathy') {
-            delete reg.quarters;
-          }
-          reg.isBlathyLimitExceeded = true;
         });
     };
     //var refreshMenuLimit = $interval(checkMenuLimit, 5000);

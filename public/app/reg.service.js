@@ -16,11 +16,8 @@ app.factory('RegistrationService', [
     var checkMenuLimit = function() {
       return $http.get('/api/limits/menu');
     };
-    var checkJavorkaLimit = function() {
-      return $http.get('/api/limits/javorka');
-    };
-    var checkBlathyLimit = function() {
-      return $http.get('/api/limits/blathy');
+    var checkQuarters = function() {
+      return $http.get('/api/limits/quarters');
     };
 
     var validate = function(reg) {
@@ -82,8 +79,7 @@ app.factory('RegistrationService', [
       validate: validate,
       calcPrice: calcPrice,
       checkMenuLimit: checkMenuLimit,
-      checkJavorkaLimit: checkJavorkaLimit,
-      checkBlathyLimit: checkBlathyLimit
+      checkQuarters: checkQuarters
     };
   }
 ]);

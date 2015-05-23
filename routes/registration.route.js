@@ -2,6 +2,7 @@
 'use strict';
 
 var limitPromise = require('../promises/limit.promise');
+var quartersCount = require('../promises/quarters.promise');
 
 module.exports = function(Q, winston, config, ses, dbReg, regService) {
 
@@ -12,9 +13,51 @@ module.exports = function(Q, winston, config, ses, dbReg, regService) {
     dbReg = dbReg,
     regService = regService;
 
+  // DI quarters accomodation counter
+  var quartersCountObj = quartersCount(Q, winston, dbReg);
+
+  // check free rooms
+  var checkFreeRooms = function(reg) {
+    var deferred = Q.defer();
+    var result = {
+      'javorka': {
+        'd1': 0,
+        'd2': 0,
+        'd3': 0
+      },
+      'blathy': {
+        'd1': 0,
+        'd2': 0,
+        'd3': 0
+      }
+    };
+    quartersCountObj(result)
+      .then(function(result) {
+        winston.info("occupied rooms", result);
+        if (reg.quarters === 'javorka') {
+          if (result.javorka.d1 >= config.quarters.javorkaLimit ||
+            result.javorka.d2 >= config.quarters.javorkaLimit ||
+            result.javorka.d3 >= config.quarters.javorkaLimit) {
+            // there is no free room
+            winston.info("there is not more free room in javorka", result);
+            return deferred.reject(Error('v.quarters.full'));
+          }
+        } else if (reg.quarters === 'blathy') {
+          if (result.blathy.d1 >= config.quarters.blathyLimit ||
+            result.blathy.d2 >= config.quarters.blathyLimit ||
+            result.blathy.d3 >= config.quarters.blathyLimit) {
+            // there is no free room
+            winston.info("there is not more free room in blathy", result);
+            return deferred.reject(Error('v.quarters.full'));
+          }
+        }
+        return deferred.resolve(reg);
+      });
+    return deferred.promise;
+  };
+
   // query email
   var checkUniqueEmail = function(reg) {
-    console.log('checkUniqueEmail');
     var deferred = Q.defer();
     dbReg.find({
       'email': reg.email
@@ -47,30 +90,10 @@ module.exports = function(Q, winston, config, ses, dbReg, regService) {
       return reg.menu || !reg.name;
     }
   );
-  // javorka limit check
-  var javorkaLimitPromise = limitPromise(Q, winston, dbReg,
-    config.quarters.javorkaLimit, {
-      'quarters': 'javorka'
-    },
-    'v.quarters.javorka.limit',
-    function(reg) {
-      return (reg.quarters && reg.quarters === 'javorka') || !reg.name;
-    }
-  );
-  // blathy limit check
-  var blathyLimitPromise = limitPromise(Q, winston, dbReg,
-    config.quarters.blathyLimit, {
-      'quarters': 'blathy'
-    },
-    'v.quarters.blathy.limit',
-    function(reg) {
-      return (reg.quarters && reg.quarters === 'blathy') || !reg.name;
-    }
-  );
 
   // insert registration
   var dbInsertReg = function(reg) {
-    console.log('dbInsertReg');
+    winston.info('Insert reg.: ', reg);
     var deferred = Q.defer();
     dbReg.insert(reg, function(err, doc) {
       if (err) {
@@ -84,7 +107,6 @@ module.exports = function(Q, winston, config, ses, dbReg, regService) {
 
   // sent registration email
   var sendRegistrationEmail = function(newDoc) {
-    console.log('sendRegistrationEmail');
     var deferred = Q.defer();
 
     if (process.env.NODE_ENV === 'ci') {
@@ -101,7 +123,8 @@ module.exports = function(Q, winston, config, ses, dbReg, regService) {
         },
         Message: {
           Subject: {
-            Data: config.email.subject + ' - ' + newDoc.name + ' - reg. kód: ' + newDoc._id
+            Data: config.email.subject + ' - ' + newDoc.name +
+              ' - reg. kód: ' + newDoc._id
           },
           Body: {
             Html: {
@@ -113,7 +136,8 @@ module.exports = function(Q, winston, config, ses, dbReg, regService) {
         if (err) {
           return deferred.reject(err);
         } else {
-          winston.info('Email sent to reg.: ' + newDoc.email + ', ' + newDoc._id);
+          winston.info('Email sent to reg.: ' + newDoc.email + ', ' +
+            newDoc._id);
           return deferred.resolve(newDoc);
         }
       });
@@ -128,16 +152,13 @@ module.exports = function(Q, winston, config, ses, dbReg, regService) {
       var reg = regService.transform(req.body);
       // delete calculated value from reg. page
       delete reg.isMenuLimitExceeded;
-      delete reg.isJavorkaLimitExceeded;
-      delete reg.isBlathyLimitExceeded;
       delete reg.price;
       // validate registration data
       regService.validate(reg);
       // validate unique registration
       checkUniqueEmail(reg)
         .then(menuLimitPromise)
-        .then(javorkaLimitPromise)
-        .then(blathyLimitPromise)
+        .then(checkFreeRooms)
         .then(dbInsertReg)
         .then(sendRegistrationEmail)
         .then(function(newDoc) {
