@@ -253,7 +253,6 @@
         <div class="row">
           <p class="offset-m2 col m8 s12">{{'label-menu' | translate}} <a href="menu_{{'lang' | translate}}.html" target="_blank">{{'a-menu-list' | translate}}</a></p>
           <div class="input-field offset-m2 col m8 s12">
-            <div id="menuLimit" ng-show="reg.isMenuLimitExceeded">{{'no-banquet' | translate}}</div>
             <select ng-disabled="reg.isMenuLimitExceeded" ng-model="reg.menu" class="form-control browser-default" name="menu" id="menu" ng-change="reg.calcPrice()">
               <option value="" selected>{{'option-label-menu' | translate}}</option>
               <option value="menu_A">{{'menu_A' | translate}}</option>
@@ -266,16 +265,20 @@
                 <option value="menu_G">{{'menu_G' | translate}}</option>
               </optgroup>
             </select>
+            <div id="menuLimit" ng-show="reg.isMenuLimitExceeded">{{'no-banquet' | translate}}</div>
           </div>
         </div>
 
         <div class="row">
           <div class="input-field offset-m2 col m5 s6">
-            <select ng-change="reg.resetDay()" ng-model="reg.quarters" class="form-control browser-default" name="quarters" id="quarters" ng-change="reg.calcPrice()">
+            <select ng-disabled="javorkaIsFull && blathyIsFull" ng-change="reg.resetDay()" ng-model="reg.quarters" class="form-control browser-default" name="quarters" id="quarters" ng-change="reg.calcPrice()">
               <option value="" selected>{{'option-label-quarters' | translate}}</option>
-              <option value="javorka">{{'javorka' | translate}}</option>
-              <option value="blathy">{{'blathy' | translate}}</option>
+              <option ng-disabled="javorkaIsFull" value="javorka">{{'javorka' | translate}}</option>
+              <option ng-disabled="blathyIsFull" value="blathy">{{'blathy' | translate}}</option>
             </select>
+            <div id="dormLimit" ng-show="javorkaIsFull && blathyIsFull">{{'no-quarters' | translate}}</div>
+            <div id="dormLimit" ng-show="javorkaIsFull && !blathyIsFull">{{'no-javorka' | translate}}</div>
+            <div id="dormLimit" ng-show="!javorkaIsFull && blathyIsFull">{{'no-blathy' | translate}}</div>
           </div>
           <div class="input-field col m3 s6">
             <input ng-disabled="!reg.quarters || (reg.quarters === 'javorka' && freeRooms.javorka.d1 === 0) || (reg.quarters === 'blathy' && freeRooms.blathy.d1 === 0)" ng-model="reg.d1" type="checkbox" id="d1" name="d1" class="form-control filled-in" />

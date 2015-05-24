@@ -35,21 +35,25 @@ module.exports = function(Q, winston, config, ses, dbReg, regService) {
       .then(function(result) {
         winston.info("occupied rooms", result);
         if (reg.quarters === 'javorka') {
-          if (result.javorka.d1 >= config.quarters.javorkaLimit ||
-            result.javorka.d2 >= config.quarters.javorkaLimit ||
-            result.javorka.d3 >= config.quarters.javorkaLimit) {
+          if ((reg.d1 && result.javorka.d1 >= config.quarters.javorkaLimit) ||
+            (reg.d2 && result.javorka.d2 >= config.quarters.javorkaLimit) ||
+            (reg.d3 && result.javorka.d3 >= config.quarters.javorkaLimit)) {
             // there is no free room
             winston.info("there is not more free room in javorka", result);
             return deferred.reject(Error('v.quarters.full'));
           }
         } else if (reg.quarters === 'blathy') {
-          if (result.blathy.d1 >= config.quarters.blathyLimit ||
-            result.blathy.d2 >= config.quarters.blathyLimit ||
-            result.blathy.d3 >= config.quarters.blathyLimit) {
+          if ((reg.d1 && result.blathy.d1 >= config.quarters.blathyLimit) ||
+            (reg.d2 && result.blathy.d2 >= config.quarters.blathyLimit) ||
+            (reg.d3 && result.blathy.d3 >= config.quarters.blathyLimit)) {
             // there is no free room
             winston.info("there is not more free room in blathy", result);
             return deferred.reject(Error('v.quarters.full'));
           }
+        } else {
+          delete reg.d1;
+          delete reg.d2;
+          delete reg.d3;
         }
         return deferred.resolve(reg);
       });

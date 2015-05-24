@@ -40,6 +40,8 @@ app.controller('RegistrationCtrl', ['$log', '$interval', '$translate', '$http', 
 
     $scope.showReg = true;
     $scope.disableRegButton = false;
+    $scope.javorkaIsFull = false;
+    $scope.blathyIsFull = false;
 
     var reg = this;
     reg.d1 = false;
@@ -55,6 +57,7 @@ app.controller('RegistrationCtrl', ['$log', '$interval', '$translate', '$http', 
     };
 
     var checkLimits = function() {
+
       RegistrationService.checkMenuLimit()
         .success(function(data, status, headers, config) {
           // menu limit isn't reached
@@ -67,18 +70,27 @@ app.controller('RegistrationCtrl', ['$log', '$interval', '$translate', '$http', 
           delete reg.menu;
           reg.isMenuLimitExceeded = true;
         });
+
       RegistrationService.checkQuarters()
         .success(function(data, status, headers, config) {
-          // javorka limit isn't reached
           $log.log(data, status);
           $scope.freeRooms = data;
-        })
-        .error(function(data, status, headers, config) {
-          // javorka limit exceeded
-          $log.log(data, status);
-          if (reg.quarters && reg.quarters === 'javorka') {
+
+          if (data.javorka.d1 === 0 && data.javorka.d2 === 0 && data.javorka.d3 === 0) {
+            // javorka is full
+            $scope.javorkaIsFull = true;
             delete reg.quarters;
           }
+
+          if (data.blathy.d1 === 0 && data.blathy.d2 === 0 && data.blathy.d3 === 0) {
+            // blathy is full
+            $scope.blathyIsFull = true;
+            delete reg.quarters;
+          }
+        })
+        .error(function(data, status, headers, config) {
+          $log.log(data, status);
+          delete reg.quarters;
         });
     };
     //var refreshMenuLimit = $interval(checkMenuLimit, 5000);
