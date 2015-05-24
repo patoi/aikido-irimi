@@ -211,7 +211,7 @@ var toHtml = function(reg) {
     txt += rowRender('Menü', MAPS[reg.menu] + ' - ' + getPriceOfMenu(reg.menu) + " HUF");
   }
   if (reg.quarters) {
-    txt += rowRender('Szállás', MAPS[reg.quarters] + ' - ' + getPriceOfQuerters(reg.quarters) + " HUF");
+    txt += rowRender('Szállás', MAPS[reg.quarters] + ': ' + (reg.d1 ? "Csütörtök " : "") + (reg.d2 ? "Péntek " : "") + (reg.d3 ? "Szombat" : "") + ' - '+ getPriceOfQuerters(reg) + " HUF");
   }
   txt += rowRender('\nUtalandó összeg', reg.price + " HUF");
   txt += fullRowRender('Elfogadom a rendezvényre és a regisztrációra vonatkozó feltételeket.');
@@ -225,9 +225,9 @@ var toHtml = function(reg) {
 
 // all registration as CSV
 var getAllRegAsCSV = function(regList) {
-  var txt = 'Sorszám,kód,idő,név,email,dojo,tel.,mkde tag,dojo vez.,kollégium,koll. ár,menü,menüár,jegy,jegyár,fizetendő,pénznem\n';
+  var txt = 'Sorszám,kód,idő,név,email,dojo,tel.,mkde tag,dojo vez.,kollégium,CS,P,SZ,koll. ár,menü,menüár,jegy,jegyár,fizetendő,pénznem\n';
   var addReg = function(reg) {
-    return (i + 1) + ',' + reg._id + ',' + reg.time + ',' + reg.name + ',' + reg.email + ',' + reg.dojo + ',\'' + reg.tel + ',' + (reg.mkdeTag ? 'I' : 'N') + ',' + (reg.dojoleader ? 'I' : 'N') + ',' + (reg.quarters ? reg.quarters : '') + ',' + getPriceOfQuerters(reg.quarters) + ',' + (reg.menu ? reg.menu : '') + ',' + getPriceOfMenu(reg.menu) + ',' + MAPS[reg.ticket] + ',' + getPriceOfTicket(reg.mkdeTag, reg.ticket) + ',' + reg.price + ',HUF';
+    return (i + 1) + ',' + reg._id + ',' + reg.time + ',' + reg.name + ',' + reg.email + ',' + reg.dojo + ',\'' + reg.tel + ',' + (reg.mkdeTag ? 'I' : 'N') + ',' + (reg.dojoleader ? 'I' : 'N') + ',' + (reg.quarters ? reg.quarters : '') + ',' + (reg.d1 ? "I" : "") + ',' + (reg.d2 ? "I" : "") + ',' + (reg.d3 ? "I" : "") + ',' + getPriceOfQuerters(reg) + ',' + (reg.menu ? reg.menu : '') + ',' + getPriceOfMenu(reg.menu) + ',' + MAPS[reg.ticket] + ',' + getPriceOfTicket(reg.mkdeTag, reg.ticket) + ',' + reg.price + ',HUF';
   };
   for (var i = 0; regList.length > i; i++) {
     txt += addReg(regList[i]) + '\n';

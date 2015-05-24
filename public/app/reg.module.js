@@ -118,7 +118,7 @@ app.controller('RegistrationCtrl', ['$log', '$interval', '$translate', '$http', 
 
     reg.registration = function() {
       // need at least one day if user choose a quarters
-      if (quarters && !reg.d1 && !reg.d2 && !reg.d3) {
+      if (reg.quarters && !reg.d1 && !reg.d2 && !reg.d3) {
         reg.msg = msg['hu']['v.quarters.required'];
         return false;
       }
