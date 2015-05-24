@@ -19,6 +19,10 @@
   <script type="text/javascript" src="./app/reg.module.js"></script>
   <script type="text/javascript" src="./app/reg.config.js"></script>
   <script type="text/javascript" src="./app/reg.service.js"></script>
+  <style>
+    /* hack to materializecss: required list */
+    .req {border-bottom: 2px red solid;}
+  </style>
 </head>
 
 <body ng-app="Reg">
@@ -224,10 +228,8 @@
 
         <div class="row">
           <div class="input-field offset-m2 col m8 s12">
-            <select ng-model="reg.ticket" ng-required="true" class="form-control browser-default" name="ticket" id="ticket" ng-change="reg.calcPrice()">
-              <option value="" disabled selected>{{'option-label-ticket' | translate}}
-                <span class="red-text"> *</span>
-              </option>
+            <select ng-model="reg.ticket" ng-required="true" class="form-control browser-default" ng-class="{true:'req', false:''}[!reg.ticket]" name="ticket" id="ticket" ng-change="reg.calcPrice()">
+              <option value="" disabled selected>{{'option-label-ticket' | translate}}</option>
               <optgroup label="">
                 <option value="whole">{{'whole' | translate}}</option>
               </optgroup>
@@ -281,14 +283,31 @@
             <div id="dormLimit" ng-show="!javorkaIsFull && blathyIsFull">{{'no-blathy' | translate}}</div>
           </div>
           <div class="input-field col m3 s6">
-            <input ng-change="reg.calcPrice()" ng-disabled="!reg.quarters || (reg.quarters === 'javorka' && freeRooms.javorka.d1 === 0) || (reg.quarters === 'blathy' && freeRooms.blathy.d1 === 0)" ng-model="reg.d1" type="checkbox" id="d1" name="d1" class="form-control filled-in" />
-            <label ng-disabled="!reg.quarters || (reg.quarters === 'javorka' && freeRooms.javorka.d1 === 0) || (reg.quarters === 'blathy' && freeRooms.blathy.d1 === 0)" for="d1">{{'thursday' | translate}}</label>
-            <br/>
-            <input ng-change="reg.calcPrice()" ng-disabled="!reg.quarters || (reg.quarters === 'javorka' && freeRooms.javorka.d2 === 0) || (reg.quarters === 'blathy' && freeRooms.blathy.d2 === 0)" ng-model="reg.d2" type="checkbox" id="d2" name="d2" class="form-control filled-in" />
-            <label ng-disabled="!reg.quarters || (reg.quarters === 'javorka' && freeRooms.javorka.d2 === 0) || (reg.quarters === 'blathy' && freeRooms.blathy.d2 === 0)" for="d2">{{'friday' | translate}}</label>
-            <br/>
-            <input ng-change="reg.calcPrice()" ng-disabled="!reg.quarters || (reg.quarters === 'javorka' && freeRooms.javorka.d3 === 0) || (reg.quarters === 'blathy' && freeRooms.blathy.d3 === 0)" ng-model="reg.d3" type="checkbox" id="d3" name="d3" class="form-control filled-in" />
-            <label ng-disabled="!reg.quarters || (reg.quarters === 'javorka' && freeRooms.javorka.d3 === 0) || (reg.quarters === 'blathy' && freeRooms.blathy.d3 === 0)" for="d3">{{'saturday' | translate}}</label>
+            <div ng-show="reg.quarters">
+              <input ng-change="reg.calcPrice()" ng-disabled="!reg.quarters || (reg.quarters === 'javorka' && freeRooms.javorka.d1 === 0) || (reg.quarters === 'blathy' && freeRooms.blathy.d1 === 0)" ng-model="reg.d1" type="checkbox" id="d1" name="d1" class="form-control filled-in"
+              />
+              <label ng-disabled="!reg.quarters || (reg.quarters === 'javorka' && freeRooms.javorka.d1 === 0) || (reg.quarters === 'blathy' && freeRooms.blathy.d1 === 0)" for="d1">
+                <i ng-hide="!reg.quarters || (reg.quarters === 'javorka' && freeRooms.javorka.d1 === 0) || (reg.quarters === 'blathy' && freeRooms.blathy.d1 === 0)" class="tiny green-text mdi-notification-play-install"></i>
+                <i ng-show="!reg.quarters || (reg.quarters === 'javorka' && freeRooms.javorka.d1 === 0) || (reg.quarters === 'blathy' && freeRooms.blathy.d1 === 0)" class="tiny red-text mdi-notification-dnd-forwardslash"></i> {{'thursday' | translate}}
+                ({{freeRooms[reg.quarters].d1}})
+              </label>
+              <br/>
+              <input ng-change="reg.calcPrice()" ng-disabled="!reg.quarters || (reg.quarters === 'javorka' && freeRooms.javorka.d2 === 0) || (reg.quarters === 'blathy' && freeRooms.blathy.d2 === 0)" ng-model="reg.d2" type="checkbox" id="d2" name="d2" class="form-control filled-in"
+              />
+              <label ng-disabled="!reg.quarters || (reg.quarters === 'javorka' && freeRooms.javorka.d2 === 0) || (reg.quarters === 'blathy' && freeRooms.blathy.d2 === 0)" for="d2">
+                <i ng-hide="!reg.quarters || (reg.quarters === 'javorka' && freeRooms.javorka.d2 === 0) || (reg.quarters === 'blathy' && freeRooms.blathy.d2 === 0)" class="tiny green-text mdi-notification-play-install"></i>
+                <i ng-show="!reg.quarters || (reg.quarters === 'javorka' && freeRooms.javorka.d2 === 0) || (reg.quarters === 'blathy' && freeRooms.blathy.d2 === 0)" class="tiny red-text mdi-notification-dnd-forwardslash"></i> {{'friday' | translate}}
+                ({{freeRooms[reg.quarters].d2}})
+              </label>
+              <br/>
+              <input ng-change="reg.calcPrice()" ng-disabled="!reg.quarters || (reg.quarters === 'javorka' && freeRooms.javorka.d3 === 0) || (reg.quarters === 'blathy' && freeRooms.blathy.d3 === 0)" ng-model="reg.d3" type="checkbox" id="d3" name="d3" class="form-control filled-in"
+              />
+              <label ng-disabled="!reg.quarters || (reg.quarters === 'javorka' && freeRooms.javorka.d3 === 0) || (reg.quarters === 'blathy' && freeRooms.blathy.d3 === 0)" for="d3">
+                <i ng-hide="!reg.quarters || (reg.quarters === 'javorka' && freeRooms.javorka.d3 === 0) || (reg.quarters === 'blathy' && freeRooms.blathy.d3 === 0)" class="tiny green-text mdi-notification-play-install"></i>
+                <i ng-show="!reg.quarters || (reg.quarters === 'javorka' && freeRooms.javorka.d3 === 0) || (reg.quarters === 'blathy' && freeRooms.blathy.d3 === 0)" class="tiny red-text mdi-notification-dnd-forwardslash"></i> {{'saturday' | translate}}
+                ({{freeRooms[reg.quarters].d3}})
+              </label>
+            </div>
           </div>
         </div>
 
