@@ -271,7 +271,7 @@
 
         <div class="row">
           <div class="input-field offset-m2 col m5 s6">
-            <select ng-disabled="javorkaIsFull && blathyIsFull" ng-change="reg.resetDay()" ng-model="reg.quarters" class="form-control browser-default" name="quarters" id="quarters" ng-change="reg.calcPrice()">
+            <select ng-change="reg.resetDay()" ng-disabled="javorkaIsFull && blathyIsFull" ng-model="reg.quarters" class="form-control browser-default" name="quarters" id="quarters">
               <option value="" selected>{{'option-label-quarters' | translate}}</option>
               <option ng-disabled="javorkaIsFull" value="javorka">{{'javorka' | translate}}</option>
               <option ng-disabled="blathyIsFull" value="blathy">{{'blathy' | translate}}</option>
@@ -281,13 +281,13 @@
             <div id="dormLimit" ng-show="!javorkaIsFull && blathyIsFull">{{'no-blathy' | translate}}</div>
           </div>
           <div class="input-field col m3 s6">
-            <input ng-disabled="!reg.quarters || (reg.quarters === 'javorka' && freeRooms.javorka.d1 === 0) || (reg.quarters === 'blathy' && freeRooms.blathy.d1 === 0)" ng-model="reg.d1" type="checkbox" id="d1" name="d1" class="form-control filled-in" />
+            <input ng-change="reg.calcPrice()" ng-disabled="!reg.quarters || (reg.quarters === 'javorka' && freeRooms.javorka.d1 === 0) || (reg.quarters === 'blathy' && freeRooms.blathy.d1 === 0)" ng-model="reg.d1" type="checkbox" id="d1" name="d1" class="form-control filled-in" />
             <label ng-disabled="!reg.quarters || (reg.quarters === 'javorka' && freeRooms.javorka.d1 === 0) || (reg.quarters === 'blathy' && freeRooms.blathy.d1 === 0)" for="d1">{{'thursday' | translate}}</label>
             <br/>
-            <input ng-disabled="!reg.quarters || (reg.quarters === 'javorka' && freeRooms.javorka.d2 === 0) || (reg.quarters === 'blathy' && freeRooms.blathy.d2 === 0)" ng-model="reg.d2" type="checkbox" id="d2" name="d2" class="form-control filled-in" />
+            <input ng-change="reg.calcPrice()" ng-disabled="!reg.quarters || (reg.quarters === 'javorka' && freeRooms.javorka.d2 === 0) || (reg.quarters === 'blathy' && freeRooms.blathy.d2 === 0)" ng-model="reg.d2" type="checkbox" id="d2" name="d2" class="form-control filled-in" />
             <label ng-disabled="!reg.quarters || (reg.quarters === 'javorka' && freeRooms.javorka.d2 === 0) || (reg.quarters === 'blathy' && freeRooms.blathy.d2 === 0)" for="d2">{{'friday' | translate}}</label>
             <br/>
-            <input ng-disabled="!reg.quarters || (reg.quarters === 'javorka' && freeRooms.javorka.d3 === 0) || (reg.quarters === 'blathy' && freeRooms.blathy.d3 === 0)" ng-model="reg.d3" type="checkbox" id="d3" name="d3" class="form-control filled-in" />
+            <input ng-change="reg.calcPrice()" ng-disabled="!reg.quarters || (reg.quarters === 'javorka' && freeRooms.javorka.d3 === 0) || (reg.quarters === 'blathy' && freeRooms.blathy.d3 === 0)" ng-model="reg.d3" type="checkbox" id="d3" name="d3" class="form-control filled-in" />
             <label ng-disabled="!reg.quarters || (reg.quarters === 'javorka' && freeRooms.javorka.d3 === 0) || (reg.quarters === 'blathy' && freeRooms.blathy.d3 === 0)" for="d3">{{'saturday' | translate}}</label>
           </div>
         </div>

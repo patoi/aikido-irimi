@@ -113,6 +113,7 @@ app.controller('RegistrationCtrl', ['$log', '$interval', '$translate', '$http', 
       reg.d1 = false;
       reg.d2 = false;
       reg.d3 = false;
+      reg.calcPrice();
     }
 
     reg.registration = function() {
