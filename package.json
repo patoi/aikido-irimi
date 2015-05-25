@@ -1,7 +1,7 @@
 {
   "name": "aikido-irimi",
   "version": "0.0.1",
-  "description": "Aikido 2015 Tata edzőtábor",
+  "description": "Aikido 2015 Tata Summer Camp",
   "main": "index.js",
   "repository": {
     "type": "git",
@@ -11,7 +11,9 @@
     "tata",
     "aikido",
     "2015",
-    "edzőtábor"
+    "summer",
+    "camp",
+    "registration"
   ],
   "author": "Pató István",
   "license": "MIT",

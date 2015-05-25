@@ -5,15 +5,15 @@
   "authors": [
     "István Pató <istvan.pato@gmail.com>"
   ],
-  "description": "Aikido Tábor",
+  "description": "Aikido 2015 Tata Summer Camp",
   "main": "index.html",
   "keywords": [
+    "tata",
     "aikido",
     "2015",
-    "magyarország",
-    "registration",
-    "regisztráció",
-    "tábor"
+    "summer",
+    "camp",
+    "registration"
   ],
   "license": "MIT",
   "ignore": [
