@@ -279,8 +279,8 @@
               <option ng-disabled="blathyIsFull" value="blathy">{{'blathy' | translate}}</option>
             </select>
             <div id="dormLimit" ng-show="javorkaIsFull && blathyIsFull">{{'no-quarters' | translate}}</div>
-            <div id="dormLimit" ng-show="javorkaIsFull && !blathyIsFull">{{'no-javorka' | translate}}</div>
-            <div id="dormLimit" ng-show="!javorkaIsFull && blathyIsFull">{{'no-blathy' | translate}}</div>
+            <div id="javorkaLimit" ng-show="javorkaIsFull && !blathyIsFull">{{'no-javorka' | translate}}</div>
+            <div id="blathyLimit" ng-show="!javorkaIsFull && blathyIsFull">{{'no-blathy' | translate}}</div>
           </div>
           <div class="input-field col m3 s6">
             <div ng-show="reg.quarters">
@@ -288,7 +288,7 @@
               />
               <label ng-disabled="!reg.quarters || (reg.quarters === 'javorka' && freeRooms.javorka.d1 === 0) || (reg.quarters === 'blathy' && freeRooms.blathy.d1 === 0)" for="d1">
                 <i ng-hide="!reg.quarters || (reg.quarters === 'javorka' && freeRooms.javorka.d1 === 0) || (reg.quarters === 'blathy' && freeRooms.blathy.d1 === 0)" class="tiny green-text mdi-notification-play-install"></i>
-                <i ng-show="!reg.quarters || (reg.quarters === 'javorka' && freeRooms.javorka.d1 === 0) || (reg.quarters === 'blathy' && freeRooms.blathy.d1 === 0)" class="tiny red-text mdi-notification-dnd-forwardslash"></i> {{'thursday' | translate}}
+                <i id="d1closed" ng-show="!reg.quarters || (reg.quarters === 'javorka' && freeRooms.javorka.d1 === 0) || (reg.quarters === 'blathy' && freeRooms.blathy.d1 === 0)" class="tiny red-text mdi-notification-dnd-forwardslash"></i> {{'thursday' | translate}}
                 ({{freeRooms[reg.quarters].d1}})
               </label>
               <br/>

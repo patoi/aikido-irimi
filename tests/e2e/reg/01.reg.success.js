@@ -28,6 +28,8 @@ module.exports = {
       .click('#menu option[value="menu_A"]')
       .click('#ticket option[value="whole"]')
       .click('#quarters option[value="javorka"]')
+      .pause(300)
+      .click('label[for="d1"]')
       .click('label[for="agree"]')
       .pause(300)
       .click('#reg')
@@ -48,6 +50,7 @@ module.exports = {
       .click('#menu option[value="menu_A"]')
       .click('#ticket option[value="whole"]')
       .click('#quarters option[value="javorka"]')
+      .click('label[for="d1"]')
       .click('label[for="agree"]')
       .pause(300)
       .click('#reg')
@@ -72,6 +75,7 @@ module.exports = {
         .click('#menu option[value="menu_A"]')
         .click('#ticket option[value="whole"]')
         .click('#quarters option[value="javorka"]')
+        .click('label[for="d1"]')
         .click('label[for="agree"]')
         .pause(300);
       return browser;
@@ -86,8 +90,7 @@ module.exports = {
     // third reg. must show that menu and javorka limit exceeded
     reg()
       .assert.visible('#menuLimit')
-      .assert.visible('#javorkaLimit')
-      .assert.hidden('#blathyLimit')
+      .assert.visible('#d1closed')
       .assert.attributeEquals("#menu", "disabled", "true");
   },
 
@@ -107,6 +110,10 @@ module.exports = {
         .click('#menu option[value="menu_A"]')
         .click('#ticket option[value="whole"]')
         .click('#quarters option[value="blathy"]')
+        .pause(300)
+        .click('label[for="d1"]')
+        .click('label[for="d2"]')
+        .click('label[for="d3"]')
         .click('label[for="agree"]')
         .pause(300);
       return browser;
@@ -124,9 +131,13 @@ module.exports = {
       .assert.visible('#success');
 
     // third reg. must show that quarters limit exceeded
-    reg(3)
+    browser
+      .url(url)
+      .waitForElementVisible('body')
+      .click('#startReg')
+      .waitForElementVisible('body')
       .assert.hidden('#javorkaLimit')
-      .assert.hidden('#blathyLimit')
-      .assert.visible('#quartersLimit');
+      .assert.visible('#blathyLimit')
+      .assert.hidden('#dormLimit');
   }
 };
