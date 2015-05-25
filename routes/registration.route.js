@@ -127,8 +127,8 @@ module.exports = function(Q, winston, config, ses, dbReg, regService) {
         },
         Message: {
           Subject: {
-            Data: config.email.subject + ' - ' + newDoc.name +
-              ' - reg. kód: ' + newDoc._id
+            Data: 'Aikido 2015 - ' + newDoc.name +
+              ' - reg.: ' + newDoc._id
           },
           Body: {
             Html: {

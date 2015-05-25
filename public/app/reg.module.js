@@ -19,7 +19,7 @@ app.constant(
       'v.quarters.full': 'Nincs már szabad szoba.'
     },
     'en': {
-      'v.quarters.required': 'Choose a day for quarters!',
+      'v.quarters.required': 'Choose at least one day for quarters!',
       'v.required': 'Check all required fields!',
       'v.name.error': 'Wrong name pattern.',
       'v.email.error': 'Wrong email address.',
@@ -35,8 +35,8 @@ app.constant(
   }
 );
 
-app.controller('RegistrationCtrl', ['$log', '$interval', '$translate', '$http', '$scope', 'RegistrationService', 'msg',
-  function($log, $interval, $translate, $http, $scope, RegistrationService, msg) {
+app.controller('RegistrationCtrl', ['$window', '$log', '$interval', '$translate', '$http', '$scope', 'RegistrationService', 'msg',
+  function($window, $log, $interval, $translate, $http, $scope, RegistrationService, msg) {
 
     $scope.showReg = true;
     $scope.disableRegButton = false;
@@ -44,6 +44,7 @@ app.controller('RegistrationCtrl', ['$log', '$interval', '$translate', '$http', 
     $scope.blathyIsFull = false;
 
     var reg = this;
+    reg.lang = $window.localStorage.getItem('NG_TRANSLATE_LANG_KEY') || 'hu';
     reg.d1 = false;
     reg.d2 = false;
     reg.d3 = false;
@@ -53,6 +54,7 @@ app.controller('RegistrationCtrl', ['$log', '$interval', '$translate', '$http', 
     reg.isMenuLimitExceeded = false;
 
     reg.changeLanguage = function(langKey) {
+      reg.lang = langKey;
       $translate.use(langKey);
     };
 
@@ -105,7 +107,7 @@ app.controller('RegistrationCtrl', ['$log', '$interval', '$translate', '$http', 
         })
         .error(function(data, status, headers, config) {
           $log.log(data, status);
-          reg.msg = msg['hu']['v.app.error'];
+          reg.msg = msg[reg.lang]['v.app.error'];
         });
     };
 
@@ -114,12 +116,14 @@ app.controller('RegistrationCtrl', ['$log', '$interval', '$translate', '$http', 
       reg.d2 = false;
       reg.d3 = false;
       reg.calcPrice();
+
     }
 
     reg.registration = function() {
       // need at least one day if user choose a quarters
       if (reg.quarters && !reg.d1 && !reg.d2 && !reg.d3) {
-        reg.msg = msg['hu']['v.quarters.required'];
+        console.log(reg.lang);
+        reg.msg = msg[reg.lang]['v.quarters.required'];
         return false;
       }
       reg.msg = undefined;
@@ -133,10 +137,10 @@ app.controller('RegistrationCtrl', ['$log', '$interval', '$translate', '$http', 
           })
           .error(function(data, status, headers, config) {
             $log.log(data, status);
-            if (msg['hu'][data.errorCode]) {
-              reg.msg = msg['hu'][data.errorCode] + ' [' + data.errorCode + ']';
+            if (msg[reg.lang][data.errorCode]) {
+              reg.msg = msg[reg.lang][data.errorCode] + ' [' + data.errorCode + ']';
             } else {
-              reg.msg = msg['hu']['v.app.error'] + ' [' + data.errorCode + ']';
+              reg.msg = msg[reg.lang]['v.app.error'] + ' [' + data.errorCode + ']';
             }
             // limit check error
             if ('v.menu.limit' === data.errorCode) {
@@ -147,7 +151,7 @@ app.controller('RegistrationCtrl', ['$log', '$interval', '$translate', '$http', 
 
       } catch (e) {
         $log.log(e.message);
-        reg.msg = msg['hu'][e.message];
+        reg.msg = msg[reg.lang][e.message];
         $scope.disableRegButton = false;
       }
     }

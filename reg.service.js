@@ -46,33 +46,100 @@ var PRICES = {
       'menu_D': 3500,
       'menu_E': 3500,
       'menu_F': 3000,
-      'menu_G': 3000,
+      'menu_G': 3000
     }
   }
 };
 
 var MAPS = {
-  'whole': 'Teljes Edzőtábor',
-  '1day': '1 napi jegy',
-  '2day': '2 napi jegy',
-  '3day': '3 napi jegy',
-  '4day': '4 napi jegy',
-  '1keiko': '1 edzés jegy',
-  '2keiko': '2 edzés jegy',
-  '3keiko': '3 edzés jegy',
-  '4keiko': '4 edzés jegy',
-  '5keiko': '5 edzés jegy',
-  '6keiko': '6 edzés jegy',
-  '7keiko': '7 edzés jegy',
-  'javorka': 'Jávorka Sándor kollégium',
-  'blathy': 'Bláthy Ottó kollégium',
-  'menu_A': 'A menü',
-  'menu_B': 'B menü',
-  'menu_C': 'C menü',
-  'menu_D': 'D menü',
-  'menu_E': 'E menü',
-  'menu_F': 'F menü',
-  'menu_G': 'G menü',
+  'hu': {
+    'mHeader': 'Aikido 2015 regisztráció',
+    'mRegCode': 'Reg. kód',
+    'mRegTime': 'Reg. időpont',
+    'mNev': 'Név',
+    'mPhone': 'Telefonszám',
+    'mMkde': 'MKDE tag',
+    'mLeader': 'Dojo vezető',
+    'mTicket': 'Edzésjegy',
+    'mMenu': 'Menü',
+    'mQuarters': 'Szállás',
+    'md1': 'Csütörtök',
+    'md2': 'Péntek',
+    'md3': 'Szombat',
+    'mPrice': 'Utalandó összeg',
+    'mAgree': 'Elfogadom a rendezvényre és a regisztrációra vonatkozó feltételeket.',
+    'mComment': '<b>A közlemény rovatban legyetek szívesek feltüntetni a neveteket!</b>',
+    'mBankAccount': 'Az alábbi bankszámlára utalhatod a fenti összeget:<br/>Számla tulajdonosa:<span style="font-weight: 400">Virga János</span><br/>Budapest Bank:<span style="font-weight: 400">10103623-25432900-01000004</span>',
+    'mValid': '<b>Fontos </b>Regisztrációd csak a beérkezett összeg után válik érvényessé. A befizetésedről néhány napon belül kapsz egy visszaigazoló emailt. Ha nem kapsz ilyet, akkor vedd fel a kapcsolatot a megadott email címen!',
+    'mThanks': 'Köszönjük a regisztrációdat!<br/>Szervezők',
+    'mYes': 'Igen',
+    'mNo': 'Nem',
+    'whole': 'Teljes Edzőtábor',
+    '1day': '1 napi jegy',
+    '2day': '2 napi jegy',
+    '3day': '3 napi jegy',
+    '4day': '4 napi jegy',
+    '1keiko': '1 edzés jegy',
+    '2keiko': '2 edzés jegy',
+    '3keiko': '3 edzés jegy',
+    '4keiko': '4 edzés jegy',
+    '5keiko': '5 edzés jegy',
+    '6keiko': '6 edzés jegy',
+    '7keiko': '7 edzés jegy',
+    'javorka': 'Jávorka Sándor kollégium',
+    'blathy': 'Bláthy Ottó kollégium',
+    'menu_A': 'A menü',
+    'menu_B': 'B menü',
+    'menu_C': 'C menü',
+    'menu_D': 'D menü',
+    'menu_E': 'E menü',
+    'menu_F': 'F menü',
+    'menu_G': 'G menü'
+  },
+  'en': {
+    'mHeader': 'Aikido 2015 Registration',
+    'mRegCode': 'Reg. id',
+    'mRegTime': 'Reg. time',
+    'mNev': 'Name',
+    'mPhone': 'Phone number',
+    'mMkde': 'MKDE member',
+    'mLeader': 'Dojo leader',
+    'mTicket': 'Ticket',
+    'mMenu': 'Menu',
+    'mQuarters': 'Quarters',
+    'md1': 'Thursday',
+    'md2': 'Friday',
+    'md3': 'Saturday',
+    'mPrice': 'Total',
+    'mAgree': 'The registration became valid, after the transferred amount is arrived to our account!',
+    'mComment': '<b>Please give your name in the transfer details!</b>',
+    'mBankAccount': 'Transfer the money to the next bank account:<br/>Bank Account Owner:<span style="font-weight: 400">Virga János</span><br/>Budapest Bank:<span style="font-weight: 400">10103623-25432900-01000004</span>',
+    'mValid': '<b>Important </b>Your payment will be confirmed with an email. If you don\'t get confirmation email, please send an email to organizer.',
+    'mThanks': 'Thank you for registration!<br/>The Organizer',
+    'mYes': 'Yes',
+    'mNo': 'No',
+    'whole': 'Whole Camp',
+    '1day': '1 day',
+    '2day': '2 day',
+    '3day': '3 day',
+    '4day': '4 day',
+    '1keiko': '1 keiko',
+    '2keiko': '2 keiko',
+    '3keiko': '3 keiko',
+    '4keiko': '4 keiko',
+    '5keiko': '5 keiko',
+    '6keiko': '6 keiko',
+    '7keiko': '7 keiko',
+    'javorka': 'Jávorka Sándor Dorm',
+    'blathy': 'Bláthy Ottó Dorm',
+    'menu_A': 'Menu A',
+    'menu_B': 'Menu B',
+    'menu_C': 'Menu C',
+    'menu_D': 'Menu D',
+    'menu_E': 'Menu E',
+    'menu_F': 'Menu F',
+    'menu_G': 'Menu G'
+  }
 };
 
 var getPrice = function(reg) {
@@ -197,37 +264,37 @@ var toHtml = function(reg) {
   var txt = '';
   txt += '<html><head><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.96.1/css/materialize.min.css"></head><body style="background-color: #fff">'
   txt += '<div class="container">'
-  txt += '<h3 class="blue-text">Aikido 2015 regisztráció</h3>'
-  txt += rowRender('Reg. kód', reg._id);
-  txt += rowRender('Reg. időpont', reg.time);
-  txt += rowRender('Név', reg.name);
+  txt += '<h3 class="blue-text">' + MAPS[reg.lang].mHeader + '</h3>'
+  txt += rowRender(MAPS[reg.lang].mRegCode, reg._id);
+  txt += rowRender(MAPS[reg.lang].mRegTime, reg.time);
+  txt += rowRender(MAPS[reg.lang].mNev, reg.name);
   txt += rowRender('Email', reg.email);
   txt += rowRender('Dojo', reg.dojo);
-  txt += rowRender('Telefon', reg.tel);
-  txt += rowRender('MKDE tag', (reg.mkdeTag ? 'Igen' : 'Nem'));
-  txt += rowRender('Dojo vezető', (reg.dojoleader ? 'Igen' : 'Nem'));
-  txt += rowRender('Edzés jegy', MAPS[reg.ticket] + ' - ' + getPriceOfTicket(reg.mkdeTag, reg.ticket) + " HUF");
+  txt += rowRender(MAPS[reg.lang].mPhone, reg.tel);
+  txt += rowRender(MAPS[reg.lang].mMkde, (reg.mkdeTag ? MAPS[reg.lang].mYes : MAPS[reg.lang].mNo));
+  txt += rowRender(MAPS[reg.lang].mLeader, (reg.dojoleader ? MAPS[reg.lang].mYes : MAPS[reg.lang].mNo));
+  txt += rowRender(MAPS[reg.lang].mTicket, MAPS[reg.lang][reg.ticket] + ' - ' + getPriceOfTicket(reg.mkdeTag, reg.ticket) + " HUF");
   if (reg.menu) {
-    txt += rowRender('Menü', MAPS[reg.menu] + ' - ' + getPriceOfMenu(reg.menu) + " HUF");
+    txt += rowRender(MAPS[reg.lang].mMenu, MAPS[reg.lang][reg.menu] + ' - ' + getPriceOfMenu(reg.menu) + " HUF");
   }
   if (reg.quarters) {
-    txt += rowRender('Szállás', MAPS[reg.quarters] + ': ' + (reg.d1 ? "Csütörtök " : "") + (reg.d2 ? "Péntek " : "") + (reg.d3 ? "Szombat" : "") + ' - '+ getPriceOfQuerters(reg) + " HUF");
+    txt += rowRender(MAPS[reg.lang].mQuarters, MAPS[reg.lang][reg.quarters] + ': ' + (reg.d1 ? MAPS[reg.lang].md1 + " " : "") + (reg.d2 ? MAPS[reg.lang].md2 + " " : "") + (reg.d3 ? MAPS[reg.lang].md3 : "") + ' - ' + getPriceOfQuerters(reg) + " HUF");
   }
-  txt += rowRender('\nUtalandó összeg', reg.price + " HUF");
-  txt += fullRowRender('Elfogadom a rendezvényre és a regisztrációra vonatkozó feltételeket.');
-  txt += fullRowRender('A közlemény rovatban legyetek szívesek feltüntetni a neveteket!');
-  txt += fullRowRender('Az alábbi bankszámlára utalhatod a fenti összeget:<br/>Számla tulajdonosa:<span style="font-weight: 400">Virga János</span><br/>Budapest Bank:<span style="font-weight: 400">10103623-25432900-01000004</span>');
-  txt += fullRowRender('<b>Fontos </b>Regisztrációd csak a beérkezett összeg után válik érvényessé. A befizetésedről néhány napon belül kapsz egy visszaigazoló emailt. Ha nem kapsz ilyet, akkor vedd fel a kapcsolatot a megadott email címen!');
-  txt += fullRowRender('Köszönjük a regisztrációdat!<br/>Szervezők');
+  txt += rowRender('\n' + MAPS[reg.lang].mPrice, reg.price + " HUF");
+  txt += fullRowRender(MAPS[reg.lang].mAgree);
+  txt += fullRowRender(MAPS[reg.lang].mComment);
+  txt += fullRowRender(MAPS[reg.lang].mBankAccount);
+  txt += fullRowRender(MAPS[reg.lang].mValid);
+  txt += fullRowRender(MAPS[reg.lang].mThanks);
   txt += '</div></body></html>';
   return txt;
 };
 
 // all registration as CSV
 var getAllRegAsCSV = function(regList) {
-  var txt = 'Sorszám,kód,idő,név,email,dojo,tel.,mkde tag,dojo vez.,kollégium,CS,P,SZ,koll. ár,menü,menüár,jegy,jegyár,fizetendő,pénznem\n';
+  var txt = 'sorszám,nyelv,kód,idő,név,email,dojo,tel.,mkde tag,dojo vez.,kollégium,CS,P,SZ,koll. ár,menü,menüár,jegy,jegyár,fizetendő,pénznem\n';
   var addReg = function(reg) {
-    return (i + 1) + ',' + reg._id + ',' + reg.time + ',' + reg.name + ',' + reg.email + ',' + reg.dojo + ',\'' + reg.tel + ',' + (reg.mkdeTag ? 'I' : 'N') + ',' + (reg.dojoleader ? 'I' : 'N') + ',' + (reg.quarters ? reg.quarters : '') + ',' + (reg.d1 ? "I" : "") + ',' + (reg.d2 ? "I" : "") + ',' + (reg.d3 ? "I" : "") + ',' + getPriceOfQuerters(reg) + ',' + (reg.menu ? reg.menu : '') + ',' + getPriceOfMenu(reg.menu) + ',' + MAPS[reg.ticket] + ',' + getPriceOfTicket(reg.mkdeTag, reg.ticket) + ',' + reg.price + ',HUF';
+    return (i + 1) + ',' + reg.lang + ',' + reg._id + ',' + reg.time + ',' + reg.name + ',' + reg.email + ',' + reg.dojo + ',\'' + reg.tel + ',' + (reg.mkdeTag ? 'I' : 'N') + ',' + (reg.dojoleader ? 'I' : 'N') + ',' + (reg.quarters ? reg.quarters : '') + ',' + (reg.d1 ? "I" : "") + ',' + (reg.d2 ? "I" : "") + ',' + (reg.d3 ? "I" : "") + ',' + getPriceOfQuerters(reg) + ',' + (reg.menu ? reg.menu : '') + ',' + getPriceOfMenu(reg.menu) + ',' + MAPS[reg.ticket] + ',' + getPriceOfTicket(reg.mkdeTag, reg.ticket) + ',' + reg.price + ',HUF';
   };
   for (var i = 0; regList.length > i; i++) {
     txt += addReg(regList[i]) + '\n';
