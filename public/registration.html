@@ -49,7 +49,7 @@
     </div>
 
     <div class="row">
-      <div class="offset-m2 col s12 m8 section">
+      <div class="offset-m2 col s12 m8">
 
         <h6 class="blue-text text-darken-2" style="padding-top: 1em">{{'events' | translate}}</h6>
         <table>
@@ -272,7 +272,7 @@
         </div>
 
         <div class="row">
-          <div class="input-field offset-m2 col m5 s6">
+          <div class="input-field offset-m2 col m5 s12">
             <select ng-change="reg.resetDay()" ng-disabled="javorkaIsFull && blathyIsFull" ng-model="reg.quarters" class="form-control browser-default" name="quarters" id="quarters">
               <option value="" selected>{{'option-label-quarters' | translate}}</option>
               <option ng-disabled="javorkaIsFull" value="javorka">{{'javorka' | translate}}</option>
@@ -282,7 +282,7 @@
             <div id="javorkaLimit" ng-show="javorkaIsFull && !blathyIsFull">{{'no-javorka' | translate}}</div>
             <div id="blathyLimit" ng-show="!javorkaIsFull && blathyIsFull">{{'no-blathy' | translate}}</div>
           </div>
-          <div class="input-field col m3 s6">
+          <div class="input-field col m3 s12">
             <div ng-show="reg.quarters">
               <input ng-change="reg.calcPrice()" ng-disabled="!reg.quarters || (reg.quarters === 'javorka' && freeRooms.javorka.d1 === 0) || (reg.quarters === 'blathy' && freeRooms.blathy.d1 === 0)" ng-model="reg.d1" type="checkbox" id="d1" name="d1" class="form-control filled-in"
               />
@@ -330,10 +330,10 @@
         </div>
 
         <div class="row">
-          <div class="offset-m2 col m5 s12">
+          <div class="input-field offset-m2 col m5 s12">
             <button ng-disabled="true" type="button" class="waves-effect waves-light btn white-text green">{{'calcPrice' | translate}}: {{reg.price}} HUF</button>
           </div>
-          <div class="col m5 s12">
+          <div class="input-field col m5 s12">
             <button id="reg" ng-disabled="regForm.$invalid || disableRegButton" class="waves-effect waves-light btn white-text" type="submit" name="action">{{'reg' | translate}}
               <i class="mdi-content-send right"></i></button>
           </div>
