@@ -150,6 +150,11 @@
           <span style="font-weight: 400">3 000 {{'hufpersonnight' | translate}}</span> - <a href="https://goo.gl/maps/iP2u2" target="_blank">Bláthy Ottó kollégium, <i class="mdi-maps-place"></i> 2890 Tata, Hősök tere 9.</a>
         </p>
 
+        <h6 class="blue-text text-darken-2" style="padding-top: 1em">{{'tshirt-order' | translate}}</h6>
+        <p style="font-weight: 300;">{{'tshirt-order-desc' | translate}} <a href="tshirt.html" target="_blank">{{'label-tshirt-view' | translate}}</a></p>
+        <p>{{'tshirt-price' | translate}}: 2601 HUF</p>
+        <p style="font-weight: 300;">{{'tshirt-desc' | translate}}</p>
+
         <h6 class="blue-text text-darken-2" style="padding-top: 1em">{{'transfer' | translate}}</h6>
         <p style="font-weight: 300;">
           {{'paymentDetails' | translate}}
@@ -256,6 +261,7 @@
         </div>
 
         <div class="row">
+          <h6 class="offset-m2 col m8 s12 blue-text text-darken-2" style="padding-top: 2em">{{'ab' | translate}}</h6>
           <p class="offset-m2 col m8 s12">{{'label-menu' | translate}} <a href="menu_{{'lang' | translate}}.html" target="_blank">{{'a-menu-list' | translate}}</a></p>
           <div class="input-field offset-m2 col m8 s12">
             <select ng-disabled="reg.isMenuLimitExceeded" ng-model="reg.menu" class="form-control browser-default" name="menu" id="menu" ng-change="reg.calcPrice()">
@@ -275,6 +281,7 @@
         </div>
 
         <div class="row">
+          <h6 class="offset-m2 col m8 s12 blue-text text-darken-2" style="padding-top: 1em">{{'quarters' | translate}}</h6>
           <div class="input-field offset-m2 col m5 s12">
             <select ng-change="reg.resetDay()" ng-disabled="javorkaIsFull && blathyIsFull" ng-model="reg.quarters" class="form-control browser-default" name="quarters" id="quarters">
               <option value="" selected>{{'option-label-quarters' | translate}}</option>
@@ -315,11 +322,11 @@
         </div>
 
         <div class="row">
+          <h6 class="offset-m2 col m8 s12 blue-text text-darken-2" style="padding-top: 1em">{{'tshirt-order' | translate}}</h6>
           <p class="offset-m2 col m8 s12">{{'label-tshirt' | translate}} <a id="tshirt" href="" ng-click="tshirt=true">{{'label-tshirt-order' | translate}}</a></p>
         </div>
 
         <div ng-show="tshirt" class="row">
-          <p class="offset-m2 col m8 s12">{{'label-tshirt-num' | translate}} <a href="tshirt_{{'lang' | translate}}.html" target="_blank">{{'label-tshirt-view' | translate}}</a></p>
           <div class="input-field offset-m2 col m1 s12">
             <input ng-model="reg.tshirt.ws" maxlength="2" ng-change="reg.calcPrice()" ng-maxlength="2" ng-pattern="/^([0-9]){0,2}$/" id="ws" name="ws" type="number" min="1" max="5" class="form-control" ng-class="{invalid: regForm.ws.$invalid}">
             <span ng-show="regForm.ws.$invalid && regForm.ws.$dirty">{{'validate-tshirt' | translate}}</span>

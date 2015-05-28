@@ -343,9 +343,32 @@ var toHtml = function(reg) {
 
 // all registration as CSV
 var getAllRegAsCSV = function(regList) {
-  var txt = 'sorszám,nyelv,kód,idő,név,email,dojo,tel.,mkde tag,dojo vez.,kollégium,CS,P,SZ,koll. ár,menü,menüár,jegy,jegyár,fizetendő,pénznem\n';
+  var txt = 'sorszám,nyelv,kód,idő,név,email,dojo,tel.,mkde tag,dojo vez.,kollégium,CS,P,SZ,koll. ár,menü,menüár,';
+  txt += 'WS,WM,WL,WXL,WXXL,BS,BM,BL,BXL,BXXL,póló ár,jegy,jegyár,fizetendő,pénznem\n';
   var addReg = function(reg) {
-    return (i + 1) + ',' + reg.lang + ',' + reg._id + ',' + reg.time + ',' + reg.name + ',' + reg.email + ',' + reg.dojo + ',\'' + reg.tel + ',' + (reg.mkdeTag ? 'I' : 'N') + ',' + (reg.dojoleader ? 'I' : 'N') + ',' + (reg.quarters ? reg.quarters : '') + ',' + (reg.d1 ? "I" : "") + ',' + (reg.d2 ? "I" : "") + ',' + (reg.d3 ? "I" : "") + ',' + getPriceOfQuerters(reg) + ',' + (reg.menu ? reg.menu : '') + ',' + getPriceOfMenu(reg.menu) + ',' + MAPS[reg.ticket] + ',' + getPriceOfTicket(reg.mkdeTag, reg.ticket) + ',' + reg.price + ',HUF';
+    var row = '';
+    row += (i + 1) + ',' + reg.lang + ',' + reg._id + ',' + reg.time + ',' + reg.name + ',' + reg.email + ',';
+    row += reg.dojo + ',\'' + reg.tel + ',' + (reg.mkdeTag ? 'I' : 'N') + ',' + (reg.dojoleader ? 'I' : 'N') + ',';
+    row += (reg.quarters ? reg.quarters : '') + ',' + (reg.d1 ? "I" : "") + ',' + (reg.d2 ? "I" : "") + ',' + (reg.d3 ? "I" : "") + ',';
+    row += getPriceOfQuerters(reg) + ',' + (reg.menu ? reg.menu : '') + ',' + getPriceOfMenu(reg.menu) + ',';
+    if (reg.tshirt) {
+      var t = reg.tshirt;
+      row += (t.ws ? t.ws : '') + ',';
+      row += (t.wm ? t.wm : '') + ',';
+      row += (t.wl ? t.wl : '') + ',';
+      row += (t.wxl ? t.wxl : '') + ',';
+      row += (t.wxxl ? t.wxxl : '') + ',';
+      row += (t.bs ? t.bs : '') + ',';
+      row += (t.bm ? t.bm : '') + ',';
+      row += (t.bl ? t.bl : '') + ',';
+      row += (t.bxl ? t.bxl : '') + ',';
+      row += (t.bxxl ? t.bxxl : '') + ',';
+      row += getPriceOfTshirt(reg.tshirt) + ',';
+    } else {
+      row += ',,,,,,,,,,0,';
+    }
+    row += MAPS['hu'][reg.ticket] + ',' + getPriceOfTicket(reg.mkdeTag, reg.ticket) + ',' + reg.price + ',HUF';
+    return row;
   };
   for (var i = 0; regList.length > i; i++) {
     txt += addReg(regList[i]) + '\n';

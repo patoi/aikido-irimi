@@ -96,7 +96,27 @@ app.config(['$translateProvider', function($translateProvider) {
     'quarters': 'Quarters',
     'hufpersonnight': 'HUF/person/night',
     'baOwner': 'Bank Account Owner',
-    'trDetails': 'Please give your name in the transfer details!'
+    'trDetails': 'Please give your name in the transfer details!',
+    'label-tshirt': 'If you want to order T-shirt, please click here:',
+    'label-tshirt-order': 'T-shirt order form',
+    'label-tshirt-view': 'Show T-shirt',
+    'label-tshirt-num': 'Choose T-shirts!',
+    'a-tshirt': 'show',
+    'label-ws': 'White S',
+    'label-wm': 'White M',
+    'label-wl': 'White L',
+    'label-wxl': 'White XL',
+    'label-wxxl': 'White XXL',
+    'validate-tshirt': 'Number: 1-5',
+    'label-bs': 'Black S',
+    'label-bm': 'Black M',
+    'label-bl': 'Black L',
+    'label-bxl': 'Black XL',
+    'label-bxxl': 'Black XXL',
+    'tshirt-order': 'Ordering T-shirt',
+    'tshirt-order-desc': 'You can order online the T-shirts and take over between keiko. The appearance of T-shirts available here: ',
+    'tshirt-price': 'T-shirt price',
+    'tshirt-desc': 'The T-shirts available in black and white, the brand is Fruit of The Loom.'
   });
 
   $translateProvider.translations('hu', {
@@ -211,7 +231,10 @@ app.config(['$translateProvider', function($translateProvider) {
     'label-bl': 'Fekete L',
     'label-bxl': 'Fekete XL',
     'label-bxxl': 'Fekete XXL',
-
+    'tshirt-order': 'Póló rendelés',
+    'tshirt-order-desc': 'Lehetőség van póló rendelésre is. A pólókat az edzőtáborban lehet személyesen átvenni az edzések közötti szünetben. A pólók kinézete megtekinthető itt: ',
+    'tshirt-price': 'Póló ár',
+    'tshirt-desc': 'A pólók fekete és fehér színben rendelhetők, márkájuk Fruit of The Loom.'
   });
 
   $translateProvider.preferredLanguage('hu');
