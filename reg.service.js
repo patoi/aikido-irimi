@@ -315,17 +315,21 @@ var toHtml = function(reg) {
   if (reg.quarters) {
     txt += rowRender(MAPS[reg.lang].mQuarters, MAPS[reg.lang][reg.quarters] + ': ' + (reg.d1 ? MAPS[reg.lang].md1 + ' ' : '') + (reg.d2 ? MAPS[reg.lang].md2 + ' ' : '') + (reg.d3 ? MAPS[reg.lang].md3 : '') + ' : ' + getPriceOfQuerters(reg) + ' HUF');
   }
+
   if (reg.tshirt) {
+    var isAllEmpty = true;
     var tshirtList = '';
     for (var property in reg.tshirt) {
       if (reg.tshirt.hasOwnProperty(property) && reg.tshirt[property]) {
+        isAllEmpty = false;
         tshirtList += (property.charAt(0) == 'w' ? MAPS[reg.lang].white : MAPS[reg.lang].black) + ' ' + property.toUpperCase().substring(1) + ': ' + reg.tshirt[property] + ', ';
       }
     }
-    var tshirtPrice = getPriceOfTshirt(reg.tshirt);
-    // tshirtList += '(W: ' + MAPS[reg.lang].white + ', B: ' + MAPS[reg.lang].black + ')';
-    tshirtList += ': ' + tshirtPrice + ' HUF';
-    txt += rowRender(MAPS[reg.lang].tshirt, tshirtList);
+    if (!isAllEmpty) {
+      var tshirtPrice = getPriceOfTshirt(reg.tshirt);
+      tshirtList += ': ' + tshirtPrice + ' HUF';
+      txt += rowRender(MAPS[reg.lang].tshirt, tshirtList);
+    }
   }
   txt += rowRender('\n' + MAPS[reg.lang].mPrice, reg.price + ' HUF');
   txt += fullRowRender(MAPS[reg.lang].mAgree);
