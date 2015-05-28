@@ -7,6 +7,7 @@ var moment = require('moment-timezone');
 
 var PRICES = {
   'huf': {
+    'tshirt': 2601,
     'mkdeTag': {
       'whole': 13000,
       '1day': 4000,
@@ -94,7 +95,9 @@ var MAPS = {
     'menu_D': 'D menü',
     'menu_E': 'E menü',
     'menu_F': 'F menü',
-    'menu_G': 'G menü'
+    'menu_G': 'G menü',
+    'white': 'Fehér',
+    'black': 'Fekete'
   },
   'en': {
     'mHeader': 'Aikido 2015 Registration',
@@ -138,7 +141,9 @@ var MAPS = {
     'menu_D': 'Menu D',
     'menu_E': 'Menu E',
     'menu_F': 'Menu F',
-    'menu_G': 'Menu G'
+    'menu_G': 'Menu G',
+    'white': 'White',
+    'black': 'Black'
   }
 };
 
@@ -147,6 +152,7 @@ var getPrice = function(reg) {
   sum = getPriceOfTicket(reg.mkdeTag, reg.ticket);
   sum += getPriceOfMenu(reg.menu);
   sum += getPriceOfQuerters(reg);
+  sum += getPriceOfTshirt(reg.tshirt);
   return sum;
 };
 
@@ -156,6 +162,23 @@ var getPriceOfTicket = function(isMkdeTag, ticket) {
   } else {
     return 0;
   }
+}
+
+var getPriceOfTshirt = function(tshirt) {
+  var tshirtPrice = 0;
+  if (tshirt) {
+    for (var property in tshirt) {
+      if (tshirt.hasOwnProperty(property) && tshirt[property]) {
+        if (tshirt[property] < 0 || tshirt[property] > 5) {
+          // invalid valuet
+          throw new Error('v.invalid.tshirt.price');
+        } else {
+          tshirtPrice += PRICES['huf'].tshirt * tshirt[property];
+        }
+      }
+    }
+  }
+  return tshirtPrice;
 }
 
 var getPriceOfMenu = function(menu) {
@@ -221,6 +244,16 @@ var validate = function(reg) {
     reg.ticket !== '6keiko' &&
     reg.ticket !== '7keiko') {
     throw new Error('v.ticket.error');
+  }
+  if (reg.tshirt) {
+    for (var property in reg.tshirt) {
+      if (reg.tshirt.hasOwnProperty(property) && reg.tshirt[property]) {
+        if (reg.tshirt[property] < 0 || reg.tshirt[property] > 5) {
+          // invalid value
+          throw new Error('v.tshirt.error');
+        }
+      }
+    }
   }
   if (reg.quarters) {
     if (reg.quarters !== 'javorka' &&

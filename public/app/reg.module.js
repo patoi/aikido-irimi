@@ -16,7 +16,8 @@ app.constant(
       'v.reg.not.unique': 'Ezzel az email címmel már van regisztráció!',
       'v.app.error': 'Hiba történt a regisztráció mentésekor, próbáld meg újra!',
       'v.menu.limit': 'Sajnáljuk, de már nincs több hely a bankettre.',
-      'v.quarters.full': 'Nincs már szabad szoba.'
+      'v.quarters.full': 'Nincs már szabad szoba.',
+      'v.tshirt.error': 'A pólók száma egyenként 1-5 közé kell essen.'
     },
     'en': {
       'v.quarters.required': 'Choose at least one day for quarters!',
@@ -30,7 +31,8 @@ app.constant(
       'v.reg.not.unique': 'This email address already used to a registration.',
       'v.app.error': 'Application error, please try again!',
       'v.menu.limit': 'You can\'t booking to banquet, because we have exceeded the maximum limit.',
-      'v.quarters.full': 'There is no free room.'
+      'v.quarters.full': 'There is no free room.',
+      'v.tshirt.error': 'The T-shirts amounts must be between 1 and 5.'
     }
   }
 );

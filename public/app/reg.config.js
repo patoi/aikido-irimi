@@ -194,7 +194,23 @@ app.config(['$translateProvider', function($translateProvider) {
     'quarters': 'Szállás',
     'hufpersonnight': 'Ft/fő/éj',
     'baOwner': 'Számla tulajdonosa',
-    'trDetails': 'Az utalás közlemény rovatában add meg a neved!'
+    'trDetails': 'Az utalás közlemény rovatában add meg a neved!',
+    'label-tshirt': 'Amennyiben pólót szeretnél rendelni, klikkents ide:',
+    'label-tshirt-order': 'póló rendelés megjelenítése',
+    'label-tshirt-view': 'Póló kinézet megtekintése',
+    'label-tshirt-num': 'Add meg, hogy mely pólókból mennyit szeretnél rendelni!',
+    'a-tshirt': 'megtekintés',
+    'label-ws': 'Fehér S',
+    'label-wm': 'Fehér M',
+    'label-wl': 'Fehér L',
+    'label-wxl': 'Fehér XL',
+    'label-wxxl': 'Fehér XXL',
+    'validate-tshirt': 'Szám: 1-5',
+    'label-bs': 'Fekete S',
+    'label-bm': 'Fekete M',
+    'label-bl': 'Fekete L',
+    'label-bxl': 'Fekete XL',
+    'label-bxxl': 'Fekete XXL',
 
   });
 
