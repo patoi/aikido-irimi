@@ -96,6 +96,7 @@ var MAPS = {
     'menu_E': 'E menü',
     'menu_F': 'F menü',
     'menu_G': 'G menü',
+    'tshirt': 'Póló',
     'white': 'Fehér',
     'black': 'Fekete'
   },
@@ -142,6 +143,7 @@ var MAPS = {
     'menu_E': 'Menu E',
     'menu_F': 'Menu F',
     'menu_G': 'Menu G',
+    'tshirt': 'T-shirt',
     'white': 'White',
     'black': 'Black'
   }
@@ -306,14 +308,26 @@ var toHtml = function(reg) {
   txt += rowRender(MAPS[reg.lang].mPhone, reg.tel);
   txt += rowRender(MAPS[reg.lang].mMkde, (reg.mkdeTag ? MAPS[reg.lang].mYes : MAPS[reg.lang].mNo));
   txt += rowRender(MAPS[reg.lang].mLeader, (reg.dojoleader ? MAPS[reg.lang].mYes : MAPS[reg.lang].mNo));
-  txt += rowRender(MAPS[reg.lang].mTicket, MAPS[reg.lang][reg.ticket] + ' - ' + getPriceOfTicket(reg.mkdeTag, reg.ticket) + " HUF");
+  txt += rowRender(MAPS[reg.lang].mTicket, MAPS[reg.lang][reg.ticket] + ' : ' + getPriceOfTicket(reg.mkdeTag, reg.ticket) + ' HUF');
   if (reg.menu) {
-    txt += rowRender(MAPS[reg.lang].mMenu, MAPS[reg.lang][reg.menu] + ' - ' + getPriceOfMenu(reg.menu) + " HUF");
+    txt += rowRender(MAPS[reg.lang].mMenu, MAPS[reg.lang][reg.menu] + ' : ' + getPriceOfMenu(reg.menu) + ' HUF');
   }
   if (reg.quarters) {
-    txt += rowRender(MAPS[reg.lang].mQuarters, MAPS[reg.lang][reg.quarters] + ': ' + (reg.d1 ? MAPS[reg.lang].md1 + " " : "") + (reg.d2 ? MAPS[reg.lang].md2 + " " : "") + (reg.d3 ? MAPS[reg.lang].md3 : "") + ' - ' + getPriceOfQuerters(reg) + " HUF");
+    txt += rowRender(MAPS[reg.lang].mQuarters, MAPS[reg.lang][reg.quarters] + ': ' + (reg.d1 ? MAPS[reg.lang].md1 + ' ' : '') + (reg.d2 ? MAPS[reg.lang].md2 + ' ' : '') + (reg.d3 ? MAPS[reg.lang].md3 : '') + ' : ' + getPriceOfQuerters(reg) + ' HUF');
   }
-  txt += rowRender('\n' + MAPS[reg.lang].mPrice, reg.price + " HUF");
+  if (reg.tshirt) {
+    var tshirtList = '';
+    for (var property in reg.tshirt) {
+      if (reg.tshirt.hasOwnProperty(property) && reg.tshirt[property]) {
+        tshirtList += (property.charAt(0) == 'w' ? MAPS[reg.lang].white : MAPS[reg.lang].black) + ' ' + property.toUpperCase().substring(1) + ': ' + reg.tshirt[property] + ', ';
+      }
+    }
+    var tshirtPrice = getPriceOfTshirt(reg.tshirt);
+    // tshirtList += '(W: ' + MAPS[reg.lang].white + ', B: ' + MAPS[reg.lang].black + ')';
+    tshirtList += ': ' + tshirtPrice + ' HUF';
+    txt += rowRender(MAPS[reg.lang].tshirt, tshirtList);
+  }
+  txt += rowRender('\n' + MAPS[reg.lang].mPrice, reg.price + ' HUF');
   txt += fullRowRender(MAPS[reg.lang].mAgree);
   txt += fullRowRender(MAPS[reg.lang].mComment);
   txt += fullRowRender(MAPS[reg.lang].mBankAccount);
