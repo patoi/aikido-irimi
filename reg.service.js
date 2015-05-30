@@ -151,16 +151,22 @@ var MAPS = {
 
 var getPrice = function(reg) {
   var sum = 0;
-  sum = getPriceOfTicket(reg.mkdeTag, reg.ticket);
+  sum = getPriceOfTicket(reg.dojoleader, reg.mkdeTag, reg.ticket);
   sum += getPriceOfMenu(reg.menu);
   sum += getPriceOfQuerters(reg);
   sum += getPriceOfTshirt(reg.tshirt);
   return sum;
 };
 
-var getPriceOfTicket = function(isMkdeTag, ticket) {
+var getPriceOfTicket = function(isDojoleader, isMkdeTag, ticket) {
   if (ticket) {
-    return isMkdeTag ? PRICES['huf']['mkdeTag'][ticket] : PRICES['huf']['nonMkdeTag'][ticket];
+    var ticketPrice = isMkdeTag ? PRICES['huf']['mkdeTag'][ticket] : PRICES['huf']['nonMkdeTag'][ticket];
+    if (isDojoleader) {
+      // ticket is free for dojo leaders
+      ticketPrice = 0;
+    }
+    return ticketPrice;
+
   } else {
     return 0;
   }

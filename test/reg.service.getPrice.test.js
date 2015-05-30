@@ -15,7 +15,7 @@ beforeEach(function() {
     'dojo': 'Aikido Dojo',
     'tel': '+36 12 345 6789',
     'mkdeTag': true,
-    'dojoleader': true,
+    'dojoleader': false,
     'menu': 'menu_A',
     'ticket': 'whole',
     'quarters': 'javorka',
@@ -27,6 +27,30 @@ beforeEach(function() {
 });
 
 describe('getPrice in HUF', function() {
+
+  context('registration is a full day workout and checked Dojo leader', function() {
+    it('should return 0, because dojo leader ticket is free', function() {
+      reg.mkdeTag = false;
+      reg.dojoleader = true;
+      delete reg.menu;
+      delete reg.quarters;
+      assert.equal(0, regService.getPrice(reg));
+    });
+  });
+
+  context('registration is a full day workout and not member of the MKDE and order 2 t-shirt', function() {
+    it('should return ' + (prices.nonMkdeTag.whole + 2 * prices.tshirt), function() {
+      reg.mkdeTag = false;
+      delete reg.menu;
+      delete reg.quarters;
+      reg.tshirt = {
+        'ws': 1,
+        'bxxl': 1,
+        'wm': null
+      };
+      assert.equal((prices.nonMkdeTag.whole + 2 * prices.tshirt), regService.getPrice(reg));
+    });
+  });
 
   context('registration is a full day workout and not member of the MKDE', function() {
     it('should return ' + prices.nonMkdeTag.whole, function() {
@@ -65,7 +89,7 @@ describe('getPrice in HUF', function() {
 
   context('registration is a full day workout and has a menu A and MKDE member', function() {
     var expected = prices.mkdeTag.whole + prices.menu.menu_A;
-    it('should return '  + expected, function() {
+    it('should return ' + expected, function() {
       reg.menu = 'menu_A';
       delete reg.quarters;
 
@@ -75,7 +99,7 @@ describe('getPrice in HUF', function() {
 
   context('registration is a full day workout and has a menu F and MKDE member', function() {
     var expected = prices.mkdeTag.whole + prices.menu.menu_F;
-    it('should return '  + expected, function() {
+    it('should return ' + expected, function() {
       reg.menu = 'menu_F';
       delete reg.quarters;
 
@@ -85,7 +109,7 @@ describe('getPrice in HUF', function() {
 
   context('registration is a full day workout and has a menu F and MKDE member and has a javorka quarters', function() {
     var expected = prices.mkdeTag.whole + prices.menu.menu_F + 3 * prices.quarters.javorka;
-    it('should return '  + expected, function() {
+    it('should return ' + expected, function() {
       reg.menu = 'menu_F';
       reg.quarters = 'javorka';
       assert.equal(expected, regService.getPrice(reg));
@@ -94,7 +118,7 @@ describe('getPrice in HUF', function() {
 
   context('registration is a full day workout and has a menu F and MKDE member and has a blathy quarters', function() {
     var expected = prices.mkdeTag.whole + prices.menu.menu_F + 3 * prices.quarters.blathy;
-    it('should return '  + expected, function() {
+    it('should return ' + expected, function() {
       reg.menu = 'menu_F';
       reg.quarters = 'blathy';
 

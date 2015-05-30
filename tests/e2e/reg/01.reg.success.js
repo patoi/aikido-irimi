@@ -1,6 +1,4 @@
-/**
- * Reg. success
- */
+// e2e nightwatch test
 'use strict';
 
 var config = require('../../../config/config.ci.js');
