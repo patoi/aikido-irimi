@@ -7,7 +7,7 @@ var moment = require('moment-timezone');
 
 var PRICES = {
   'huf': {
-    'tshirt': 2601,
+    'tshirt': 2500,
     'mkdeTag': {
       'whole': 13000,
       '1day': 4000,

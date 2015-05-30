@@ -116,7 +116,7 @@ app.config(['$translateProvider', function($translateProvider) {
     'tshirt-order': 'Ordering T-shirt',
     'tshirt-order-desc': 'You can order online the T-shirts and take over between keiko. The appearance of T-shirts available here: ',
     'tshirt-price': 'T-shirt price',
-    'tshirt-desc': 'The T-shirts available in black and white, the brand is Fruit of The Loom.'
+    'tshirt-desc': 'The T-shirts are available in black and white colors.'
   });
 
   $translateProvider.translations('hu', {
@@ -234,7 +234,7 @@ app.config(['$translateProvider', function($translateProvider) {
     'tshirt-order': 'Póló rendelés',
     'tshirt-order-desc': 'Lehetőség van póló rendelésre is. A pólókat az edzőtáborban lehet személyesen átvenni az edzések közötti szünetben. A pólók kinézete megtekinthető itt: ',
     'tshirt-price': 'Póló ár',
-    'tshirt-desc': 'A pólók fekete és fehér színben rendelhetők, márkájuk Fruit of The Loom.'
+    'tshirt-desc': 'A pólók fekete és fehér színben rendelhetők.'
   });
 
   $translateProvider.preferredLanguage('hu');
