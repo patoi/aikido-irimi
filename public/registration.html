@@ -224,11 +224,11 @@
 
         <div class="row">
           <div class="offset-m2 input-field col m4 s6">
-            <input ng-model="reg.mkdeTag" type="checkbox" class="form-control filled-in" id="mkdeTag" name="mkdeTag" ng-change="reg.calcPrice()" />
+            <input  ng-change="reg.calcPrice()" ng-model="reg.mkdeTag" type="checkbox" class="form-control filled-in" id="mkdeTag" name="mkdeTag" />
             <label for="mkdeTag">{{'label-mkdetag' | translate}}</label>
           </div>
           <div class="input-field col m4 s6">
-            <input ng-model="reg.dojoleader" type="checkbox" class="form-control filled-in" id="dojoleader" name="dojoleader" />
+            <input ng-change="reg.calcPrice()" ng-model="reg.dojoleader" type="checkbox" class="form-control filled-in" id="dojoleader" name="dojoleader" />
             <label for="dojoleader">{{'label-dojoleader' | translate}}</label>
           </div>
         </div>
@@ -328,57 +328,67 @@
 
         <div ng-show="tshirt" class="row">
           <div class="input-field offset-m2 col m1 s12">
-            <input ng-model="reg.tshirt.ws" maxlength="2" ng-change="reg.calcPrice()" ng-maxlength="2" ng-pattern="/^([0-9]){0,2}$/" id="ws" name="ws" type="number" min="1" max="5" class="form-control" ng-class="{invalid: regForm.ws.$invalid}">
+            <input ng-model="reg.tshirt.ws" maxlength="2" ng-change="reg.calcPrice()" ng-maxlength="2" ng-pattern="/^([0-9]){0,2}$/" id="ws" name="ws" type="number" min="0" max="5" class="form-control" ng-class="{invalid: regForm.ws.$invalid}">
             <span ng-show="regForm.ws.$invalid && regForm.ws.$dirty">{{'validate-tshirt' | translate}}</span>
             <label for="ws">{{'label-ws' | translate}}</label>
           </div>
           <div class="input-field col m1 s12">
-            <input ng-model="reg.tshirt.wm" maxlength="2" ng-change="reg.calcPrice()" ng-maxlength="2" ng-pattern="/^([0-9]){0,2}$/" id="wm" name="wm" type="number" min="1" max="5" class="form-control" ng-class="{invalid: regForm.wm.$invalid}">
+            <input ng-model="reg.tshirt.wm" maxlength="2" ng-change="reg.calcPrice()" ng-maxlength="2" ng-pattern="/^([0-9]){0,2}$/" id="wm" name="wm" type="number" min="0" max="5" class="form-control" ng-class="{invalid: regForm.wm.$invalid}">
             <span ng-show="regForm.wm.$invalid && regForm.wm.$dirty">{{'validate-tshirt' | translate}}</span>
             <label for="wm">{{'label-wm' | translate}}</label>
           </div>
           <div class="input-field col m1 s12">
-            <input ng-model="reg.tshirt.wl" maxlength="2" ng-change="reg.calcPrice()" ng-maxlength="2" ng-pattern="/^([0-9]){0,2}$/" id="wl" name="wl" type="number" min="1" max="5" class="form-control" ng-class="{invalid: regForm.wl.$invalid}">
+            <input ng-model="reg.tshirt.wl" maxlength="2" ng-change="reg.calcPrice()" ng-maxlength="2" ng-pattern="/^([0-9]){0,2}$/" id="wl" name="wl" type="number" min="0" max="5" class="form-control" ng-class="{invalid: regForm.wl.$invalid}">
             <span ng-show="regForm.wl.$invalid && regForm.wl.$dirty">{{'validate-tshirt' | translate}}</span>
             <label for="wl">{{'label-wl' | translate}}</label>
           </div>
           <div class="input-field col m1 s12">
-            <input ng-model="reg.tshirt.wxl" maxlength="2" ng-change="reg.calcPrice()" ng-maxlength="2" ng-pattern="/^([0-9]){0,2}$/" id="wxl" name="wxl" type="number" min="1" max="5" class="form-control" ng-class="{invalid: regForm.wxl.$invalid}">
+            <input ng-model="reg.tshirt.wxl" maxlength="2" ng-change="reg.calcPrice()" ng-maxlength="2" ng-pattern="/^([0-9]){0,2}$/" id="wxl" name="wxl" type="number" min="0" max="5" class="form-control" ng-class="{invalid: regForm.wxl.$invalid}">
             <span ng-show="regForm.wxl.$invalid && regForm.wxl.$dirty">{{'validate-tshirt' | translate}}</span>
             <label for="wxl">{{'label-wxl' | translate}}</label>
           </div>
           <div class="input-field col m1 s12">
-            <input ng-model="reg.tshirt.wxxl" maxlength="2" ng-change="reg.calcPrice()" ng-maxlength="2" ng-pattern="/^([0-9]){0,2}$/" id="wxxl" name="wxxl" type="number" min="1" max="5" class="form-control" ng-class="{invalid: regForm.wxxl.$invalid}">
+            <input ng-model="reg.tshirt.wxxl" maxlength="2" ng-change="reg.calcPrice()" ng-maxlength="2" ng-pattern="/^([0-9]){0,2}$/" id="wxxl" name="wxxl" type="number" min="0" max="5" class="form-control" ng-class="{invalid: regForm.wxxl.$invalid}">
             <span ng-show="regForm.wxxl.$invalid && regForm.wxxl.$dirty">{{'validate-tshirt' | translate}}</span>
             <label for="wxxl">{{'label-wxxl' | translate}}</label>
+          </div>
+          <div class="input-field col m1 s12">
+            <input ng-model="reg.tshirt.wxxxl" maxlength="2" ng-change="reg.calcPrice()" ng-maxlength="2" ng-pattern="/^([0-9]){0,2}$/" id="wxxxl" name="wxxxl" type="number" min="0" max="5" class="form-control" ng-class="{invalid: regForm.wxxxl.$invalid}">
+            <span ng-show="regForm.wxxxl.$invalid && regForm.wxxxl.$dirty">{{'validate-tshirt' | translate}}</span>
+            <label for="wxxxl">{{'label-wxxxl' | translate}}</label>
           </div>
         </div>
 
         <div ng-show="tshirt" class="row">
           <div class="input-field offset-m2 col m1 s12">
-            <input ng-model="reg.tshirt.bs" maxlength="2" ng-change="reg.calcPrice()" ng-maxlength="2" ng-pattern="/^([0-9]){0,2}$/" id="bs" name="bs" type="number" min="1" max="5" class="form-control" ng-class="{invalid: regForm.bs.$invalid}">
+            <input ng-model="reg.tshirt.bs" maxlength="2" ng-change="reg.calcPrice()" ng-maxlength="2" ng-pattern="/^([0-9]){0,2}$/" id="bs" name="bs" type="number" min="0" max="5" class="form-control" ng-class="{invalid: regForm.bs.$invalid}">
             <span ng-show="regForm.bs.$invalid && regForm.bs.$dirty">{{'validate-tshirt' | translate}}</span>
             <label for="bs">{{'label-bs' | translate}}</label>
           </div>
           <div class="input-field col m1 s12">
-            <input ng-model="reg.tshirt.bm" maxlength="2" ng-change="reg.calcPrice()" ng-maxlength="2" ng-pattern="/^([0-9]){0,2}$/" id="bm" name="bm" type="number" min="1" max="5" class="form-control" ng-class="{invalid: regForm.bm.$invalid}">
+            <input ng-model="reg.tshirt.bm" maxlength="2" ng-change="reg.calcPrice()" ng-maxlength="2" ng-pattern="/^([0-9]){0,2}$/" id="bm" name="bm" type="number" min="0" max="5" class="form-control" ng-class="{invalid: regForm.bm.$invalid}">
             <span ng-show="regForm.bm.$invalid && regForm.bm.$dirty">{{'validate-tshirt' | translate}}</span>
             <label for="bm">{{'label-bm' | translate}}</label>
           </div>
           <div class="input-field col m1 s12">
-            <input ng-model="reg.tshirt.bl" maxlength="2" ng-change="reg.calcPrice()" ng-maxlength="2" ng-pattern="/^([0-9]){0,2}$/" id="bl" name="bl" type="number" min="1" max="5" class="form-control" ng-class="{invalid: regForm.bl.$invalid}">
+            <input ng-model="reg.tshirt.bl" maxlength="2" ng-change="reg.calcPrice()" ng-maxlength="2" ng-pattern="/^([0-9]){0,2}$/" id="bl" name="bl" type="number" min="0" max="5" class="form-control" ng-class="{invalid: regForm.bl.$invalid}">
             <span ng-show="regForm.bl.$invalid && regForm.bl.$dirty">{{'validate-tshirt' | translate}}</span>
             <label for="bl">{{'label-bl' | translate}}</label>
           </div>
           <div class="input-field col m1 s12">
-            <input ng-model="reg.tshirt.bxl" maxlength="2" ng-change="reg.calcPrice()" ng-maxlength="2" ng-pattern="/^([0-9]){0,2}$/" id="bxl" name="bxl" type="number" min="1" max="5" class="form-control" ng-class="{invalid: regForm.bxl.$invalid}">
+            <input ng-model="reg.tshirt.bxl" maxlength="2" ng-change="reg.calcPrice()" ng-maxlength="2" ng-pattern="/^([0-9]){0,2}$/" id="bxl" name="bxl" type="number" min="0" max="5" class="form-control" ng-class="{invalid: regForm.bxl.$invalid}">
             <span ng-show="regForm.bxl.$invalid && regForm.bxl.$dirty">{{'validate-tshirt' | translate}}</span>
             <label for="bxl">{{'label-bxl' | translate}}</label>
           </div>
           <div class="input-field col m1 s12">
-            <input ng-model="reg.tshirt.bxxl" maxlength="2" ng-change="reg.calcPrice()" ng-maxlength="2" ng-pattern="/^([0-9]){0,2}$/" id="bxxl" name="bxxl" type="number" min="1" max="5" class="form-control" ng-class="{invalid: regForm.bxxl.$invalid}">
+            <input ng-model="reg.tshirt.bxxl" maxlength="2" ng-change="reg.calcPrice()" ng-maxlength="2" ng-pattern="/^([0-9]){0,2}$/" id="bxxl" name="bxxl" type="number" min="0" max="5" class="form-control" ng-class="{invalid: regForm.bxxl.$invalid}">
             <span ng-show="regForm.bxxl.$invalid && regForm.bxxl.$dirty">{{'validate-tshirt' | translate}}</span>
             <label for="bxxl">{{'label-bxxl' | translate}}</label>
+          </div>
+          <div class="input-field col m1 s12">
+            <input ng-model="reg.tshirt.bxxxl" maxlength="2" ng-change="reg.calcPrice()" ng-maxlength="2" ng-pattern="/^([0-9]){0,2}$/" id="bxxxl" name="bxxxl" type="number" min="0" max="5" class="form-control" ng-class="{invalid: regForm.bxxxl.$invalid}">
+            <span ng-show="regForm.bxxxl.$invalid && regForm.bxxxl.$dirty">{{'validate-tshirt' | translate}}</span>
+            <label for="bxxxl">{{'label-bxxxl' | translate}}</label>
           </div>
         </div>
 

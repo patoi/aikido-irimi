@@ -20,6 +20,7 @@ describe('Validate a registration', function() {
     'dojoleader': true,
     'ticket': 'whole',
     'quarters': 'javorka',
+    'd1': true,
     'agree': true
   };
 

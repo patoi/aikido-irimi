@@ -350,7 +350,7 @@ var toHtml = function(reg) {
 // all registration as CSV
 var getAllRegAsCSV = function(regList) {
   var txt = 'sorszám,nyelv,kód,idő,név,email,dojo,tel.,mkde tag,dojo vez.,kollégium,CS,P,SZ,koll. ár,menü,menüár,';
-  txt += 'WS,WM,WL,WXL,WXXL,BS,BM,BL,BXL,BXXL,póló ár,jegy,jegyár,fizetendő,pénznem\n';
+  txt += 'WS,WM,WL,WXL,WXXL,WXXXL,BS,BM,BL,BXL,BXXL,BXXXL,póló ár,jegy,jegyár,fizetendő,pénznem\n';
   var addReg = function(reg) {
     var row = '';
     row += (i + 1) + ',' + reg.lang + ',' + reg._id + ',' + reg.time + ',' + reg.name + ',' + reg.email + ',';
@@ -364,14 +364,16 @@ var getAllRegAsCSV = function(regList) {
       row += (t.wl ? t.wl : '') + ',';
       row += (t.wxl ? t.wxl : '') + ',';
       row += (t.wxxl ? t.wxxl : '') + ',';
+      row += (t.wxxxl ? t.wxxxl : '') + ',';
       row += (t.bs ? t.bs : '') + ',';
       row += (t.bm ? t.bm : '') + ',';
       row += (t.bl ? t.bl : '') + ',';
       row += (t.bxl ? t.bxl : '') + ',';
       row += (t.bxxl ? t.bxxl : '') + ',';
+      row += (t.bxxxl ? t.bxxxl : '') + ',';
       row += getPriceOfTshirt(reg.tshirt) + ',';
     } else {
-      row += ',,,,,,,,,,0,';
+      row += ',,,,,,,,,,,,0,';
     }
     row += MAPS['hu'][reg.ticket] + ',' + getPriceOfTicket(reg.mkdeTag, reg.ticket) + ',' + reg.price + ',HUF';
     return row;

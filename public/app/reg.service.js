@@ -34,7 +34,7 @@ app.factory('RegistrationService', [
       } else {}
 
       var nameRegex = /^([a-zöüóőúéáűíä \-\.]){6,100}$/gi;
-      var dojonameRegex = /^([a-zöüóőúéáűíä \-\.]){2,100}$/gi;
+      var dojonameRegex = /^([a-zöüóőúéáűíä\ \-\.\']){2,100}$/gi;
       var telRegEx = /^([0-9 \-\+]){7,16}$/gi;
 
       if (!nameRegex.test(reg.name)) {
@@ -63,10 +63,24 @@ app.factory('RegistrationService', [
         reg.ticket !== '7keiko') {
         throw new Error('v.ticket.error');
       }
-      if (reg.quarters &&
-        reg.quarters !== 'javorka' &&
-        reg.quarters !== 'blathy') {
-        throw new Error('v.quarters.error');
+      if (reg.tshirt) {
+        for (var property in reg.tshirt) {
+          if (reg.tshirt.hasOwnProperty(property) && reg.tshirt[property]) {
+            if (reg.tshirt[property] < 0 || reg.tshirt[property] > 5) {
+              // invalid value
+              throw new Error('v.tshirt.error');
+            }
+          }
+        }
+      }
+      if (reg.quarters) {
+        if (reg.quarters !== 'javorka' &&
+          reg.quarters !== 'blathy') {
+          throw new Error('v.quarters.error');
+        }
+        if (!reg.d1 && !reg.d2 && !reg.d3) {
+          throw new Error('v.quarters.required');
+        }
       }
       if (reg.agree !== true) {
         throw new Error('v.agree.error');
