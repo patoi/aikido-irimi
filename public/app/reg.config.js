@@ -114,7 +114,7 @@ app.config(['$translateProvider', function($translateProvider) {
     'label-bxl': 'Black XL',
     'label-bxxl': 'Black XXL',
     'tshirt-order': 'Ordering T-shirt',
-    'tshirt-order-desc': 'You can order online the T-shirts and take over between keiko. The appearance of T-shirts available here: ',
+    'tshirt-order-desc': 'You can order online the T-shirts and take over between keiko. The appearance of T-shirts: ',
     'tshirt-price': 'T-shirt price',
     'tshirt-desc': 'The T-shirts are available in black and white colors.'
   });
