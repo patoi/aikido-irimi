@@ -314,7 +314,7 @@ var toHtml = function(reg) {
   txt += rowRender(MAPS[reg.lang].mPhone, reg.tel);
   txt += rowRender(MAPS[reg.lang].mMkde, (reg.mkdeTag ? MAPS[reg.lang].mYes : MAPS[reg.lang].mNo));
   txt += rowRender(MAPS[reg.lang].mLeader, (reg.dojoleader ? MAPS[reg.lang].mYes : MAPS[reg.lang].mNo));
-  txt += rowRender(MAPS[reg.lang].mTicket, MAPS[reg.lang][reg.ticket] + ' : ' + getPriceOfTicket(reg.mkdeTag, reg.ticket) + ' HUF');
+  txt += rowRender(MAPS[reg.lang].mTicket, MAPS[reg.lang][reg.ticket] + ' : ' + getPriceOfTicket(reg.dojoleader, eg.mkdeTag, reg.ticket) + ' HUF');
   if (reg.menu) {
     txt += rowRender(MAPS[reg.lang].mMenu, MAPS[reg.lang][reg.menu] + ' : ' + getPriceOfMenu(reg.menu) + ' HUF');
   }
@@ -375,7 +375,7 @@ var getAllRegAsCSV = function(regList) {
     } else {
       row += ',,,,,,,,,,,,0,';
     }
-    row += MAPS['hu'][reg.ticket] + ',' + getPriceOfTicket(reg.mkdeTag, reg.ticket) + ',' + reg.price + ',HUF';
+    row += MAPS['hu'][reg.ticket] + ',' + getPriceOfTicket(reg.dojoleader, reg.mkdeTag, reg.ticket) + ',' + reg.price + ',HUF';
     return row;
   };
   for (var i = 0; regList.length > i; i++) {
