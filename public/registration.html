@@ -225,7 +225,7 @@
 
         <div class="row">
           <div class="offset-m2 input-field col m4 s6">
-            <input  ng-change="reg.calcPrice()" ng-model="reg.mkdeTag" type="checkbox" class="form-control filled-in" id="mkdeTag" name="mkdeTag" />
+            <input ng-change="reg.calcPrice()" ng-model="reg.mkdeTag" type="checkbox" class="form-control filled-in" id="mkdeTag" name="mkdeTag" />
             <label for="mkdeTag">{{'label-mkdetag' | translate}}</label>
           </div>
           <div class="input-field col m4 s6">
@@ -322,13 +322,16 @@
           </div>
         </div>
 
-        <div class="row">
+        <div class="row" ng-init="tshirt=true" >
           <h6 class="offset-m2 col m8 s12 blue-text text-darken-2" style="padding-top: 1em">{{'tshirt-order' | translate}}</h6>
-          <p class="offset-m2 col m8 s12">{{'label-tshirt' | translate}} <a id="tshirt" href="" ng-click="tshirt=true">{{'label-tshirt-order' | translate}}</a></p>
+          <!--p class="offset-m2 col m8 s12">{{'label-tshirt' | translate}} <a id="tshirt" href="" ng-click="tshirt=true">{{'label-tshirt-order' | translate}}</a></p-->
         </div>
 
         <div ng-show="tshirt" class="row">
-          <div class="input-field offset-m2 col m1 s12">
+          <div class="offset-m2 col m2 s12 valign-wrapper" style="border: 1px solid black">
+            <span class="valign"><br>{{'label-white' | translate}}<br>&nbsp;</span>
+          </div>
+          <div class="input-field col m1 s12">
             <input ng-model="reg.tshirt.ws" maxlength="2" ng-change="reg.calcPrice()" ng-maxlength="2" ng-pattern="/^([0-9]){0,2}$/" id="ws" name="ws" type="number" min="0" max="5" class="form-control" ng-class="{invalid: regForm.ws.$invalid}">
             <span ng-show="regForm.ws.$invalid && regForm.ws.$dirty">{{'validate-tshirt' | translate}}</span>
             <label for="ws">{{'label-ws' | translate}}</label>
@@ -361,7 +364,10 @@
         </div>
 
         <div ng-show="tshirt" class="row">
-          <div class="input-field offset-m2 col m1 s12">
+          <div class="offset-m2 col m2 s12 valign-wrapper black white-text">
+            <span class="valign"><br>{{'label-black' | translate}}<br>&nbsp;</span>
+          </div>
+          <div class="input-field col m1 s12">
             <input ng-model="reg.tshirt.bs" maxlength="2" ng-change="reg.calcPrice()" ng-maxlength="2" ng-pattern="/^([0-9]){0,2}$/" id="bs" name="bs" type="number" min="0" max="5" class="form-control" ng-class="{invalid: regForm.bs.$invalid}">
             <span ng-show="regForm.bs.$invalid && regForm.bs.$dirty">{{'validate-tshirt' | translate}}</span>
             <label for="bs">{{'label-bs' | translate}}</label>

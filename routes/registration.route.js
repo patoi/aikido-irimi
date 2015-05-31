@@ -208,7 +208,7 @@ module.exports = function(Q, winston, config, ses, dbReg, regService) {
             if (err) {
               winston.error('SMTP: all reg. data send: ' + err.message);
             } else {
-              winston.info('Email sent from all reg. data!');
+              winston.info('Email sent about all reg. data!');
             }
             res.sendStatus(200);
           });
