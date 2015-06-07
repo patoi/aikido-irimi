@@ -118,7 +118,7 @@ var MAPS = {
     'mAgree': 'The registration became valid, after the transferred amount is arrived to our account!',
     'mComment': '<b>Please give your name in the transfer details!</b>',
     'mBankAccount': 'Transfer the money to the next bank account:<br/>Bank Account Owner:<span style="font-weight: 400">Virga János</span><br/>Budapest Bank:<span style="font-weight: 400">10103623-25432900-01000004</span>',
-    'mValid': '<b>Important </b>Your payment will be confirmed with an email. If you don\'t get confirmation email, please send an email to organizer.',
+    'mValid': '<b>Important notice</b>Your payment will be confirmed with an email. If you don\'t get confirmation email, please send an email to organizer.',
     'mThanks': 'Thank you for registration!<br/>The Organizer',
     'mYes': 'Yes',
     'mNo': 'No',
