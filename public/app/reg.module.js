@@ -47,6 +47,7 @@ app.controller('RegistrationCtrl', ['$window', '$log', '$interval', '$translate'
 
     var reg = this;
     reg.lang = $window.localStorage.getItem('NG_TRANSLATE_LANG_KEY') || 'hu';
+    reg.d0 = false;
     reg.d1 = false;
     reg.d2 = false;
     reg.d3 = false;
@@ -80,13 +81,13 @@ app.controller('RegistrationCtrl', ['$window', '$log', '$interval', '$translate'
           $log.log(data, status);
           $scope.freeRooms = data;
 
-          if (data.javorka.d1 === 0 && data.javorka.d2 === 0 && data.javorka.d3 === 0) {
+          if (data.javorka.d0 === 0 && data.javorka.d1 === 0 && data.javorka.d2 === 0 && data.javorka.d3 === 0) {
             // javorka is full
             $scope.javorkaIsFull = true;
             delete reg.quarters;
           }
 
-          if (data.blathy.d1 === 0 && data.blathy.d2 === 0 && data.blathy.d3 === 0) {
+          if (data.blathy.d0 === 0 && data.blathy.d1 === 0 && data.blathy.d2 === 0 && data.blathy.d3 === 0) {
             // blathy is full
             $scope.blathyIsFull = true;
             delete reg.quarters;
@@ -114,6 +115,7 @@ app.controller('RegistrationCtrl', ['$window', '$log', '$interval', '$translate'
     };
 
     reg.resetDay = function() {
+      reg.d0 = false;
       reg.d1 = false;
       reg.d2 = false;
       reg.d3 = false;
@@ -123,7 +125,7 @@ app.controller('RegistrationCtrl', ['$window', '$log', '$interval', '$translate'
 
     reg.registration = function() {
       // need at least one day if user choose a quarters
-      if (reg.quarters && !reg.d1 && !reg.d2 && !reg.d3) {
+      if (reg.quarters && !reg.d0 && !reg.d1 && !reg.d2 && !reg.d3) {
         console.log(reg.lang);
         reg.msg = msg[reg.lang]['v.quarters.required'];
         return false;

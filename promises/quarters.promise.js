@@ -6,11 +6,13 @@
  * Calling object:
   var result = {
    'javorka': {
+     'd0': 0,
      'd1': 0,
      'd2': 0,
      'd3': 0
    },
    'blathy': {
+     'd0': 0,
      'd1': 0,
      'd2': 0,
      'd3': 0
@@ -41,6 +43,13 @@ module.exports = function(Q, winston, dbReg) {
     return deferred.promise;
   };
 
+  var countJavorkaD0 = function(result) {
+    return countDormDay({
+      'quarters': 'javorka',
+      'd0': true
+    }, result, 'd0');
+  };
+
   var countJavorkaD1 = function(result) {
     return countDormDay({
       'quarters': 'javorka',
@@ -60,6 +69,13 @@ module.exports = function(Q, winston, dbReg) {
       'quarters': 'javorka',
       'd3': true
     }, result, 'd3');
+  };
+
+  var countBlathyD0 = function(result) {
+    return countDormDay({
+      'quarters': 'blathy',
+      'd0': true
+    }, result, 'd0');
   };
 
   var countBlathyD1 = function(result) {
@@ -84,9 +100,11 @@ module.exports = function(Q, winston, dbReg) {
   };
 
   return function(result) {
-    return countJavorkaD1(result)
+    return countJavorkaD0(result)
+      .then(countJavorkaD1)
       .then(countJavorkaD2)
       .then(countJavorkaD3)
+      .then(countBlathyD0)
       .then(countBlathyD1)
       .then(countBlathyD2)
       .then(countBlathyD3);

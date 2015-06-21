@@ -295,7 +295,19 @@
           </div>
           <div class="input-field col m3 s12">
             <div ng-show="reg.quarters">
-              <input ng-change="reg.calcPrice()" ng-disabled="!reg.quarters || (reg.quarters === 'javorka' && freeRooms.javorka.d1 === 0) || (reg.quarters === 'blathy' && freeRooms.blathy.d1 === 0)" ng-model="reg.d1" type="checkbox" id="d1" name="d1" class="form-control filled-in"
+              <input ng-change="reg.calcPrice()"
+                     ng-disabled="!reg.quarters || (reg.quarters === 'javorka' && freeRooms.javorka.d0 === 0) || (reg.quarters === 'blathy')"
+                     ng-model="reg.d0" type="checkbox" id="d0" name="d0" class="form-control filled-in"
+              />
+              <label ng-disabled="!reg.quarters || (reg.quarters === 'javorka' && freeRooms.javorka.d0 === 0) || (reg.quarters === 'blathy')" for="d0">
+                <i ng-hide="!reg.quarters || (reg.quarters === 'javorka' && freeRooms.javorka.d0 === 0) || (reg.quarters === 'blathy')" class="tiny green-text mdi-notification-play-install"></i>
+                <i id="d1closed" ng-show="!reg.quarters || (reg.quarters === 'javorka' && freeRooms.javorka.d0 === 0) || (reg.quarters === 'blathy')" class="tiny red-text mdi-notification-dnd-forwardslash"></i> {{'wednesday'
+                | translate}} ({{freeRooms[reg.quarters].d0}})
+              </label>
+              <br/>
+              <input ng-change="reg.calcPrice()"
+                     ng-disabled="!reg.quarters || (reg.quarters === 'javorka' && freeRooms.javorka.d1 === 0) || (reg.quarters === 'blathy' && freeRooms.blathy.d1 === 0)"
+                     ng-model="reg.d1" type="checkbox" id="d1" name="d1" class="form-control filled-in"
               />
               <label ng-disabled="!reg.quarters || (reg.quarters === 'javorka' && freeRooms.javorka.d1 === 0) || (reg.quarters === 'blathy' && freeRooms.blathy.d1 === 0)" for="d1">
                 <i ng-hide="!reg.quarters || (reg.quarters === 'javorka' && freeRooms.javorka.d1 === 0) || (reg.quarters === 'blathy' && freeRooms.blathy.d1 === 0)" class="tiny green-text mdi-notification-play-install"></i>

@@ -64,6 +64,7 @@ var MAPS = {
     'mTicket': 'Edzésjegy',
     'mMenu': 'Menü',
     'mQuarters': 'Szállás',
+    'md0': 'Szerda',
     'md1': 'Csütörtök',
     'md2': 'Péntek',
     'md3': 'Szombat',
@@ -111,6 +112,7 @@ var MAPS = {
     'mTicket': 'Ticket',
     'mMenu': 'Menu',
     'mQuarters': 'Quarters',
+    'md0': 'Wednesday',
     'md1': 'Thursday',
     'md2': 'Friday',
     'md3': 'Saturday',
@@ -200,6 +202,7 @@ var getPriceOfMenu = function(menu) {
 var getPriceOfQuerters = function(reg) {
   if (reg.quarters) {
     var quartersPrice = 0;
+    quartersPrice += reg.d0 ? PRICES['huf']['quarters'][reg.quarters] : 0;
     quartersPrice += reg.d1 ? PRICES['huf']['quarters'][reg.quarters] : 0;
     quartersPrice += reg.d2 ? PRICES['huf']['quarters'][reg.quarters] : 0;
     quartersPrice += reg.d3 ? PRICES['huf']['quarters'][reg.quarters] : 0;
@@ -268,7 +271,7 @@ var validate = function(reg) {
       reg.quarters !== 'blathy') {
       throw new Error('v.quarters.error');
     }
-    if (!reg.d1 && !reg.d2 && !reg.d3) {
+    if (!reg.d0 && !reg.d1 && !reg.d2 && !reg.d3) {
       throw new Error('v.quarters.required');
     }
   }
@@ -319,7 +322,13 @@ var toHtml = function(reg) {
     txt += rowRender(MAPS[reg.lang].mMenu, MAPS[reg.lang][reg.menu] + ' : ' + getPriceOfMenu(reg.menu) + ' HUF');
   }
   if (reg.quarters) {
-    txt += rowRender(MAPS[reg.lang].mQuarters, MAPS[reg.lang][reg.quarters] + ': ' + (reg.d1 ? MAPS[reg.lang].md1 + ' ' : '') + (reg.d2 ? MAPS[reg.lang].md2 + ' ' : '') + (reg.d3 ? MAPS[reg.lang].md3 : '') + ' : ' + getPriceOfQuerters(reg) + ' HUF');
+    var quartersTxt = '';
+    quartersTxt += (reg.d0 ? MAPS[reg.lang].md0 + ' ' : '');
+    quartersTxt += (reg.d1 ? MAPS[reg.lang].md1 + ' ' : '');
+    quartersTxt += (reg.d2 ? MAPS[reg.lang].md2 + ' ' : '');
+    quartersTxt += (reg.d3 ? MAPS[reg.lang].md3 : '');
+    quartersTxt+= ' : ' + getPriceOfQuerters(reg) + ' HUF';
+    txt += rowRender(MAPS[reg.lang].mQuarters, MAPS[reg.lang][reg.quarters] + ': ' + quartersTxt);
   }
 
   if (reg.tshirt) {
@@ -349,13 +358,17 @@ var toHtml = function(reg) {
 
 // all registration as CSV
 var getAllRegAsCSV = function(regList) {
-  var txt = 'sorszám,nyelv,kód,idő,név,email,dojo,tel.,mkde tag,dojo vez.,kollégium,CS,P,SZ,koll. ár,menü,menüár,';
+  var txt = 'sorszám,nyelv,kód,idő,név,email,dojo,tel.,mkde tag,dojo vez.,kollégium,SZ,CS,P,SZ,koll. ár,menü,menüár,';
   txt += 'WS,WM,WL,WXL,WXXL,WXXXL,BS,BM,BL,BXL,BXXL,BXXXL,póló ár,jegy,jegyár,fizetendő,pénznem\n';
   var addReg = function(reg) {
     var row = '';
     row += (i + 1) + ',' + reg.lang + ',' + reg._id + ',' + reg.time + ',' + reg.name + ',' + reg.email + ',';
     row += reg.dojo + ',\'' + reg.tel + ',' + (reg.mkdeTag ? 'I' : 'N') + ',' + (reg.dojoleader ? 'I' : 'N') + ',';
-    row += (reg.quarters ? reg.quarters : '') + ',' + (reg.d1 ? "I" : "") + ',' + (reg.d2 ? "I" : "") + ',' + (reg.d3 ? "I" : "") + ',';
+    row += (reg.quarters ? reg.quarters : '') + ','
+    row += (reg.d0 ? 'I' : '') + ',';
+    row += (reg.d1 ? 'I' : '') + ',';
+    row += (reg.d2 ? 'I' : '') + ',';
+    row += (reg.d3 ? 'I' : '') + ',';
     row += getPriceOfQuerters(reg) + ',' + (reg.menu ? reg.menu : '') + ',' + getPriceOfMenu(reg.menu) + ',';
     if (reg.tshirt) {
       var t = reg.tshirt;

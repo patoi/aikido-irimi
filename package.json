@@ -53,7 +53,7 @@
   },
   "scripts": {
     "test": "./_mocha && ./karma start --single-run",
-    "livereload": "node livereload.js",
+    "livereload": "NODE_ENV=dev node livereload.js",
     "test-client": "./karma start --single-run",
     "coverage": "./node_modules/istanbul/lib/cli.js cover ./_mocha -- -R spec",
     "start-dev": "NODE_ENV=dev nodemon server.js",

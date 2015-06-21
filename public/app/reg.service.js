@@ -78,7 +78,7 @@ app.factory('RegistrationService', [
           reg.quarters !== 'blathy') {
           throw new Error('v.quarters.error');
         }
-        if (!reg.d1 && !reg.d2 && !reg.d3) {
+        if (!reg.d0 && !reg.d1 && !reg.d2 && !reg.d3) {
           throw new Error('v.quarters.required');
         }
       }

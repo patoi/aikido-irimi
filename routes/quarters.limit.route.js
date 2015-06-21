@@ -18,11 +18,13 @@ module.exports = function(Q, winston, dbReg, javorkaLimit, blathyLimit) {
   return function(req, res) {
     var result = {
       'javorka': {
+        'd0': 0,
         'd1': 0,
         'd2': 0,
         'd3': 0
       },
       'blathy': {
+        'd0': 0,
         'd1': 0,
         'd2': 0,
         'd3': 0
@@ -32,11 +34,13 @@ module.exports = function(Q, winston, dbReg, javorkaLimit, blathyLimit) {
       .then(function(result, err) {
         var freeRooms = {
           'javorka': {
+            'd0': javorkaLimit - result.javorka.d0,
             'd1': javorkaLimit - result.javorka.d1,
             'd2': javorkaLimit - result.javorka.d2,
             'd3': javorkaLimit - result.javorka.d3
           },
           'blathy': {
+            'd0': blathyLimit - result.blathy.d0,
             'd1': blathyLimit - result.blathy.d1,
             'd2': blathyLimit - result.blathy.d2,
             'd3': blathyLimit - result.blathy.d3
