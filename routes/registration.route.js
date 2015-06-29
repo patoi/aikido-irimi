@@ -164,6 +164,8 @@ module.exports = function(Q, winston, config, ses, dbReg, regService) {
           'errorCode': 'v.reg.deadline'
         });
         return;
+      } else {
+        console.log('deadline ok');
       }
 
       // delete calculated value from reg. page
