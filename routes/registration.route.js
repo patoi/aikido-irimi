@@ -3,6 +3,7 @@
 
 var limitPromise = require('../promises/limit.promise');
 var quartersCount = require('../promises/quarters.promise');
+var moment = require('moment-timezone');
 
 module.exports = function(Q, winston, config, ses, dbReg, regService) {
 
@@ -152,8 +153,19 @@ module.exports = function(Q, winston, config, ses, dbReg, regService) {
   return {
     registration: function(req, res) {
       winston.info('registration in', req.body);
+
       // transform registration data
       var reg = regService.transform(req.body);
+
+      var DEAD_LINE = moment('2015-07-01 00:00:00').tz("Europe/Budapest");
+      if (DEAD_LINE.isBefore(reg.time)) {
+        winston.info('registration has rejected: v.reg.deadline', req.body);
+        res.status(410).json({
+          'errorCode': 'v.reg.deadline'
+        });
+        return;
+      }
+
       // delete calculated value from reg. page
       delete reg.isMenuLimitExceeded;
       delete reg.price;
