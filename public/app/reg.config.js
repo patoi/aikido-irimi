@@ -121,7 +121,9 @@ app.config(['$translateProvider', function($translateProvider) {
     'tshirt-order': 'Ordering T-shirt',
     'tshirt-order-desc': 'You can order online the T-shirts and take over between keiko. The appearance of T-shirts: ',
     'tshirt-price': 'T-shirt price',
-    'tshirt-desc': 'The T-shirts are available in black and white colors.'
+    'tshirt-desc': 'The T-shirts are available in black and white colors.',
+    'v.reg.deadline': 'You have reached the registration deadline.',
+    'information': 'Information'
   });
 
   $translateProvider.translations('hu', {
@@ -244,7 +246,9 @@ app.config(['$translateProvider', function($translateProvider) {
     'tshirt-order': 'Póló rendelés',
     'tshirt-order-desc': 'Lehetőség van póló rendelésre is. A pólókat az edzőtáborban lehet személyesen átvenni az edzések közötti szünetben. A pólók kinézete megtekinthető itt: ',
     'tshirt-price': 'Póló ár',
-    'tshirt-desc': 'A pólók fekete és fehér színben rendelhetők.'
+    'tshirt-desc': 'A pólók fekete és fehér színben rendelhetők.',
+    'v.reg.deadline': 'A regisztrációs határidő lejárt.',
+    'information': 'Információ'
   });
 
   $translateProvider.preferredLanguage('hu');
