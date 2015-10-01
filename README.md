@@ -17,6 +17,7 @@ Aikido 2015 Summer Camp - registration application
 ## Technology
 It is running on AWS, NodeJS. Using: express, morgan, nedb and winston.
 CI infrastucture running on TravisCI, with unit and e2e tests: chai, karma, nightwatch.
+It's using materialize design and angularjs on client side 
 
 ## How to test or run
 
