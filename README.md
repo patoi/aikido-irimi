@@ -2,6 +2,18 @@
 # aikido-irimi
 Aikido 2015 Summer Camp - registration application
 
+## Features
+
+- i18n
+- ticket booking
+- room booking, counting free spaces
+- T-shirt selection
+- menu selection
+- price calculation
+- handling registration dead line
+- email sending (by AWS SES)
+- downloading database in CSV
+
 ## Technology
 It is running on AWS, NodeJS. Using: express, morgan, nedb and winston.
 CI infrastucture running on TravisCI, with unit and e2e tests: chai, karma, nightwatch.
